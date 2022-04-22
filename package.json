@@ -1,0 +1,37 @@
+{
+  "name": "seasidedevelopmentapp-server",
+  "version": "1.0.0",
+  "description": "Service Finder app for capstone project",
+  "main": "server.js",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "build": "cd client && npm run build",
+    "dev": "concurrently -kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seaside-Development/seaside-backend.git"
+    
+  },
+  "author": "Seaside Development",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Seaside-Development/seaside-backend/issues"
+  },
+  "homepage": "https://github.com/Seaside-Development/seaside-backend#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "v16.13.2"
+}
+}
