@@ -25,10 +25,14 @@ const jobRequestsSchema = mongoose.Schema({
     },
     startDate: {type: Date, default: Date.now},
     endDate: {type: Date, default: Date.now},
-    review: {type: Object, default: {
-      rating: {min:0, max:5},
-      details: {type: String, default: ''}
-    }}
+    review: [
+      { 
+        rating: {type: Number, min:0, max:5, required: [true, 'Please enter a rating']},
+        details: {type: String, default: '', required: [true, 'Please enter a review']},
+        contractor: [{type: mongoose.Schema.Types.ObjectId, ref: 'contractors', required: [true, 'Please enter a contractor']}],
+        Date: {type: Date, default: Date.now}
+    }]
+     
  });
 
 module.exports = mongoose.model('JobRequests', jobRequestsSchema);
