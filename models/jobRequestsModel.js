@@ -5,7 +5,7 @@ const jobRequestsSchema = mongoose.Schema({
    complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
    contractor: {type: String, default: '', required:true}, //description: 'MANDATORY'
    contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'contractors'}],
-   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'customers'}],
+   customerID: [{type: mongoose.Schema.Types.ObjectId, ref: 'customers'}],
    industry: {
      type:String,
      enum: ['Gardening', 'Construction', 'Plumbing','Electrical'],
