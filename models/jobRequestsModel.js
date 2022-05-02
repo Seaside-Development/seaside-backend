@@ -1,99 +1,34 @@
 const mongoose = require('mongoose');
 
-const jobRequestsSchema = new mongoose.Schema({
-    $jsonSchema: {
-        bsonType: 'object',
-        required: [
-          'status',
-          'parish',
-          'length',
-          'complexity',
-          'industry'
-        ],
-        properties: {
-          contractor: {
-            bsonType: 'string',
-            description: 'contractor hired for the job, NOT MANDATORY'
-          },
-          industry: {
-            'enum': [
-              'Gardening',
-              'Construction',
-              'Plumbing',
-              'Electrical'
-            ],
-            description: 'The industry that the job relates to. MANDATORY'
-          },
-          parish: {
-            'enum': [
-              'St. Lucy',
-              'St. Peter',
-              'St. James',
-              'St. Andrew',
-              'St. Thomas',
-              'St. Joseph',
-              'St. Michael',
-              'St. George',
-              'St. John',
-              'Christ Church',
-              'St. Philip'
-            ],
-            description: 'location of the job. MANDATORY'
-          },
-          description: {
-            bsonType: 'string',
-            description: 'a breif description of the the problem. NOT MANDATORY'
-          },
-          length: {
-            bsonType: 'bool',
-            description: 'true means long term false means short-term. MANDATORY'
-          },
-          complexity: {
-            bsonType: 'bool',
-            description: 'true means complex, false means simple. MANDATORY'
-          },
-          status: {
-            'enum': [
-              'Completed',
-              'In Progress',
-              'Not Started'
-            ],
-            description: 'status of the job, MANDATORY'
-          },
-          startDate: {
-            bsonType: 'date',
-            description: 'the date the job started. NOT MADNATORY'
-          },
-          endDate: {
-            bsonType: 'date',
-            description: 'the date the job was completed. NOT MADNATORY'
-          },
-          review: {
-            bsonType: 'object',
-            required: [
-              'contractor',
-              'details',
-              'rating'
-            ],
-            properties: {
-              contractor: {
-                bsonType: 'string',
-                description: 'contractor that did the job. MANDATORY'
-              },
-              details: {
-                bsonType: 'string',
-                description: 'The review describing the experience. MANDATORY'
-              },
-              rating: {
-                bsonType: 'int',
-                minimum: 1,
-                maximum: 5,
-                description: 'A numerical expression describing quality of service. MANDATORY'
-              }
-            }
-          }
-        }
-      }
+const jobRequestsSchema = mongoose.Schema({
+   _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true}, // _id is required and unique
+   complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
+   contractor: {type: String, default: '', required:true}, //description: 'MANDATORY'
+   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'contractors'}],
+   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'customers'}],
+   industry: {
+     type:String,
+     enum: ['Gardening', 'Construction', 'Plumbing','Electrical'],
+     required:  [true, 'Please select an industry']
+   },
+   job_description: {type:String, default: ''},
+   length: {type: Boolean, default: false, required: [true, 'Please select a true or false']}, //description: 'true means long, false means short. MANDATORY'
+   parish: {
+     type: String,
+     enum: ['St. Lucy','St. Peter','St. James','St. Andrew','St. Thomas', 'St. Joseph','St. Michael', 'St. George','St. John','Christ Church','St. Philip' ],
+     required: [true, 'Please select a parish']
+    },
+    status: {
+      type: String,
+      enum: ['Pending', 'In Progress', 'Completed', 'Cancelled'],
+      required: [true, 'Please select a status']
+    },
+    startDate: {type: Date, default: Date.now},
+    endDate: {type: Date, default: Date.now},
+    review: {type: Object, default: {
+      rating: {min:0, max:5},
+      details: {type: String, default: ''}
+    }}
  });
 
 module.exports = mongoose.model('JobRequests', jobRequestsSchema);
