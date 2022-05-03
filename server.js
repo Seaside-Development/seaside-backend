@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 
 //api pathway
 app.use('/api/jobrequests', require('./routes/jobrequestsRoutes'));
-
+app.use('/api/jobrequests', require('./routes/ContractorsRoutes'));
 //pathway to the error
 app.use(errorHandler);
 

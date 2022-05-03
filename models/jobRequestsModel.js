@@ -33,6 +33,8 @@ const jobRequestsSchema = mongoose.Schema({
         Date: {type: Date, default: Date.now}
     }]
      
- });
+ }, 
+  {timestamps: true}
+ );
 
 module.exports = mongoose.model('JobRequests', jobRequestsSchema);
