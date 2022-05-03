@@ -3,8 +3,24 @@ const mongoose = require('mongoose');
 const jobRequestsSchema = mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
     contractor: { type: String, required: true },
-    businessDescription: { type: string, required: true, default: '' },
-    operatingLocations: {}, 
+    businessDescription: { type: string, required: true, default: '' },                         
+    operatingLocations: [{
+        type: String,
+        enum: [
+            'St. Lucy',
+            'St. Peter',
+            'St. James',
+            'St. Andrew',
+            'St. Thomas',
+            'St. Joseph',
+            'St. Michael',
+            'St. George',
+            'St. John',
+            'Christ Church',
+            'St. Philip'
+        ]
+
+    }], 
     ratings: [
         {
             completedJobs: { type: Number, required: true, default: 0 },
