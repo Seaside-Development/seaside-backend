@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 
-const customerSchema = mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
-    username: { type: String, required: true, unique: true },
-    email: {type: String, required: true},
+const userSchema = new mongoose.Schema({
+    //_id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
+    _id: { type: String, required: true, unique: true},
+    username: { type: String, required: [true, "Please provide a username"], unique: true },
+    email: {type: String, required: [true, "Please provide an email"], unique: true},
     avatar: {type: String },
-    password: { type: String, required: true},
-    telephone: { type: String, required: false}
-
+    password: { type: String, required: [true, "Please enter a password"]},
+    telephone: { type: String, required: false},
 });
 
-module.exports.customer = mongoose.model('customer', customerSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

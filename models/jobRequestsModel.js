@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const contractor=require('./contractorModel').contractors
-const customer=require('./userModel').customer
+const user=require('./userModel').user
 
 //Job request Schema
 const jobRequestsSchema = mongoose.Schema({
    _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true}, // _id is required and unique
    complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
    contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: contractor}],
-   customerID: [{type: mongoose.Schema.Types.ObjectId, ref: customer}],
+   customerID: [{type: mongoose.Schema.Types.ObjectId, ref: user}],
    
    //Industry that pertains to the job
    industry: {
