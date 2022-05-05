@@ -27,7 +27,7 @@ const contractorSchema = mongoose.Schema({
     }],
     
     services:[{ type: mongoose.Schema.Types.ObjectId, required: true, ref: services }],
-    ratings: {ratings, required: false, defualt: undefined}
+    ratings: {required: false, default: 0, type: Number},
 });
 
 
