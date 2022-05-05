@@ -6,7 +6,9 @@ const JobRequests = require('../models/jobRequestsModel');
 // @route GET /api/services
 // @access Private
 const getJobrequests = asyncHandler (async (req, res) => {
-    res.status(200).json({message: 'Get Rob Requests'});
+    const jobrequests = await JobRequests.find();
+
+    res.status(200).json(jobrequests);
 })
 
 // @desc Set Service

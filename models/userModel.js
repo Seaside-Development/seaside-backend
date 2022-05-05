@@ -8,8 +8,10 @@ const userSchema = new mongoose.Schema({
     avatar: {type: String },
     password: { type: String, required: [true, "Please enter a password"]},
     telephone: { type: String, required: false},
-});
+    },
+    {
+        timestamps: true
+    }
+);
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
