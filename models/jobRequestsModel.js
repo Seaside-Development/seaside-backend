@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const jobRequestsSchema = mongoose.Schema({
    _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true}, // _id is required and unique
    complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
-   contractor: {type: String, default: '', required:true}, //description: 'MANDATORY'
-   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'contractors'}],
+   contractor: {type: String, default: '', required: [true, 'Enter a contractor']}, //description: 'MANDATORY'
+   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'Contractors'}],
    customerID: [{type: mongoose.Schema.Types.ObjectId, ref: 'customers'}],
    industry: {
      type:String,
@@ -36,5 +36,6 @@ const jobRequestsSchema = mongoose.Schema({
  }, 
   {timestamps: true}
  );
+
 
 module.exports = mongoose.model('JobRequests', jobRequestsSchema);

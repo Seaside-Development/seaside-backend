@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const jobRequestsSchema = mongoose.Schema({
+const ContractorSchema = mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
     contractor: { type: String, required: true },
-    businessDescription: { type: string, required: true, default: '' },                         
+    businessDescription: { type: String, required: true, default: '' },                      
     operatingLocations: [{
         type: String,
         enum: [
@@ -31,4 +31,4 @@ const jobRequestsSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('JobRequests', jobRequestsSchema);
+module.exports = mongoose.model('Contractor', ContractorSchema);
