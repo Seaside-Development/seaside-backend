@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+# MongoDB services
+  mongodb:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=client
+      - MONGO_INITDB_ROOT_PASSWORD=clientCapst0ne
+      - MONGO_INITDB_DATABASE=Capstone
+
+  #Node API Services
+  api:
+    build: .
+    ports: 
+      - 4000:5000
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb+srv://client:clientCapst0ne@capstonecluster.b1lzy.mongodb.net/Capstone?retryWrites=true&w=majority
+      NAME: SeasideBackend
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo_db: {}

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-
+const contractor=require('./contractorModel').contractors
+const customer=require('./userModel').customer
 
 //Job request Schema
 const jobRequestsSchema = mongoose.Schema({
    _id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true}, // _id is required and unique
    complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
-   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: 'contractors'}],
-   customerID: [{type: mongoose.Schema.Types.ObjectId, ref: 'customers'}],
+   contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: contractor}],
+   customerID: [{type: mongoose.Schema.Types.ObjectId, ref: customers}],
    
    //Industry that pertains to the job
    industry: {
@@ -47,6 +48,9 @@ const jobRequestsSchema = mongoose.Schema({
         Date: {type: Date, default: Date.now}
     }
      
- });
+ }, 
+  {timestamps: true}
+ );
+
 
 module.exports = mongoose.model('JobRequests', jobRequestsSchema);
