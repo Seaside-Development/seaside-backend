@@ -10,4 +10,4 @@ const customerSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('customer', customerSchema);
+module.exports.customer = mongoose.model('customer', customerSchema);
