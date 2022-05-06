@@ -3,7 +3,7 @@ const  services = require('./servicesNodel').services;
 
 
 const contractorSchema = mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
+    id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
     contractorName: { type: String, required: true },
     businessDescription: { type: String, required: true, default: '' },                         
     operatingLocations: [{
@@ -39,7 +39,7 @@ const ratings=new mongoose.Schema({
 
 //THIS IS ACTING AS A POTENTIAL SUBSCHEMA AND MAY NOT BE NEEDED WITH IMPLEMNTATION
 const servicesSchema = mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
+    id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
     
     services:[{
         Plumbing: [{type: Array, enum:['installation', 'removal', 'repairs']}],

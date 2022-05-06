@@ -5,8 +5,7 @@
 const mongoose = require('mongoose');
 
 const servicesSchema = mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
-    
+    id: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true }, // _id is required and unique
     services:[{
         Plumbing: [{type: Array, enum:['installation', 'removal', 'repairs']}],
         Gardening: [{type: Array, enum:['lawn maintainence', 'planting']}],
