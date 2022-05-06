@@ -1,5 +1,4 @@
 const asyncHandler = require('express-async-handler');
-
 const User = require('../models/userModel');
 
 // @desc Get all Service
@@ -11,32 +10,77 @@ const getUsers = asyncHandler (async (req, res) => {
   res.status(200).json(users);
 })
 
-// @desc Set Service
+// @desc Set new User
 // @route POST /api/services
-// @access Private
+// @access Public
 const setUser = asyncHandler (async (req, res) => {
-  if(!req.body.text) {
+  const { username, email, avatar, password, telephone } = req.body;
+
+  if(!username || !email || !avatar || !password || !telephone) {
       res.status(400)
-      throw new Error('Please add a text field');
+      throw new Error('Please add all fields');
   } 
 
+  // check if user exists
+  const userExist = await User.findOne({ email });
+  if(userExist) {
+      res.status(400)
+      throw new Error('User already exist');
+  }
+
+  // Create user
   const user = await User.create({
-    text: req.body.text
+    username,
+    email,
+    avatar,
+    password,
+    telephone
   })
-  res.status(200).json(user);
+  
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      telephone: user.telephone,
+    })
+  } else {
+    res.status(400)
+    throw new Error('Invalid user data')
+  }
 })
 
 // @desc Update Service
-// @route PUT /api/services/:id
+// @route PUT /api/v1/users/:id
 // @access Private
 const updateUser = asyncHandler (async (req, res) => {
-  res.status(200).json({message: `update User Account ${req.params.id}`});
+  const goal = await User.findById(req.params.id);
+
+  if(!User) {
+      res.status(400)
+      throw new Error('User not found');
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(updatedUser);
 })
 
 // @desc Delete Users
 // @route DELETE /api/services/:id
 // @access Private
 const deleteUser = asyncHandler (async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if(!User) {
+    res.status(400)
+    throw new Error('User not found');
+  }
+
+  await User.remove(); // remove user  
   res.status(200).json({message: `Delete User Account ${req.params.id}`});
 })
 
