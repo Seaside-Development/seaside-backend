@@ -19,7 +19,11 @@ const setUser = asyncHandler (async (req, res) => {
       res.status(400)
       throw new Error('Please add a text field');
   } 
-  res.status(200).json({message: 'Set User Account'});
+
+  const user = await User.create({
+    text: req.body.text
+  })
+  res.status(200).json(user);
 })
 
 // @desc Update Service
