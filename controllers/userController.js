@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 
 // @desc Get all Service
-// @route GET /api/services
+// @route GET /api/users
 // @access Private
 const getUsers = asyncHandler (async (req, res) => {
   const users = await User.find();
@@ -10,10 +10,10 @@ const getUsers = asyncHandler (async (req, res) => {
   res.status(200).json(users);
 })
 
-// @desc Set new User
-// @route POST /api/services
+// @desc Set/Register a new User
+// @route POST /api/users/register
 // @access Public
-const setUser = asyncHandler (async (req, res) => {
+const registerUser = asyncHandler (async (req, res) => {
   const { username, email, avatar, password, telephone } = req.body;
 
   if(!username || !email || !avatar || !password || !telephone) {
@@ -52,9 +52,9 @@ const setUser = asyncHandler (async (req, res) => {
   }
 })
 
-// @desc Update Service
-// @route PUT /api/v1/users/:id
-// @access Private
+// @desc Update user
+// @route PUT /api/users/update/:id
+// @access Public
 const updateUser = asyncHandler (async (req, res) => {
   const goal = await User.findById(req.params.id);
 
@@ -71,8 +71,8 @@ const updateUser = asyncHandler (async (req, res) => {
 })
 
 // @desc Delete Users
-// @route DELETE /api/services/:id
-// @access Private
+// @route DELETE /api/users/delete:id
+// @access Public
 const deleteUser = asyncHandler (async (req, res) => {
   const user = await User.findById(req.params.id);
   if(!User) {
@@ -84,47 +84,21 @@ const deleteUser = asyncHandler (async (req, res) => {
   res.status(200).json({message: `Delete User Account ${req.params.id}`});
 })
 
-// @desc Get All User
-// @route GET /api/services/:id
-// @access Private
-const getAllUsers = asyncHandler (async (req, res) => {
-    try {
-      let query = User.find();
-  
-      const user = parseInt(req.query.user) || 1;
-      const userSize = parseInt(req.query.limit) || 4;
-      const skip = (user - 1) * userSize;
-      const total = await User.countDocuments();
-  
-      const users = Math.ceil(total / userSize);
-  
-      query = query.skip(skip).limit(userSize);
-  
-      if (user > users) {
-        return res.status(404).json({
-          status: "fail",
-          message: "No page found",
-        });
-      }
-  
-      const result = await query;
-  
-      res.status(200).json({
-        status: "success",
-        count: result.length,
-        user,
-        users,
-        data: result,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        status: "error",
-        message: "Server Error",
-      });
-    }
-  });
+// @desc    Authenticate a user
+// @route   POST /api/users/login
+// @access  Public
+const loginUser = asyncHandler(async (req, res) => {
+  res.json({ message: 'Login successful' });
+})
+
+// @desc    Get user data
+// @route   GET /api/users/me
+// @access  Private
+const getMe = asyncHandler(async (req, res) => {
+  res.status(200).json(req.user)
+})
+
 
 module.exports = {
-    getUsers, setUser, updateUser, deleteUser, getAllUsers
+    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser
 }

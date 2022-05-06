@@ -27,9 +27,9 @@ app.use(express.urlencoded({ extended: false }));
 // }
 
 //api pathway
-app.use('/api/v1/users', require('./routes/userRoutes'));
-app.use('/api/v1/jobrequests', require('./routes/jobrequestsRoutes'));
-app.use('/api/v1/contractor', require('./routes/ContractorsRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/jobrequests', require('./routes/jobrequestsRoutes'));
+app.use('/api/contractor', require('./routes/ContractorsRoutes'));
 //pathway to the error
 app.use(errorHandler);
 

@@ -7,7 +7,12 @@ const jobRequestsSchema = mongoose.Schema({
    id: {type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true}, // _id is required and unique
    complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
    contractorID: [{type: mongoose.Schema.Types.ObjectId, ref: contractor}],
-   customerID: [{type: mongoose.Schema.Types.ObjectId, ref: user}],
+   user: 
+     {
+       type: mongoose.Schema.Types.ObjectId, 
+       required: true,
+       ref: 'User',
+    },
    
    //Industry that pertains to the job
    industry: {
