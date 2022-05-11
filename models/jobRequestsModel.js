@@ -44,14 +44,12 @@ const jobRequestsSchema = mongoose.Schema({
     startDate: {type: Date, default: Date.now},
     endDate: {type: Date, default: Date.now},
     
-    //Reference to reviews
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
-    // //Customer review of job
-    // review:[{ 
-    //       rating: {type: Number, min:0, max:5, required: [true, 'Please select a rating']},
-    //       details: {type: String, default: '', required: [true, 'Please enter a review']},
-    //       Date: {type: Date, default: Date.now}
-    // }]   
+    //Customer review of job
+    review:[{ 
+          rating: {type: Number, min:0, max:5, required: [true, 'Please select a rating']},
+          details: {type: String, default: '', required: [true, 'Please enter a review']},
+          Date: {type: Date, default: Date.now}
+    }]   
  }, 
   {timestamps: true}
  );

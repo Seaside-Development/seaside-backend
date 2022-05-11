@@ -34,7 +34,6 @@ const setJobrequest = asyncHandler (async (req, res) => {
         reviews,
         user: req.user._id
     });
-
     res.status(200).json(jobrequest);
 })
 
@@ -68,6 +67,9 @@ const addReview = asyncHandler (async (req, res) => {
         res.status(401)
         throw new Error('User not authorized to add review')
     }
+
+    // add the review to the contractor model
+        
 
     //update the service
     const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
