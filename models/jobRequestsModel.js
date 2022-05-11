@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const contractor=require('./contractorModel').contractors
-const user=require('./userModel').user
+const User=require('./userModel').user
 
 //Job request Schema
 const jobRequestsSchema = mongoose.Schema({
     title: { type: String, required: [true, "Please provide a title"] },
     complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
-    contractorID: {type: mongoose.Schema.Types.ObjectId, ref: contractor},
+    //reference to contractor
+    contractorID: {type: mongoose.Schema.Types.ObjectId, ref: 'Contractors'},
+    //reference to user
     user: 
       {
         type: mongoose.Schema.Types.ObjectId, 
@@ -41,13 +43,15 @@ const jobRequestsSchema = mongoose.Schema({
     //Start and end dates of job
     startDate: {type: Date, default: Date.now},
     endDate: {type: Date, default: Date.now},
-      
-    //Customer review of job
-    review:[{ 
-          rating: {type: Number, min:0, max:5, required: [true, 'Please select a rating']},
-          details: {type: String, default: '', required: [true, 'Please enter a review']},
-          Date: {type: Date, default: Date.now}
-    }]   
+    
+    //Reference to reviews
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
+    // //Customer review of job
+    // review:[{ 
+    //       rating: {type: Number, min:0, max:5, required: [true, 'Please select a rating']},
+    //       details: {type: String, default: '', required: [true, 'Please enter a review']},
+    //       Date: {type: Date, default: Date.now}
+    // }]   
  }, 
   {timestamps: true}
  );

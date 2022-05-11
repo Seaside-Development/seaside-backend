@@ -22,6 +22,11 @@ const registerUser = asyncHandler (async (req, res) => {
       res.status(400)
       throw new Error('Please add all fields');
   } 
+  // check if password length is greater than 8.
+  if(password.length < 7) {
+    res.status(400);
+    throw new Error('Password must be at least 8 characters long');
+  }
 
   // check if user exists
   const userExist = await User.findOne({ email });

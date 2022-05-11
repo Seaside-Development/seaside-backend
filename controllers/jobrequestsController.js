@@ -6,7 +6,6 @@ const JobRequests = require('../models/jobRequestsModel');
 // @access  Public
 const getJobrequests = asyncHandler (async (req, res) => {
     const jobrequests = await JobRequests.find( {user: req.user._id});
-
     res.status(200).json(jobrequests);
 })
 
@@ -14,7 +13,7 @@ const getJobrequests = asyncHandler (async (req, res) => {
 // @route   POST /api/services
 // @access  Private
 const setJobrequest = asyncHandler (async (req, res) => {
-    const {title, complexity, contractorID, user, industry, description, length, parish, status, startdate, endDate, review} = req.body;
+    const {title, complexity, contractorID, user, industry, description, length, parish, status, startdate, endDate, reviews} = req.body;
 
     if(!title || !complexity || !industry || !description || !length || !parish || !status || !startdate) {
         res.status(400)
@@ -29,10 +28,10 @@ const setJobrequest = asyncHandler (async (req, res) => {
         description, 
         length, 
         parish, 
-        status: 'Pending', 
+        status, 
         startdate, 
         endDate, 
-        review,
+        reviews,
         user: req.user._id
     });
 
@@ -44,16 +43,16 @@ const setJobrequest = asyncHandler (async (req, res) => {
 // @access  Private
 const addReview = asyncHandler (async (req, res) => {
     // get the review and change the status to completed
-    const {review: [{rating, details, Date}], status = 'Completed'} = req.body;
+    const {reviews, status = 'Completed'} = req.body;
     
-    // check if the review is empty
+    // check if the job exist
     const jobrequest = await JobRequests.findByIdAndUpdate(req.params.id) 
     if(!jobrequest) {
         res.status(400)
         throw new Error('Job not found');
     }
     // check if the review is empty
-    if(!review || !status) {
+    if(!reviews || !status) {
         res.status(400)
         throw new Error('Please add required fields');
     }
@@ -110,13 +109,12 @@ const updateJobrequest = asyncHandler (async (req, res) => {
 // @route   DELETE /api/services/remove/:id
 // @access  Private
 const deleteJobrequest = asyncHandler (async (req, res) => {
+    //check if the jobrequest exists
     const jobrequest = await JobRequests.findById(req.params.id);
-
     if(!jobrequest) {
         res.status(404)
         throw new Error('Jobrequest not found');
     }
-
     // Check for user
     if (!req.user) {
         res.status(401)
