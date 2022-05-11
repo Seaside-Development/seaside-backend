@@ -34,6 +34,11 @@ const deleteContractors = asyncHandler (async (req, res) => {
     res.status(200).json({message: `Delete Contractor ${req.params.id}`});
 })
 
+const getMe = asyncHandler(async (req, res) => {
+    res.status(200).json(req.Contractor)
+  })
+  
+
 module.exports = {
-    getContractors, setContractors, updateContractors, deleteContractors
+    getContractors, setContractors, updateContractors, deleteContractors, getMe
 }
