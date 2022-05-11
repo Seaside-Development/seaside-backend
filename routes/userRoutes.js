@@ -3,7 +3,7 @@ const router = express.Router();
 const {getUsers, loginUser, registerUser, updateUser, deleteUser, getMe} = require('../controllers/userController.js');// Importing the serviceController
 const {protect} = require('../middleware/authMiddleware.js');// Importing the authMiddleware
 
-router.get('/', prtoect, getUsers);
+router.get('/', protect, getUsers);
 router.post('/login', loginUser);
 router.post('/register', registerUser);
 router.put('/update/:id', protect,updateUser)
