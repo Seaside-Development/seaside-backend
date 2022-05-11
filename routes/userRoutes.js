@@ -5,9 +5,9 @@ const {protect} = require('../middleware/authMiddleware.js');// Importing the au
 
 router.get('/', getUsers);
 router.post('/login', loginUser);
-router.post('/register', registerUser);
-router.put('/update/:id', updateUser)
-router.delete('/remove/:id', deleteUser);
+router.post('/register', protect,registerUser);
+router.put('/update/:id', protect,updateUser)
+router.delete('/remove/:id', protect,deleteUser);
 router.get('/me', protect, getMe);
 
 module.exports = router;
