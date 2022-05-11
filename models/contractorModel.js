@@ -4,8 +4,8 @@ const User = require('./usersModel');
 
 const contractorSchema = mongoose.Schema({
     // must have a user reference, is an array because contractors can have multiple users
-    userId: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'}],
-    contractorName: { type: String, required: [true, 'Please provide a name']},
+    userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
+    contractorName: {type: String, required: [true, 'Please provide a name']},
     email: {
         type: String,
         lowercase: true,
@@ -13,6 +13,7 @@ const contractorSchema = mongoose.Schema({
         match: [/.+\@.+\..+/, 'Please provide a valid email address'],
         required: [true, "Please provide an email"], 
     },
+    telephone: {type: String, required: [true, 'Please provide a telephone number']},
     businessDescription: { type: String, required: true, default: '' },                         
     operatingLocations: [{
         type: String,
@@ -27,20 +28,17 @@ const contractorSchema = mongoose.Schema({
             'St. George',
             'St. John',
             'Christ Church',
-            'St. Philip'
+            'St. Philip',
+            'All Parishes'
         ],
         required:[true, 'Please select a parish of operations']
     }],
-    services:[{ type: mongoose.Schema.Types.Array, required: true, ref: services }],
-    ratings: {required: false, default: 0, type: Number},
+    services:[{ type: Array, required: [true, 'Please select a service']}],
+    completedJobs: { type: Number, default: 0},
+    totalRatings: { type: Number, default: 0}, //devided by total number of submitted ratings   
+    avgRating: { type: Number, default: undefined },
 },
  {timestamps: true}
 );
-
-const ratings=new mongoose.Schema({
-    ContractorRating: {type: mongoose.Schema.Types.Mixed, ref: 'Review'},
-    completedJobs: { type: Number, required: false, default: 0 },
-    avgRating: { type: Number, default: undefined, required:true },
-})
 
 module.exports.Contractors = mongoose.model('Contractors', contractorSchema);
