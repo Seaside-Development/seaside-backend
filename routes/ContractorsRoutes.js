@@ -4,7 +4,7 @@ const {getContractors, registerContractor, updateContractors, deleteContractors,
 const {protect} = require('../middleware/authMiddleware');// Importing the authMiddleware
 
 router.get('/', getContractors);
-router.post('/contractors/', registerContractor);
+router.post('/becomeContractor', registerContractor);
 router.put('/update/:id', updateContractors);
 router.delete('/remove/:id', deleteContractors);
 router.get('/me', protect, getMe);

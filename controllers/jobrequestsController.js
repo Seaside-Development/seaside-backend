@@ -32,7 +32,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
         startdate, 
         endDate, 
         reviews,
-        user: req.user._id
+        user: req.user.id
     });
     res.status(200).json(jobrequest);
 })

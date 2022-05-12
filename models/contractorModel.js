@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const  services = require('./servicesModel');
-const User = require('./usersModel');
+const User = require('./userModel');
 
 const contractorSchema = mongoose.Schema({
     // must have a user reference, is an array because contractors can have multiple users

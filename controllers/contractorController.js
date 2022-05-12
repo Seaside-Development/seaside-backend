@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler');
 const Contractor = require('../models/contractorModel');
+const User = require('../models/userModel');
 
 
 // @desc    Get all Service
@@ -17,9 +16,10 @@ const getContractors = asyncHandler (async (req, res) => {
   // @route   POST /api/contractor/register
   // @access  Public
 const registerContractor = asyncHandler (async (req, res) => {
-    const {userID, contractorName, email, businessDescription, operatingLocations, services, rating, industry} = req.body;
+    // Body request
+    const {userID, contractorName, email, telephone, businessDescription, operatingLocations, services, rating, completedJobs, totalRatings, avgRating} = req.body;
   
-    if(!contractorName || !email || !businessDescription || !operatingLocations || !services || !industries) {
+    if(!contractorName || !email || !businessDescription || !operatingLocations || !services) {
         res.status(400)
         throw new Error('Please add all fields');
     } 
@@ -33,13 +33,12 @@ const registerContractor = asyncHandler (async (req, res) => {
 
     // Create contractor
     const contractor = await Contractor.create({
-        userID: req.user._id,
+        userID: req.user.id,
         contractorName, 
         email, 
         businessDescription, 
         operatingLocations, 
         services, 
-        industries,
     })
     res.status(200).json(contractor);
 
@@ -52,54 +51,51 @@ const registerContractor = asyncHandler (async (req, res) => {
         businessDescription, 
         operatingLocations, 
         services, 
-        industries
       })
     } else {
       res.status(400)
       throw new Error('Invalid Contractor data')
     }
-  })
-  
-  // @desc    Update user
-  // @route   PUT /api/contractor/update/:id
-  // @access  Public
-  const updateContractors = asyncHandler (async (req, res) => {
-    const contractor = await Contractor.findById(req.params.id);
-  
-    if(!Contractor) {
-        res.status(400)
-        throw new Error('Contractor not found');
-    }
-  
-    const updateContractors = await Contractor.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-  
-    res.status(200).json(updateContractors);
 })
   
-// @desc    Delete Users
+// @desc    Update user
+// @route   PUT /api/contractor/update/:id
+// @access  Public
+const updateContractors = asyncHandler (async (req, res) => {
+  const contractor = await Contractor.findById(req.params.id);
+  
+  if(!Contractor) {
+        res.status(400)
+        throw new Error('Contractor not found');
+  }
+  
+  const updateContractors = await Contractor.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+  });
+  res.status(200).json(updateContractors);
+})
+  
+// @desc    Delete a contractor
 // @route   DELETE /api/contractor/delete:id
 // @access  Public
 const deleteContractors = asyncHandler (async (req, res) => {
     const contractor = await Contractor.findById(req.params.id);
     if(!Contractor) {
       res.status(400)
-      throw new Error('User not found');
+      throw new Error('Contractor account not found');
     }
   
     await Contractor.remove(); // remove user  
     res.status(200).json({message: `Delete Contractor Account ${req.params.id}`});
   })
   
-  // @desc    Get user data
-  // @route   GET /api/contractor/me
-  // @access  Private
-  const getMe = asyncHandler(async (req, res) => {
+// @desc    Get user data
+// @route   GET /api/contractor/me
+// @access  Private
+const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(req.contractor)
-  })
+})
   
-
 module.exports = {
     getContractors, registerContractor, updateContractors, deleteContractors, getMe
 }
