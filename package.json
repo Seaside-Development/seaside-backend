@@ -4,11 +4,10 @@
   "description": "Service Finder app for capstone project",
   "main": "server.js",
   "scripts": {
-    "client": "cd client && npm start",
     "server": "nodemon server.js",
-    "build": "cd client && npm run build",
+    "dev": "nodemon server.js",
     "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run start"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,7 @@
     "express-async-handler": "^1.2.0",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.6.0",
     "mongoose": "^6.3.0"
   },
   "devDependencies": {
