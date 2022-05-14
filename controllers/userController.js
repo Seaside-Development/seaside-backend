@@ -15,9 +15,9 @@ const getUsers = asyncHandler (async (req, res) => {
 // @route   POST /api/users/register
 // @access  Public
 const registerUser = asyncHandler (async (req, res) => {
-  const {username, email, avatar, password, telephone} = req.body;
+  const {firstName, lastName, username, email, avatar, password, telephone} = req.body;
 
-  if(!username || !email || !avatar || !password || !telephone) {
+  if(!firstName || !lastName || !username || !email || !avatar || !password || !telephone) {
       res.status(400)
       throw new Error('Please add all fields');
   } 
@@ -40,6 +40,8 @@ const registerUser = asyncHandler (async (req, res) => {
 
   // Create user
   const user = await User.create({
+    firstName, 
+    lastName,
     username, 
     email, 
     avatar, 

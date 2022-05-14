@@ -2,5 +2,3 @@ node_modules
 client_modules_dir = os.path.join(client_dir, 'node_modules')
 client/node_modules
 .env
-Dockerfile
-docker-compose.yaml
