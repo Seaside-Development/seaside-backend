@@ -1,24 +1,24 @@
-require('dotenv').config();
-const asyncHandler = require('express-async-handler');
-const fs = require("fs");
-const User = require("../models/userModel");
-const connectDB = require("../config/db");
+// require('dotenv').config();
+// const asyncHandler = require('express-async-handler');
+// const fs = require("fs");
+// const User = require("../models/userModel");
+// const connectDB = require("../config/db");
 
-connectDB();
+// connectDB();
 
-const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
+// const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 
-//console.log(users);
-const importData = asyncHandler (async () => {
-    try {
-        await User.create(users);
-        console.log(`Data Imported 👌`);
-        process.exit(0);
-    } catch (err) {
-        console.error(`There was an error 😢: ${err}`);
-        process.exit(1);
-    }
-});
+// //console.log(users);
+// const importData = asyncHandler (async () => {
+//     try {
+//         await User.create(users);
+//         console.log(`Data Imported 👌`);
+//         process.exit(0);
+//     } catch (err) {
+//         console.error(`There was an error 😢: ${err}`);
+//         process.exit(1);
+//     }
+// });
 
 // const deleteData = async () => {
 //     try {
@@ -31,8 +31,8 @@ const importData = asyncHandler (async () => {
 //     }
 //   };
   
-  if (process.argv[2] === "--import") {
-    importData();
-  } else if (process.argv[2] === "--delete") {
-    deleteData();
-  }
+//   if (process.argv[2] === "--import") {
+//     importData();
+//   } else if (process.argv[2] === "--delete") {
+//     deleteData();
+//   }
