@@ -54,7 +54,6 @@ const registerUser = asyncHandler (async (req, res) => {
       username: user.username,
       email: user.email, 
       avatar: user.avatar,
-      password: user.password,
       telephone: user.telephone,
       token: generateToken(user._id)
     })
