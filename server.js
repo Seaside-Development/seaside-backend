@@ -5,14 +5,6 @@ const {errorHandler} = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-module.exports = {
-  plugins: [
-    new BundleAnalyzerPlugin()
-  ]
-}
-
 connectDB();
 
 const app = express();
