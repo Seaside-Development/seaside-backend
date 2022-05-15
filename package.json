@@ -4,10 +4,11 @@
   "description": "Service Finder app for capstone project",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "server": "nodemon server.js",
     "dev": "nodemon server.js",
-    "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --unsafe-perm && npm run build && npm run start"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install"
   },
   "repository": {
     "type": "git",
@@ -18,19 +19,18 @@
   "bugs": {
     "url": "https://github.com/Seaside-Development/seaside-backend/issues"
   },
-  "homepage": "https://github.com/Seaside-Development/seaside-backend#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
-    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.0"
   },
   "devDependencies": {
+    "concurrently": "^7.1.0",
     "nodemon": "^2.0.15"
   },
   "engines": {
