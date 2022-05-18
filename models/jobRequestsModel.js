@@ -37,7 +37,7 @@ const jobRequestsSchema = mongoose.Schema({
     status: {
         type: String,
         enum: ['Pending', 'In Progress', 'Completed', 'Cancelled'],
-        required: [true, 'Please select a status'],
+        //required: [true, 'Please select a status'],
         default: 'Pending'
     },
     //Start and end dates of job

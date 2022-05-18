@@ -2,7 +2,7 @@
 //WE MAY NOT NEED THIS SCHEMA FURTHER RESEARCH NEEDD TO COME TO FINAL CONCLUSION
 const mongoose = require('mongoose');
 
-const servicesSchema = new mongoose.Schema({
+const servicesSchema = mongoose.Schema({
     services:[{
         Plumbing: [{type: Array, enum:['installation', 'removal', 'repairs']}],
         Gardening: [{type: Array, enum:['lawn maintainence', 'planting']}],

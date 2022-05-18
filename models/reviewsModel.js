@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const reviewSchema = new mongoose.Schema(
+const reviewSchema = mongoose.Schema(
     {
         rating: {type: Number, min:0, max:5, required: [true, 'Please select a rating']},
         details: {type: String, default: '', required: [true, 'Please enter a review']},
