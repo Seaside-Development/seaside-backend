@@ -6,6 +6,8 @@ const contractorSchema = mongoose.Schema({
     // must have a user reference, is an array because contractors can have multiple users
     userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     contractorName: {type: String, required: [true, 'Please provide a name']},
+    //i.e. company name
+    title: {type: String},
     email: {
         type: String,
         lowercase: true,
@@ -33,6 +35,10 @@ const contractorSchema = mongoose.Schema({
         ],
         required:[true, 'Please select a parish of operations']
     }],
+    //array of industries that the contractor works in
+    industry: [{type: String}],
+    //array of services that the contractor offers
+    // must have a services reference, is an array because contractors can have multiple services
     services:[{ type: Array, required: [true, 'Please select a service']}],
     completedJobs: { type: Number, default: 0},
     totalRatings: { type: Number, default: 0}, //devided by total number of submitted ratings   

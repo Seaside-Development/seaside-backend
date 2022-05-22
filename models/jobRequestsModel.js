@@ -22,6 +22,9 @@ const jobRequestsSchema = mongoose.Schema({
       enum: ['Gardening', 'Construction', 'Plumbing','Electrical'],
       required:  [true, 'Please select an industry']
     },
+    services: {
+      type: String,
+    },
     //job description
     description: {type:String, default: '', required: [true, 'Please enter a job description']},
     //How long the job is expected to be

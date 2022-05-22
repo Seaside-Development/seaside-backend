@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const JobRequests = require('../models/jobRequestsModel');
+const reviews = require('../models/reviewsModel');
 
 // @desc    Get all Service
 // @route   GET /api/services
@@ -13,9 +14,9 @@ const getJobrequests = asyncHandler (async (req, res) => {
 // @route   POST /api/services
 // @access  Private
 const setJobrequest = asyncHandler (async (req, res) => {
-    const {title, complexity, contractorID, user, industry, description, length, parish, status, startdate, endDate, reviews} = req.body;
+    const {title, complexity, contractorID, user, industry, services, description, length, parish, status, startdate, endDate, reviews} = req.body;
 
-    if(!title || !complexity || !industry || !description || !length || !parish || !status || !startdate) {
+    if(!title || !complexity || !industry || !description || !services || !length || !parish || !status || !startdate) {
         res.status(400)
         throw new Error('Please add required fields');
     }
@@ -25,6 +26,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
         complexity, 
         contractorID, 
         industry, 
+        services,
         description, 
         length, 
         parish, 
