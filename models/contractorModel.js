@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-const  services = require('./servicesModel');
-const User = require('./userModel');
 
 const contractorSchema = mongoose.Schema({
     // must have a user reference, is an array because contractors can have multiple users
-    userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
+    user: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     contractorName: {type: String, required: [true, 'Please provide a name']},
     //i.e. company name
     title: {type: String},
@@ -12,13 +10,13 @@ const contractorSchema = mongoose.Schema({
         type: String,
         lowercase: true,
         unique: true,
-        match: [/.+\@.+\..+/, 'Please provide a valid email address'],
+        //match: [/.+\@.+\..+/, 'Please provide a valid email address'],
         required: [true, "Please provide an email"], 
     },
     telephone: {type: String, required: [true, 'Please provide a telephone number']},
     businessDescription: { type: String, required: true, default: '' },                         
     operatingLocations: [{
-        type: String,
+        type: Array,
         enum: [
             'St. Lucy',
             'St. Peter',
@@ -36,7 +34,7 @@ const contractorSchema = mongoose.Schema({
         required:[true, 'Please select a parish of operations']
     }],
     //array of industries that the contractor works in
-    industry: [{type: String}],
+    industry: [{type: Array}],
     //array of services that the contractor offers
     // must have a services reference, is an array because contractors can have multiple services
     services:[{ type: Array, required: [true, 'Please select a service']}],
@@ -47,4 +45,4 @@ const contractorSchema = mongoose.Schema({
  {timestamps: true}
 );
 
-module.exports.Contractors = mongoose.model('Contractors', contractorSchema);
+module.exports = mongoose.model('Contractors', contractorSchema);

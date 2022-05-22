@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const Contractor = require('../models/contractorModel');
+const Contractors = require('../models/contractorModel');
 const User = require('../models/userModel');
 const JobRequest = require('../models/jobRequestsModel');
 
@@ -8,7 +8,7 @@ const JobRequest = require('../models/jobRequestsModel');
 // @route   GET /api/contractor
 // @access  Private
 const getContractors = asyncHandler (async (req, res) => {
-    const contractor = await Contractor.find();
+    const contractor = await Contractors.find();
   
     res.status(200).json(contractor);
 })
@@ -18,21 +18,23 @@ const getContractors = asyncHandler (async (req, res) => {
 // @route  GET /api/contractor/search
 // @access Private
 const getContractorsBySearch = asyncHandler (async (req, res) => {
-    const {industry, services, operatingLocations} = req.query;
+    let {industry, services, operatingLocations} = req.body;
 
     //search for the contractor by query parameters
-    const contractors = await Contractor.find(
+    let contractors = await Contractors.find(
       {
-        industry: {$regex: req.params.industry, $options: 'i'}, 
-        services: {$regex: req.params.services, $options: 'i'}, 
-        operatingLocations: {$regex: req.params.operatingLocations, $options: 'i'},
-      }).exec();
+        industry: [industry],
+        services: [services],
+        operatingLocations: [operatingLocations]
+      }
+    );
+    console.log(contractors);
     // limit the results to 5
     contractors = contractors.slice(0, 5);
     // return the contractors
     res.send(contractors);
 
-    contractorResult = contractor.map(contractor => {
+    contractorResult = Contractors.map(contractor => {
         return {
           title: contractor.title,
           contractorName: contractor.contractorName,
@@ -52,23 +54,23 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
 // @access  Public
 const registerContractor = asyncHandler (async (req, res) => {
     // Body request
-    const {userID, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating} = req.body;
+    const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating} = req.body;
   
-    if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !title) {
+    if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !title || !telephone) {
         res.status(400)
         throw new Error('Please add all fields');
     } 
     
     // check if user exists
-    const contractorExist = await Contractor.findOne({ email });
+    const contractorExist = await Contractors.findOne({ email });
     if(contractorExist) {
         res.status(400)
         throw new Error('Contractor already exist');
     }
 
     // Create contractor object
-    const contractor = await Contractor.create({
-        userID: req.user.id,
+    const contractor = await Contractors.create({
+        user: req.user.id,
         title,
         contractorName, 
         email, 
@@ -76,13 +78,14 @@ const registerContractor = asyncHandler (async (req, res) => {
         operatingLocations, 
         industry,
         services, 
+        telephone,
     })
     res.status(200).json(contractor);
 
-    if (Contractor) {
+    if (Contractors) {
       res.status(201).json({
-        _id: Contractor._id, 
-        userID,
+        _id: Contractors._id, 
+        user,
         contractorName, 
         email, 
         businessDescription, 
@@ -99,7 +102,7 @@ const registerContractor = asyncHandler (async (req, res) => {
 // @route   PUT /api/contractor/update/:id
 // @access  Public
 const updateContractors = asyncHandler (async (req, res) => {
-  const contractor = await Contractor.findById(req.params.id);
+  const contractor = await Contractors.findById(req.params.id);
   
   if(!Contractor) {
         res.status(400)
@@ -116,7 +119,7 @@ const updateContractors = asyncHandler (async (req, res) => {
 // @route   DELETE /api/contractor/delete:id
 // @access  Public
 const deleteContractors = asyncHandler (async (req, res) => {
-    const contractor = await Contractor.findById(req.params.id);
+    const contractor = await Contractors.findById(req.params.id);
     if(!Contractor) {
       res.status(400)
       throw new Error('Contractor account not found');
