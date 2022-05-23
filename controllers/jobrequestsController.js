@@ -5,8 +5,12 @@ const reviews = require('../models/reviewsModel');
 // @desc    Get all Service
 // @route   GET /api/services
 // @access  Public
-const getJobrequests = asyncHandler (async (req, res) => {
-    const jobrequests = await JobRequests.find( {user: req.user._id});
+const searchJobrequests = asyncHandler (async (req, res) => {
+    let {id, userId} = req.body;
+    const jobrequests = await JobRequests.find( {
+        id: _id,
+        userId: userId
+    });
     res.status(200).json(jobrequests);
 })
 
@@ -135,6 +139,24 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
     res.status(200).json({message: `Delete Job Requests ${req.params.id}`});
 })
 
+const getJobrequestById = asyncHandler (async (req, res) => {
+    const jobrequest = await JobRequests.findById(req.params.id);
+    if(!jobrequest) {
+        res.status(404)
+        throw new Error('Jobrequest not found');
+    }
+    res.status(200).json(jobrequest);
+})
+
+const getJobrequestByContractorId = asyncHandler (async (req, res) => {
+    const jobrequest = await JobRequests.find({contractorID: req.params.id});
+    if(!jobrequest) {
+        res.status(404)
+        throw new Error('Jobrequest not found');
+    }
+    res.status(200).json(jobrequest);
+})
+
 module.exports = {
-    getJobrequests, setJobrequest, updateJobrequest, deleteJobrequest
+    searchJobrequests, setJobrequest, updateJobrequest, deleteJobrequest, getJobrequestById, addReview, getJobrequestByContractorId
 }

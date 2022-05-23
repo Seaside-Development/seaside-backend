@@ -9,7 +9,6 @@ const JobRequest = require('../models/jobRequestsModel');
 // @access  Private
 const getContractors = asyncHandler (async (req, res) => {
     const contractor = await Contractors.find();
-  
     res.status(200).json(contractor);
 })
   
@@ -28,7 +27,6 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
         operatingLocations: [operatingLocations]
       }
     );
-    console.log(contractors);
     // limit the results to 5
     contractors = contractors.slice(0, 5);
     // return the contractors
