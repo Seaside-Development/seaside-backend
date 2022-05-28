@@ -33,26 +33,11 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 //render pages
-<<<<<<< HEAD
-app.get("/", (req, res) => { res.render("index");}); //display the index page
-app.get("/user-registration-form", (req, res) => {res.render("user-registration-form");}); //end of app.get
 app.get("/useraccount", (req, res) => {res.render("useraccount");}); //end of app.get
-=======
-app.get("/", (req, res) => {
-  res.render("index");
-}); //display the index page
-app.get("/user-registration-form", (req, res) => {
-  res.render("user-registration-form");
-}); //end of app.get
-
-app.get("/contractorform", (req, res) => {
-  res.render("contractorform");
-}); //end of app.get
-
-app.get("/createjobform", (req, res) => {
-  res.render("createjobform");
-}); //end of app.get
->>>>>>> e4258c4b61b8eaa250a17196bef41eafa87818a0
+app.get("/", (req, res) => {res.render("index");}); //display the index page
+app.get("/user-registration-form", (req, res) => {res.render("user-registration-form");}); //end of app.get
+app.get("/contractorform", (req, res) => {res.render("contractorform");}); //end of app.get
+app.get("/createjobform", (req, res) => {res.render("createjobform");}); //end of app.get
 
 //api pathways
 app.use("/api/users", require("./routes/userRoutes"));
