@@ -44,6 +44,10 @@ app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get
 
+app.get("/createjobform", (req, res) => {
+  res.render("createjobform");
+}); //end of app.get
+
 //api pathways
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/jobrequests", require("./routes/jobrequestsRoutes"));
