@@ -24,7 +24,7 @@ app.use('/css', express.static(__dirname + 'frontend/public/js'));
 app.use('/css', express.static(__dirname + 'frontend/public/attachments'));
 
 //set views
-app.set('views', './frontend/views');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 //display the ejs files
