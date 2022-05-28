@@ -35,6 +35,9 @@ app.get("", (req, res) => {
 app.get("/user-registration-form", (req, res) => {
   res.render("user-registration-form");
 }); //end of app.get
+app.get("/header", (req, res) => {
+  res.render("header");
+}); //end of app.get
 
 //api pathways
 app.use("/api/users", require("./routes/userRoutes"));
