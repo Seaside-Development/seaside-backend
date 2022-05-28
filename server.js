@@ -35,6 +35,7 @@ app.set("view engine", "ejs");
 //render pages
 app.get("/", (req, res) => { res.render("index");}); //display the index page
 app.get("/user-registration-form", (req, res) => {res.render("user-registration-form");}); //end of app.get
+app.get("/useraccount", (req, res) => {res.render("useraccount");}); //end of app.get
 
 //api pathways
 app.use("/api/users", require("./routes/userRoutes"));
