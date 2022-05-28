@@ -33,7 +33,7 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 //render pages
-app.get("", (req, res) => { res.render("index");}); //display the index page
+app.get("/", (req, res) => { res.render("index");}); //display the index page
 app.get("/user-registration-form", (req, res) => {res.render("user-registration-form");}); //end of app.get
 
 //api pathways
