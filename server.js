@@ -16,7 +16,7 @@ connectDB(); // connect to database function
 //enable express middleware
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 //Enable CORS
 app.use("/", cors());

@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
+const { redirect } = require('express/lib/response');
 
 // @desc    Get all Service
 // @route   GET /api/users
@@ -17,7 +18,7 @@ const getUsers = asyncHandler (async (req, res) => {
 const registerUser = asyncHandler (async (req, res) => {
   const {firstName, lastName, username, email, avatar, password, telephone} = req.body;
 
-  if(!firstName || !lastName || !username || !email || !avatar || !password || !telephone) {
+  if(!firstName || !lastName || !username || !email || !password || !telephone) {
       res.status(400)
       throw new Error('Please add all fields');
   } 
@@ -49,14 +50,17 @@ const registerUser = asyncHandler (async (req, res) => {
     telephone
   })  
   if (user) {
-    res.status(201).json({
+    res
+    .status(201).json({
       _id: user._id, 
       username: user.username,
       email: user.email, 
       avatar: user.avatar,
       telephone: user.telephone,
       token: generateToken(user._id)
+      
     })
+    .redirect('/views/index');
   } else {
     res.status(400)
     throw new Error('Invalid user data')
