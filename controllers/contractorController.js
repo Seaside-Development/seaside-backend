@@ -47,14 +47,41 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
     res.status(200).json(contractorResult);
 })
 
+// @desc    Login the contractor
+// @route   POST /api/contractor/login
+// @access  Public
+const loginContractor = asyncHandler (async (req, res) => {
+    const {email, password} = req.body;
+    // Check if email and password exist
+    if(!email || !password) {
+        res.status(400)
+        throw new Error('Please provide an email and password');
+    }
+    // Check if user exists and password is correct
+    const contractor = await Contractors.findOne({email});
+    if(!contractor) {
+        res.status(400)
+        throw new Error('Email not found');
+    }
+    const isMatch = await contractor.comparePassword(password);
+    if(!isMatch) {
+        res.status(400)
+        throw new Error('Incorrect password');
+    }
+    // Return jsonwebtoken
+    const token = contractor.getSignedJwtToken();
+    res.status(200).json({success: true, token});
+})
+
+
 // @desc    Set/Register a new contractor
 // @route   POST /api/contractor/register
 // @access  Public
 const registerContractor = asyncHandler (async (req, res) => {
     // Body request
-    const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating} = req.body;
+    const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating, password} = req.body;
   
-    if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !title || !telephone) {
+    if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !title || !telephone || !password) {
         res.status(400)
         throw new Error('Please add all fields');
     } 
@@ -72,6 +99,7 @@ const registerContractor = asyncHandler (async (req, res) => {
         title,
         contractorName, 
         email, 
+        password,
         businessDescription, 
         operatingLocations, 
         industry,
@@ -135,5 +163,5 @@ const getMe = asyncHandler(async (req, res) => {
 })
   
 module.exports = {
-    getContractors, registerContractor, updateContractors, deleteContractors, getMe, getContractorsBySearch
+    getContractors, registerContractor, updateContractors, deleteContractors, getMe, getContractorsBySearch, loginContractor
 }

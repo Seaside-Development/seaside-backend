@@ -13,6 +13,7 @@ const contractorSchema = mongoose.Schema({
         //match: [/.+\@.+\..+/, 'Please provide a valid email address'],
         required: [true, "Please provide an email"], 
     },
+    password: {type: String, required: [true, 'Please provide a password']},
     telephone: {type: String, required: [true, 'Please provide a telephone number']},
     businessDescription: { type: String, required: true, default: '' },                         
     operatingLocations: [{
