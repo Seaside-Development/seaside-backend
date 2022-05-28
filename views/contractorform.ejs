@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <link href="/styles/styles.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="flex justify-center py-24">
+      <div class="card w-3/6 shadow-md rounded-lg p-8 m-8">
+        <h1 class="text-center font-semibold text-2xl">
+          Contractor Registration Form
+        </h1>
+        <form
+          action="/api/users/register"
+          method="POST"
+          class="py-5 space-y-8 divide-y divide-gray-200"
+        >
+          <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+            <div>
+              <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="name"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Name
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      autoComplete="name"
+                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="email"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Email Address
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      autoComplete="email"
+                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md placeholder-gray-300"
+                      placeholder="*********"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="street-address"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Telephone
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="telephone"
+                      id="phone-number"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
+                      placeholder="+1 (246) 822-6543"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    for="business-description"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Busines Description
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <textarea
+                      id="business-description"
+                      name="business-description"
+                      rows="3"
+                      class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+                    ></textarea>
+                    <p class="mt-2 text-sm text-gray-500">
+                      Write a few sentences describing your business.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex sm:grid sm:grid-cols-4 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    for="location"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Operating Locations
+                  </label>
+                  <div class="mt-1 sm:mt-0">
+                    <fieldset class="space-y-5">
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-lucy"
+                            aria-describedby="st-lucy-description"
+                            name="st-lucy"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label for="st-lucy" class="font-medium text-gray-700"
+                            >St. Lucy</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-peter"
+                            aria-describedby="st-peter-description"
+                            name="st-peter"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-peter"
+                            class="font-medium text-gray-700"
+                            >St. Peter</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-andrew"
+                            aria-describedby="st-andrew-description"
+                            name="st-andrew"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-andrew"
+                            class="font-medium text-gray-700"
+                            >St. Andrew</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-james"
+                            aria-describedby="st-james-description"
+                            name="st-james"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-james"
+                            class="font-medium text-gray-700"
+                            >St. James</label
+                          >
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="mt-1 sm:mt-0">
+                    <fieldset class="space-y-5">
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-joseph"
+                            aria-describedby="st-joseph-description"
+                            name="st-joseph"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-joseph"
+                            class="font-medium text-gray-700"
+                            >St. Joseph</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-George"
+                            aria-describedby="st-George-description"
+                            name="st-George"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-George"
+                            class="font-medium text-gray-700"
+                            >St. George</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-thomas"
+                            aria-describedby="st-thomas-description"
+                            name="st-thomas"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-thomas"
+                            class="font-medium text-gray-700"
+                            >St. Thomas</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-john"
+                            aria-describedby="st-john-description"
+                            name="st-john"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label for="st-john" class="font-medium text-gray-700"
+                            >St. John</label
+                          >
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="mt-1 sm:mt-0">
+                    <fieldset class="space-y-5">
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-michael"
+                            aria-describedby="st-michael-description"
+                            name="st-michael"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-michael"
+                            class="font-medium text-gray-700"
+                            >St. Michael</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="st-philip"
+                            aria-describedby="st-philip-description"
+                            name="st-philip"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="st-philip"
+                            class="font-medium text-gray-700"
+                            >St. Philip</label
+                          >
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="christ-church"
+                            aria-describedby="christ-church-description"
+                            name="christ-church"
+                            type="checkbox"
+                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                          />
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label
+                            for="christ-church"
+                            class="font-medium text-gray-700"
+                            >Christ Church</label
+                          >
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+          >
+            <label
+              for="industry"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            >
+              Industry
+            </label>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <select
+                id="industry"
+                name="industry"
+                autocomplete="industry-name"
+                class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              >
+                <option>Plumbing</option>
+                <option>Carpentry</option>
+                <option>Electrical</option>
+                <option>HVAC</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+          >
+            <label
+              for="service"
+              class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+            >
+              Service
+            </label>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <select
+                id="service"
+                name="service"
+                autocomplete="service-name"
+                class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+              >
+                <option>Maintenance</option>
+                <option>Repair</option>
+                <option>Electrical</option>
+                <option>Carpentry</option>
+                <option>Plumbing</option>
+                <option>HVAC</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-5">
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-indigo-700 hover:bg-indigo-200 hove:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
