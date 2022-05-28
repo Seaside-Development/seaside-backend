@@ -25,10 +25,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.8",
-<<<<<<< HEAD
     "esbuild": "^0.14.41",
-=======
->>>>>>> 273825b9d57e64533ac2a64a542845118cd7e32e
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
