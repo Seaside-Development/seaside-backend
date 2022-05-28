@@ -2,6 +2,8 @@
 const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
+const ejs = require('ejs');
+const path = require('path');
 const {errorHandler} = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
@@ -26,7 +28,7 @@ app.use('/css', express.static(__dirname + 'frontend/public/attachments'));
 //set views
 app.set('views', './views');
 app.set('view engine', 'ejs');
-
+app.use(express.static(path.join(__dirname, 'public')))
 //display the ejs files
 app.get('', (req, res) => {
     res.render('index')
