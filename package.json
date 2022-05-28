@@ -25,11 +25,17 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.8",
+<<<<<<< HEAD
+    "esbuild": "^0.14.41",
+=======
+>>>>>>> 273825b9d57e64533ac2a64a542845118cd7e32e
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.6.0",
-    "mongoose": "^6.3.0"
+    "mongoose": "^6.3.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
     "concurrently": "^7.1.0",
