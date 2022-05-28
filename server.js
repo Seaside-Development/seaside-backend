@@ -32,6 +32,9 @@ app.set('view engine', 'ejs');
 app.get('', (req, res) => {
     res.render('index')
 })  //end of app.get
+app.get('/contractorform', (req, res) => {
+    res.render('contractorform')
+})  //end of app.get
 
 //api pathways
 app.use('/api/users', require('./routes/userRoutes'));
