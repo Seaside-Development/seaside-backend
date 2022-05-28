@@ -23,9 +23,13 @@ app.use('/css', express.static(__dirname + 'frontend/public/css'));
 app.use('/css', express.static(__dirname + 'frontend/public/js'));
 app.use('/css', express.static(__dirname + 'frontend/public/attachments'));
 
+//set views
+app.set('views', './frontend/views');
+app.set('view engine', 'ejs');
+
 //display the ejs files
 app.get('', (req, res) => {
-    res.sendFile(__dirname + '/frontend/views/index.html')
+    res.render('index')
 })  //end of app.get
 
 //api pathways
