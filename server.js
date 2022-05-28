@@ -28,7 +28,6 @@ app.use('/css', express.static(__dirname + 'frontend/public/attachments'));
 //set views
 app.set('views', './views');
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')))
 //display the ejs files
 app.get('', (req, res) => {
     res.render('index')
