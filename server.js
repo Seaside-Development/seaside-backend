@@ -51,6 +51,12 @@ app.get("/createjobform", (req, res) => {
 app.get("/job-list", (req, res) => {
   res.render("job-list");
 }); //end of app.get
+app.get("/job-list/:jobId", (req, res) => {
+  res.render("jobDetails");
+}); //end of app.get
+
+
+
 
 //api pathways
 app.use("/api/users", require("./routes/userRoutes"));

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/dist/output.css" rel="stylesheet" />
+        <link href="/styles/styles.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body>
+        <div class="content flex flex-col h-screen justify-center items-center py-24">
+            <div class="card flex flex-col w-5/6 h-max shadow-md rounded-lg p-8 my-8" >
+                    <!-- Title -->
+                <h1 class="text-center font-semibold text-2xl border-b-2 align-text-bottom mb-6 pb-2">
+                Job Details
+                </h1>
+
+                <div class="space-y-8 divide-y divide-gray-200">
+                    <div>
+                        <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5" >
+                                <label
+                                    for="Title"
+                                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                                >
+                                    Title
+                                </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Job Title Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="complexity"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Complexity
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Complexity Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="industry"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Industry
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Industry Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="service"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Service
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Service Placehoilder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="description"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Description
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Description Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="length"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Length
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Length Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="location"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Location
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Location Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="date"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Date
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Date Placeholder
+                            </div>
+                        </div>
+                        <div
+                            class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                        >
+                            <label
+                            for="workarea"
+                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            >
+                            Work area
+                            </label>
+                            <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            Work Area Placeholder
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+            </div>
+
+            <div class="pt-5">
+                <div class="flex justify-end">
+                    <button
+                        type="button"
+                        class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Reject
+                    </button>
+                    <button
+                        id="myButton"
+                      type="submit"
+                      class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+
+                        <script type="text/javascript">
+                            document.getElementById("myButton").onclick=function(){
+                                location.href="http://localhost:5000/"
+                            }
+                        </script>
+
+
+                        Accept
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
