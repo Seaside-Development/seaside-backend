@@ -1,7 +1,9 @@
 [
     {
         "name": "Plumbing",
-        "serivces": ["Maintenance", "Repair", "Plumbing"]
+        "service1": "Maintenance", 
+        "2": "Repair", 
+        "3": "Plumbing"
     },
     {
         "name": "Carpentry",

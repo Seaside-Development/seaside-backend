@@ -8,6 +8,7 @@ const colors = require("colors");
 const path = require("path");
 const cors = require("cors");
 const ejs = require("ejs");
+const fs = require('fs');
 
 const port = process.env.PORT || 5000;
 
@@ -23,16 +24,20 @@ app.use("/", cors());
 
 //static files
 app.use(express.static("public"));
-app.use("/css", express.static(__dirname + "frontend/public/css"));
-app.use("/css", express.static(__dirname + "frontend/public/js"));
-app.use("/css", express.static(__dirname + "frontend/public/attachments"));
+// app.use("/css", express.static(__dirname + "frontend/public/css"));
+// app.use("/css", express.static(__dirname + "frontend/public/js"));
+// app.use("/css", express.static(__dirname + "frontend/public/attachments"));
 
 //set views
 app.use(expressLayouts); // allows us to use ejs layouts
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
+let fileData = fs.readFileSync("./utils/services.json");
+var industryObj = JSON.parse(fileData);
+
 //render pages
+//@Desc: routes to render the pages
 app.get("/useraccount", (req, res) => {
   res.render("useraccount");
 }); //end of app.get
@@ -46,7 +51,7 @@ app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
-  res.render("createjobform");
+  res.render("createjobform", { industryObj: industryObj });
 }); //end of app.get
 app.get("/job-list", (req, res) => {
   res.render("job-list");
@@ -55,10 +60,8 @@ app.get("/job-list/:jobId", (req, res) => {
   res.render("jobDetails");
 }); //end of app.get
 
-
-
-
-//api pathways
+//API routes 
+//@Desc: routes used to get data from the database
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/jobrequests", require("./routes/jobrequestsRoutes"));
 app.use("/api/contractor", require("./routes/ContractorsRoutes"));
@@ -72,4 +75,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //check for the port
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`Server started on port ${port}`.blue.underline));

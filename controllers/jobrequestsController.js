@@ -18,7 +18,7 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 // @route   POST /api/services
 // @access  Private
 const setJobrequest = asyncHandler (async (req, res) => {
-    const {title, complexity, contractorID, user, industry, services, description, length, parish, status, startdate, endDate, reviews} = req.body;
+    const {title, complexity, contractorID, user, industry, services, description, length, parish, status, startdate, endDate, reviews, img} = req.body;
 
     if(!title || !complexity || !industry || !description || !services || !length || !parish || !status || !startdate) {
         res.status(400)

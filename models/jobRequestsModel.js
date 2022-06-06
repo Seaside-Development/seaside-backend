@@ -46,7 +46,9 @@ const jobRequestsSchema = mongoose.Schema({
     //Start and end dates of job
     startDate: {type: Date, default: Date.now},
     endDate: {type: Date, default: Date.now},
-    
+    img: {
+      data: Buffer, contentType: String
+    },
     //Customer review of job
     review:[{ 
           rating: {type: Number, min:0, max:5, required: [true, 'Please select a rating']},

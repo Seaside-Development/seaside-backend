@@ -8,8 +8,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
+
+    <% 
+    function handleSubmit() {
+      var searchForContractor ={ 
+        industry: document.getElementById('industry').value,
+        service: document.getElementById('service').value,
+        operatingLocation: document.getElementById('operatingLocation').value,
+      };
+
+      console.log(searchForContractor);
+      fetch('/api/contractors/search', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(searchForContractor),
+      })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+    }; 
+    %> 
+
     <div class="flex justify-center items-center py-24">
-      <form  action="/api/jobrequests/createjob" method="POST"
+      <form  action="/api/jobrequests/createjob" method="POST"  onsubmit={handleSubmit}
         class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg"
       >
         <div class="space-y-8 divide-y divide-gray-200">
@@ -40,6 +63,7 @@
                       type="text"
                       name="Title"
                       id="Title"
+                      value="title"
                       autocomplete="Title"
                       class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                     />
@@ -81,12 +105,12 @@
                     id="industry"
                     name="industry"
                     autocomplete="industry-name"
+                    value="industry"
                     class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   >
-                    <option>Plumbing</option>
-                    <option>Carpentry</option>
-                    <option>Electrical</option>
-                    <option>HVAC</option>
+                  <% industryObj.forEach(function(i) { %>
+                    <option><%= i.name %></option>
+                  <% }) %>
                   </select>
                 </div>
               </div>
@@ -103,6 +127,7 @@
                   <select
                     id="service"
                     name="service"
+                    value="service"
                     autocomplete="service-name"
                     class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   >
