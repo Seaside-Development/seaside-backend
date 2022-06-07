@@ -5,14 +5,26 @@ const reviews = require('../models/reviewsModel');
 // @desc    Get all Service
 // @route   GET /api/services
 // @access  Public
-const searchJobrequests = asyncHandler (async (req, res) => {
-    let {id, userId} = req.body;
-    const jobrequests = await JobRequests.find( {
-        id: _id,
-        userId: userId
-    });
-    res.status(200).json(jobrequests);
-})
+const searchJobrequests = (req, res) => {
+    JobRequests.find().sort({ createdAt: -1 })
+        .then(result => {
+            res.render('job-list', { jobrequests: result, title: 'All job request' });
+        })
+        .catch  (err => {
+            console.log(err);
+            // res.status(500).json({
+            //     success: false, 
+            //     error: 'Server Error'
+            // });
+        });
+};
+
+    // let {id, userId} = req.body;
+    // const jobrequests = await JobRequests.find( {
+    //     id: _id,
+    //     userId: userId
+    // });
+    // res.status(200).json(jobrequests);
 
 // @desc    Set Service
 // @route   POST /api/services
