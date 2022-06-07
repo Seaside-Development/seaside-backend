@@ -9,7 +9,7 @@ const path = require("path");
 const morgan = require('morgan');
 const cors = require("cors");
 const ejs = require("ejs");
-const fs = require('fs');
+const fs = require("fs");
 
 const JobRequests = require("./routes/jobrequestsRoutes");
 
@@ -70,8 +70,11 @@ app.get("/createjobform", (req, res) => {
 app.get("/job-list/:jobId", (req, res) => {
   res.render("jobDetails");
 }); //end of app.get
+app.get("/signin", (req, res) => {
+  res.render("signin");
+}); //end of app.get
 
-//API routes 
+//API routes
 //@Desc: routes used to get data from the database
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/jobrequests", JobRequests);
@@ -86,4 +89,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //check for the port
-app.listen(port, () => console.log(`Server started on port ${port}`.blue.underline));
+app.listen(port, () =>
+  console.log(`Server started on port ${port}`.blue.underline)
+);
