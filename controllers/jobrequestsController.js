@@ -1,18 +1,31 @@
 const asyncHandler = require('express-async-handler');
+const { result } = require('lodash');
 const JobRequests = require('../models/jobRequestsModel');
 const reviews = require('../models/reviewsModel');
 
 // @desc    Get all Service
 // @route   GET /api/services
 // @access  Public
-const searchJobrequests = asyncHandler (async (req, res) => {
-    let {id, userId} = req.body;
-    const jobrequests = await JobRequests.find( {
-        id: _id,
-        userId: userId
-    });
-    res.status(200).json(jobrequests);
-})
+const searchJobrequests = (req, res) => {
+    JobRequests.find().sort({ createdAt: -1 })
+        .then(result => {
+            res.render('job-list', { jobrequests: result, title: 'All job request' });
+        })
+        .catch  (err => {
+            console.log(err);
+            // res.status(500).json({
+            //     success: false, 
+            //     error: 'Server Error'
+            // });
+        });
+};
+
+    // let {id, userId} = req.body;
+    // const jobrequests = await JobRequests.find( {
+    //     id: _id,
+    //     userId: userId
+    // });
+    // res.status(200).json(jobrequests);
 
 // @desc    Set Service
 // @route   POST /api/services
@@ -140,13 +153,25 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
 })
 
 const getJobrequestById = asyncHandler (async (req, res) => {
-    const jobrequest = await JobRequests.findById(req.params.id);
-    if(!jobrequest) {
+    const id = req.params.id;
+    await JobRequests.findById(id)
+        .then(result => )
+        res.render('jobDetails', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
+    })
+    .catch(err => {
         res.status(404)
         throw new Error('Jobrequest not found');
-    }
-    res.status(200).json(jobrequest);
-})
+    });
+
+
+    // const jobrequest = await JobRequests.findById(req.params.id);
+    // if(!jobrequest) {
+    //     res.status(404)
+    //     throw new Error('Jobrequest not found');
+    // }
+    // res.render('jobDetails', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
+    // //res.status(200).json(jobrequest);
+
 
 const getJobrequestByContractorId = asyncHandler (async (req, res) => {
     const jobrequest = await JobRequests.find({contractorID: req.params.id});

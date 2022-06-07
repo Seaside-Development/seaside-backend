@@ -30,8 +30,8 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
     // limit the results to 5
     contractors = contractors.slice(0, 5);
     // return the contractors
-    res.send(contractors);
-
+    //res.send(contractors);
+    res.render('contractor-list', { contractors: contractors, title: 'All contractors' });
     contractorResult = Contractors.map(contractor => {
         return {
           title: contractor.title,
@@ -81,7 +81,12 @@ const registerContractor = asyncHandler (async (req, res) => {
     // Body request
     const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating, password} = req.body;
   
-    if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !title || !telephone || !password) {
+    
+
+
+
+    if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !telephone || !password) {
+      console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
         res.status(400)
         throw new Error('Please add all fields');
     } 
@@ -96,7 +101,7 @@ const registerContractor = asyncHandler (async (req, res) => {
     // Create contractor object
     const contractor = await Contractors.create({
         user: req.user.id,
-        title,
+        // title,
         contractorName, 
         email, 
         password,

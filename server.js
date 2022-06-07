@@ -5,11 +5,15 @@ const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
 const express = require("express");
 const colors = require("colors");
-const path = require("path");
+const bodyParser=require("body-parser")
+const morgan = require('morgan');
 const cors = require("cors");
 const ejs = require("ejs");
 const fs = require("fs");
 
+const JobRequests = require("./routes/jobrequestsRoutes");
+
+const ejsLint = require('ejs-lint');
 const port = process.env.PORT || 5000;
 
 connectDB(); // connect to database function
@@ -17,7 +21,13 @@ connectDB(); // connect to database function
 //enable express middleware
 const app = express();
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use((req, res, next) => {
+  res.locals.path = req.path;
+  next();
+});
 
 //Enable CORS
 app.use("/", cors());
@@ -46,15 +56,14 @@ app.get("/", (req, res) => {
 }); //display the index page
 app.get("/user-registration-form", (req, res) => {
   res.render("user-registration-form");
+  res.redirect("/");
 }); //end of app.get
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
   res.render("createjobform", { industryObj: industryObj });
-}); //end of app.get
-app.get("/job-list", (req, res) => {
-  res.render("job-list");
+  res.redirect("/job-list");
 }); //end of app.get
 app.get("/job-list/:jobId", (req, res) => {
   res.render("jobDetails");
@@ -66,7 +75,7 @@ app.get("/signin", (req, res) => {
 //API routes
 //@Desc: routes used to get data from the database
 app.use("/api/users", require("./routes/userRoutes"));
-app.use("/api/jobrequests", require("./routes/jobrequestsRoutes"));
+app.use("/api/jobrequests", JobRequests);
 app.use("/api/contractor", require("./routes/ContractorsRoutes"));
 app.use(errorHandler); //pathway to the error handler
 

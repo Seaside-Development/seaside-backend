@@ -33,7 +33,7 @@
                   <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <input
                       type="text"
-                      name="name"
+                      name="contractorName"
                       id="name"
                       autoComplete="name"
                       class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md"
@@ -110,8 +110,8 @@
                   </label>
                   <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <textarea
-                      id="business-description"
-                      name="business-description"
+                      id="businessDescription"
+                      name="businessDescription"
                       rows="3"
                       class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
                     ></textarea>
@@ -129,14 +129,16 @@
                   >
                     Operating Locations
                   </label>
-                  <div class="mt-1 sm:mt-0">
+                  <div class="mt-1 sm:mt-0"
+                  >
                     <fieldset class="space-y-5">
                       <div class="relative flex items-start">
                         <div class="flex items-center h-5">
                           <input
                             id="st-lucy"
                             aria-describedby="st-lucy-description"
-                            name="st-lucy"
+        
+                            name="operatingLocations[]"
                             type="checkbox"
                             class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                           />
@@ -151,8 +153,8 @@
                         <div class="flex items-center h-5">
                           <input
                             id="st-peter"
+                            name="operatingLocations"
                             aria-describedby="st-peter-description"
-                            name="st-peter"
                             type="checkbox"
                             class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                           />
@@ -373,8 +375,8 @@
             </label>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
               <select
-                id="service"
-                name="service"
+                id="services"
+                name="services"
                 autocomplete="service-name"
                 class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
               >
