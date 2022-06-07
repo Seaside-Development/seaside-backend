@@ -30,8 +30,8 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
     // limit the results to 5
     contractors = contractors.slice(0, 5);
     // return the contractors
-    res.send(contractors);
-
+    //res.send(contractors);
+    res.render('contractor-list', { contractors: contractors, title: 'All contractors' });
     contractorResult = Contractors.map(contractor => {
         return {
           title: contractor.title,
