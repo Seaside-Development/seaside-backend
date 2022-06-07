@@ -7,7 +7,7 @@ router.get('/searchJobs', searchJobrequests);
 router.post('/createjob', protect, setJobrequest);
 router.put('/updatejob/:id', protect,updateJobrequest);
 router.delete('/removejob/:id', protect,deleteJobrequest);
-router.get('myjobs/:id', getJobrequestById);
+router.get('/:id', getJobrequestById);
 router.get('/contractorJobs/:id', protect, getJobrequestByContractorId);
 
 module.exports = router;

@@ -80,11 +80,6 @@ const loginContractor = asyncHandler (async (req, res) => {
 const registerContractor = asyncHandler (async (req, res) => {
     // Body request
     const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating, password} = req.body;
-  
-    
-
-
-
     if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !telephone || !password) {
       console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
         res.status(400)
@@ -112,7 +107,6 @@ const registerContractor = asyncHandler (async (req, res) => {
         telephone,
     })
     res.status(200).json(contractor);
-
     if (Contractors) {
       res.status(201).json({
         _id: Contractors._id, 
