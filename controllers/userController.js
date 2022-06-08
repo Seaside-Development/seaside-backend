@@ -17,7 +17,6 @@ const getUsers = asyncHandler (async (req, res) => {
 // @access  Public
 const registerUser = asyncHandler (async (req, res) => {
   const {firstName, lastName, username, email, avatar, password, telephone} = req.body;
-
   if(!firstName || !lastName || !username || !email || !password || !telephone) {
       res.status(400)
       throw new Error('Please add all fields');
@@ -47,8 +46,9 @@ const registerUser = asyncHandler (async (req, res) => {
     email, 
     avatar, 
     password: hashedPassword, 
-    telephone
+    telephone,
   })  
+
   if (user) {
     res
     .status(201).json({
@@ -57,10 +57,8 @@ const registerUser = asyncHandler (async (req, res) => {
       email: user.email, 
       avatar: user.avatar,
       telephone: user.telephone,
-      token: generateToken(user._id)
-      
+      token: generateToken(user._id),
     })
-    .redirect('/views/index');
   } else {
     res.status(400)
     throw new Error('Invalid user data')
