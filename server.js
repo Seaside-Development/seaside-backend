@@ -5,8 +5,8 @@ const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
 const express = require("express");
 const colors = require("colors");
-const bodyParser=require("body-parser")
-const morgan = require('morgan');
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const cors = require("cors");
 const ejs = require("ejs");
 const fs = require("fs");
@@ -15,7 +15,7 @@ const JobRequests = require("./routes/jobrequestsRoutes");
 const User = require("./routes/userRoutes");
 const ContractorsRoutes = require("./routes/contractorsRoutes");
 
-const ejsLint = require('ejs-lint');
+const ejsLint = require("ejs-lint");
 const port = process.env.PORT || 5000;
 
 connectDB(); // connect to database function
@@ -25,7 +25,7 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
@@ -68,6 +68,9 @@ app.get("/createjobform", (req, res) => {
 }); //end of app.get
 app.get("/signin", (req, res) => {
   res.render("signin");
+}); //end of app.get
+app.get("/contractorpreview", (req, res) => {
+  res.render("contractorpreview");
 }); //end of app.get
 
 //API routes

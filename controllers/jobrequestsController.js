@@ -162,7 +162,7 @@ const getJobrequestById = asyncHandler (async (req, res) => {
     .catch(err => {
         res.status(404)
         throw new Error('Jobrequest not found');
-    });
+    })
 });
 
 const getJobrequestByContractorId = asyncHandler (async (req, res) => {
