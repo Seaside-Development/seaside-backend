@@ -63,6 +63,10 @@ const registerUser = asyncHandler (async (req, res) => {
     res.status(400)
     throw new Error('Invalid user data')
   }
+  res.redirect('signup',{
+    user: user,
+    title: 'User Registration Form',
+  });
 })
 
 // @desc    Update user
