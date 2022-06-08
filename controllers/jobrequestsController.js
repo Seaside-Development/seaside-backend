@@ -6,7 +6,7 @@ const reviews = require('../models/reviewsModel');
 // @desc    Get all Service
 // @route   GET /api/services
 // @access  Public
-const searchJobrequests = (req, res) => {
+const searchJobrequests = asyncHandler (async (req, res) => {
     JobRequests.find().sort({ createdAt: -1 })
         .then(result => {
             res.render('job-list', { jobrequests: result, title: 'All job request' });
@@ -18,7 +18,7 @@ const searchJobrequests = (req, res) => {
             //     error: 'Server Error'
             // });
         });
-};
+});
 
     // let {id, userId} = req.body;
     // const jobrequests = await JobRequests.find( {
@@ -156,7 +156,7 @@ const getJobrequestById = asyncHandler (async (req, res) => {
     const id = req.params.id;
     await JobRequests.findById(id)
         .then(result => {
-        res.render('jobDetails', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
+        res.render('jobDetails', { jobrequest: result, title: 'Job Request Details by ID' });
     })
     .catch(err => {
         res.status(404)

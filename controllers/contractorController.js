@@ -113,7 +113,6 @@ const registerContractor = asyncHandler (async (req, res) => {
         telephone,
     })
     res.status(200).json(contractor);
-
     if (Contractors) {
       res.status(201).json({
         _id: Contractors._id, 
