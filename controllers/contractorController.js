@@ -80,7 +80,13 @@ const loginContractor = asyncHandler (async (req, res) => {
 const registerContractor = asyncHandler (async (req, res) => {
     // Body request
     const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating, password} = req.body;
+  
+    console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
+
+
+
     if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !telephone || !password) {
+      console.log(typeof operatingLocations)
       console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
         res.status(400)
         throw new Error('Please add all fields');
