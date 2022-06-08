@@ -101,7 +101,7 @@ const registerContractor = asyncHandler (async (req, res) => {
 
     // Create contractor object
     const contractor = await Contractors.create({
-        // user: req.user.id,
+        user: req.user.id,
         // title,
         contractorName, 
         email, 
