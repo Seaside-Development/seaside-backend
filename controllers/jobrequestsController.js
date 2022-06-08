@@ -155,13 +155,14 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
 const getJobrequestById = asyncHandler (async (req, res) => {
     const id = req.params.id;
     await JobRequests.findById(id)
-        .then(result => )
+        .then(result => {
         res.render('jobDetails', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
     })
     .catch(err => {
         res.status(404)
         throw new Error('Jobrequest not found');
-    });
+    })
+});
 
 
     // const jobrequest = await JobRequests.findById(req.params.id);
