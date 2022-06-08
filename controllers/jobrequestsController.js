@@ -157,22 +157,13 @@ const getJobrequestById = asyncHandler (async (req, res) => {
     await JobRequests.findById(id)
         .then(result => {
         res.render('jobDetails', { jobrequest: result, title: 'Job Request Details by ID' });
+        //res.status(200).json(result);
     })
     .catch(err => {
         res.status(404)
         throw new Error('Jobrequest not found');
     });
 });
-
-
-    // const jobrequest = await JobRequests.findById(req.params.id);
-    // if(!jobrequest) {
-    //     res.status(404)
-    //     throw new Error('Jobrequest not found');
-    // }
-    // res.render('jobDetails', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
-    // //res.status(200).json(jobrequest);
-
 
 const getJobrequestByContractorId = asyncHandler (async (req, res) => {
     const jobrequest = await JobRequests.find({contractorID: req.params.id});

@@ -12,6 +12,8 @@ const ejs = require("ejs");
 const fs = require("fs");
 
 const JobRequests = require("./routes/jobrequestsRoutes");
+const User = require("./routes/userRoutes");
+const ContractorsRoutes = require("./routes/contractorsRoutes");
 
 const ejsLint = require('ejs-lint');
 const port = process.env.PORT || 5000;
@@ -55,8 +57,7 @@ app.get("/", (req, res) => {
   res.render("index");
 }); //display the index page
 app.get("/user-registration-form", (req, res) => {
-  res.render("user-registration-form");
-  res.redirect("/");
+  res.redirect("/api/users/register");
 }); //end of app.get
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
@@ -71,9 +72,9 @@ app.get("/signin", (req, res) => {
 
 //API routes
 //@Desc: routes used to get data from the database
-app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/users", User);
 app.use("/api/jobrequests", JobRequests);
-app.use("/api/contractor", require("./routes/ContractorsRoutes"));
+app.use("/api/contractor", ContractorsRoutes);
 app.use(errorHandler); //pathway to the error handler
 
 // check that app is running on production mode
