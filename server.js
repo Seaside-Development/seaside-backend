@@ -56,8 +56,8 @@ app.get("/useraccount", (req, res) => {
 app.get("/", (req, res) => {
   res.render("index");
 }); //display the index page
-app.get("/user-registration-form", (req, res) => {
-  res.redirect("/api/users/register");
+app.get("/signup", (req, res) => {
+  res.render("signup");
 }); //end of app.get
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
