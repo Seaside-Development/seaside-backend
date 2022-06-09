@@ -4,58 +4,167 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
     <title>Document</title>
   </head>
   <body>
-    <div class="content flex flex-col h-full justify-center items-center py-24">
-        <div
-          class="card flex flex-col w-5/6 h-full shadow-md rounded-lg p-8 my-8"
-        >
-          <!-- Title -->
-          <h1 class="flex font-semibold text-2xl border-b-2 align-text-bottom">
-            Contractor Preview
-          </h1>
-          <div class="card__sections flex h-full pt-3 justify-between ">
-            <div class="card__left w-1/6 "><p>heading</p></div>
-            <div class="card__right w-5/6">
-              <!-- row 1 -->
-              <div class="grid grid-cols-4 gap-3  h-full"> 
-                <!-- card  2-->
-              <div
-                  class="flex flex-col w-12/12 h-2/3 rounded-2xl shadow-2xl space-y-2"
-                >
-                    <div class="flex flex-col rounded-2xl shadow-2xl">
-                        <div class="flex z-10  items-center justify-between">
-                            <img class=" ml-4 p-1 h-20 w-20 rounded-full" src="https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80" alt="">
-                            <p class="flex h-10 px-5 m-2 items-center text-indigo-100  bg-indigo-700 rounded-lg ">Freelance</p>
-                        </div>
-                        <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-                          <div class="flex-1">
-                              <p class="text-xl font-semibold text-indigo-900">Company Name</p>
-                              <p class="mt-3 text-base text-gray-500  ">Lorem ipsum dolor sit amet consectetur adipisicing elit. a aut inventore optio animi., tempore temporibus quo laudantium.</p>
-                          </div>
-                          <div class="mt-6 flex items-center justify-between text-indigo-700">
-                            <div class="flex items-center flex-shrink-0 space-x-1">
-                              <a href="#">
-                                <svg class="w-4 h-4 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <p class="text-sm font-medium">
-                                    <a href="#" class="hover:underline"> Location </a>
-                                  </p> </a>
-                            </div>
-                            <div class="flex ml-3 justify-between items-center">
-                                <p class=" text-3xl">$25</p>
-                                <p>/hour</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+    <div class="flex flex-col h-full justify-center items-center py-24">
+      <div
+        class="content bg-indigo-50 flex flex-col w-5/6 h-full shadow-md rounded-lg p-8 my-8"
+      >
+        <!-- Title -->
+        <h1 class="flex font-semibold text-2xl border-b-2 align-text-bottom">
+          Contractor Preview
+        </h1>
+        <div class="card__sections flex h-full pt-3 justify-between">
+          <div class="card__left w-1/6 space-y-14">
+            <p class="text-md text-slate-600">Filter by:</p>
+            <!-- selection 1 start -->
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  id="plumbing"
+                  aria-describedby="plumbing-description"
+                  name="operatingLocations[]"
+                  value="Christ Church"
+                  type="checkbox"
+                  class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
               </div>
-              <!-- card end -->
-              
-
+              <div class="ml-3 text-sm">
+                <label for="plumbing" class="font-medium text-gray-700"
+                  >Plumbing</label
+                >
+              </div>
             </div>
+            <!-- selection end -->
+            <!-- selection 1 start -->
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  id="carpentry"
+                  aria-describedby="carpentry-description"
+                  name="operatingLocations[]"
+                  value="Christ Church"
+                  type="checkbox"
+                  class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="carpentry" class="font-medium text-gray-700"
+                  >Carpentry</label
+                >
+              </div>
+            </div>
+            <!-- selection end -->
+            <!-- selection 1 start -->
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  id="electrical"
+                  aria-describedby="electrical-description"
+                  name="operatingLocations[]"
+                  value="Christ Church"
+                  type="checkbox"
+                  class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="electrical" class="font-medium text-gray-700"
+                  >Electrical</label
+                >
+              </div>
+            </div>
+            <!-- selection end -->
+            <!-- selection 1 start -->
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  id="hvac"
+                  aria-describedby="hvac-description"
+                  name="operatingLocations[]"
+                  value="Christ Church"
+                  type="checkbox"
+                  class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="hvac" class="font-medium text-gray-700">HVAC</label>
+              </div>
+            </div>
+            <!-- selection end -->
+          </div>
+          <div class="card__right w-5/6">
+            <!-- row 1 -->
+            <div class="grid grid-cols-4 gap-3 h-full">
+              <!-- card  1-->
+
+              <div class="flex flex-col rounded-2xl shadow-2xl bg-white">
+                <div class="flex items-center justify-between">
+                  <img
+                    class="ml-4 mt-4 h-16 w-16 rounded-full"
+                    src="https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
+                    alt=""
+                  />
+                  <p
+                    class="flex h-7 px-5 m-4 items-center text-indigo-100 bg-indigo-700 rounded-lg"
+                  >
+                    Freelance
+                  </p>
+                </div>
+                <div class="flex p-6 flex-col justify-between">
+                  <div class="flex flex-col">
+                    <p class="text-xl font-semibold text-indigo-900">
+                      Company Name
+                    </p>
+                    <p class="mt-3 text-base text-gray-500">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. a
+                      aut inventore optio animi., tempore temporibus quo
+                      laudantium.
+                    </p>
+                  </div>
+                  <div
+                    class="mt-6 flex items-center justify-between text-indigo-700"
+                  >
+                    <div class="flex items-center flex-shrink-0 space-x-1">
+                      <a href="#">
+                        <svg
+                          class="w-4 h-4 text-indigo-700"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          ></path>
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          ></path>
+                        </svg>
+                        <p class="text-sm font-medium">
+                          <a href="#" class="hover:underline"> Location </a>
+                        </p>
+                      </a>
+                    </div>
+                    <div class="flex ml-3 justify-between items-center">
+                      <p class="text-3xl">$25</p>
+                      <p>/hour</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- card end -->
           </div>
         </div>
       </div>
+    </div>
   </body>
 </html>

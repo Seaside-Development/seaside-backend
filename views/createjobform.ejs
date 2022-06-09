@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/output.css" rel="stylesheet" />
-    <link href="/styles/styles.css" rel="stylesheet" />
+    <!-- <link href="/styles/styles.css" rel="stylesheet" /> -->
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
+<<<<<<< HEAD
     
     <% 
       function handleSubmit() {
@@ -31,10 +32,24 @@
           .catch(err => console.log(err));
       }; 
     %> 
+=======
+    <% function handleSubmit() { var searchForContractor ={ industry:
+    document.getElementById('industry').value, service:
+    document.getElementById('service').value, operatingLocation:
+    document.getElementById('operatingLocation').value, };
+    console.log(searchForContractor); fetch('/api/contractors/search', { method:
+    'GET', headers: { 'Content-Type': 'application/json', 'Authorization':
+    `req.headers.authorization.split(' ')[1]`, }, body:
+    JSON.stringify(searchForContractor), }) .then(response => response.json())
+    .then(data => console.log(data)) .catch(err => console.log(err)); }; %>
+>>>>>>> 76d107ae5880d39effd0358ebae067902a86b379
 
     <div class="flex justify-center items-center py-24">
-      <form  action="/api/jobrequests/createjob" method="POST"  onsubmit={handleSubmit}
-        class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg"
+      <form
+        action="/api/jobrequests/createjob"
+        method="POST"
+        onsubmit="{handleSubmit}"
+        class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg bg-slate-100"
       >
         <div class="space-y-8 divide-y divide-gray-200">
           <div>
@@ -53,22 +68,19 @@
                 class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
               >
                 <label
-                  for="Title"
+                  htmlFor="title"
                   class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
                   Title
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <div class="max-w-lg flex rounded-md shadow-md">
-                    <input
-                      type="text"
-                      name="Title"
-                      id="Title"
-                      value="title"
-                      autocomplete="Title"
-                      class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    autoComplete="title"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
+                  />
                 </div>
               </div>
               <div
@@ -85,7 +97,7 @@
                     id="complexity"
                     name="complexity"
                     autocomplete="complexity-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Hard</option>
                     <option>Easy</option>
@@ -107,11 +119,11 @@
                     name="industry"
                     autocomplete="industry-name"
                     value="industry"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
-                  <% industryObj.forEach(function(i) { %>
+                    <% industryObj.forEach(function(i) { %>
                     <option><%= i.name %></option>
-                  <% }) %>
+                    <% }) %>
                   </select>
                 </div>
               </div>
@@ -130,7 +142,7 @@
                     name="service"
                     value="service"
                     autocomplete="service-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Maintenance</option>
                     <option>Repair</option>
@@ -176,7 +188,7 @@
                     id="length"
                     name="length"
                     autocomplete="length-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Long (8+ days)</option>
                     <option>Medium (5-8 days)</option>
@@ -198,7 +210,7 @@
                     id="location"
                     name="location"
                     autocomplete="location-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>St. Lucy</option>
                     <option>St. Peter</option>
@@ -297,7 +309,7 @@
             </button>
             <button
               type="submit"
-              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Save
             </button>

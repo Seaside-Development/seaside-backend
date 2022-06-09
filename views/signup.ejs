@@ -1,24 +1,16 @@
 <html>
   <body>
-    <% handleSubmit = (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
-      console.log(data);
-      this.props.onSubmit(data);
-    } %>
+    <% handleSubmit = (e) => { e.preventDefault(); const formData = new
+    FormData(e.target); const data = {}; formData.forEach((value, key) => {
+    data[key] = value; }); console.log(data); this.props.onSubmit(data); } %>
     <div class="flex justify-center">
-      <div class="card w-3/6 shadow-md rounded-lg p-8 m-8">
+      <div class="card w-3/6 shadow-md rounded-lg p-8 m-8 bg-indigo-50">
         <h1 class="text-center font-semibold text-2xl">Registration Form</h1>
-        <form 
-        action="/api/users/register" 
-        method="POST"
-        onSubmit="handleSubmit"
+        <form
+          action="/api/users/register"
+          method="POST"
+          onSubmit="handleSubmit"
         >
-        class="py-5 space-y-8 divide-y divide-gray-200">
           <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
               <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
