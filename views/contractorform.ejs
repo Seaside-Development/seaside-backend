@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/output.css" rel="stylesheet" />
-    <link href="/styles/styles.css" rel="stylesheet" />
+    <!-- <link href="/styles/styles.css" rel="stylesheet" /> -->
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <div class="flex justify-center py-24">
-      <div class="card w-3/6 shadow-md rounded-lg p-8 m-8">
+      <div class="card w-3/6 shadow-md rounded-lg p-8 m-8 bg-slate-100">
         <h1 class="text-center font-semibold text-2xl">
           Contractor Registration Form
         </h1>
@@ -36,7 +36,7 @@
                       name="contractorName"
                       id="name"
                       autoComplete="name"
-                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
@@ -55,7 +55,7 @@
                       name="email"
                       id="email"
                       autoComplete="email"
-                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
@@ -75,7 +75,7 @@
                       type="password"
                       autoComplete="current-password"
                       required
-                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md placeholder-gray-300"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                       placeholder="*********"
                     />
                   </div>
@@ -129,8 +129,7 @@
                   >
                     Operating Locations
                   </label>
-                  <div class="mt-1 sm:mt-0"
-                  >
+                  <div class="mt-1 sm:mt-0">
                     <fieldset class="space-y-5">
                       <div class="relative flex items-start">
                         <div class="flex items-center h-5">
@@ -365,7 +364,7 @@
                 id="industry"
                 name="industry"
                 autocomplete="industry-name"
-                class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                class="max-w-lg block p-2 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
               >
                 <option>Plumbing</option>
                 <option>Carpentry</option>
@@ -388,7 +387,7 @@
                 id="services"
                 name="services"
                 autocomplete="service-name"
-                class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                class="max-w-lg block p-2 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
               >
                 <option>Maintenance</option>
                 <option>Repair</option>
@@ -410,7 +409,7 @@
               </button>
               <button
                 type="submit"
-                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-indigo-700 hover:bg-indigo-200 hove:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Save
               </button>
