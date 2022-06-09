@@ -42,22 +42,19 @@
                 class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
               >
                 <label
-                  for="Title"
+                  htmlFor="title"
                   class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
                   Title
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <div class="max-w-lg flex rounded-md shadow-md">
-                    <input
-                      type="text"
-                      name="Title"
-                      id="Title"
-                      value="title"
-                      autocomplete="Title"
-                      class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    autoComplete="title"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
+                  />
                 </div>
               </div>
               <div
@@ -74,7 +71,7 @@
                     id="complexity"
                     name="complexity"
                     autocomplete="complexity-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Hard</option>
                     <option>Easy</option>
@@ -96,7 +93,7 @@
                     name="industry"
                     autocomplete="industry-name"
                     value="industry"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <% industryObj.forEach(function(i) { %>
                     <option><%= i.name %></option>
@@ -119,7 +116,7 @@
                     name="service"
                     value="service"
                     autocomplete="service-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Maintenance</option>
                     <option>Repair</option>
@@ -165,7 +162,7 @@
                     id="length"
                     name="length"
                     autocomplete="length-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Long (8+ days)</option>
                     <option>Medium (5-8 days)</option>
@@ -187,7 +184,7 @@
                     id="location"
                     name="location"
                     autocomplete="location-name"
-                    class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>St. Lucy</option>
                     <option>St. Peter</option>
