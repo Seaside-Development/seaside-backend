@@ -75,6 +75,9 @@ app.get("/contractorpreview", (req, res) => {
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get
+app.get("/contractoroverview", (req, res) => {
+  res.render("contractoroverview");
+}); //end of app.get
 
 //API routes
 //@Desc: routes used to get data from the database
