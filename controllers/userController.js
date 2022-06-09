@@ -114,7 +114,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     console.log('ggs my dude')
 
-    res.redirect(`../..useraccount`, 200)
+    res.redirect(`../../useraccount`, 200)
 
 
     // res.redirect(200,'../../index',{
