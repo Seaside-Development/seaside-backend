@@ -59,8 +59,8 @@ app.get("/", (req, res) => {
 app.get("/signup", (req, res) => {
   res.render("signup");
 }); //end of app.get
-app.get("/contractorform", (req, res) => {
-  res.render("contractorform");
+app.get("/contact", (req, res) => {
+  res.render("contact");
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
   res.render("createjobform", { industryObj: industryObj });
@@ -71,6 +71,9 @@ app.get("/signin", (req, res) => {
 }); //end of app.get
 app.get("/contractorpreview", (req, res) => {
   res.render("contractorpreview");
+}); //end of app.get
+app.get("/contractorform", (req, res) => {
+  res.render("contractorform");
 }); //end of app.get
 
 //API routes
