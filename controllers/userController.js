@@ -75,7 +75,7 @@ const registerUser = asyncHandler (async (req, res) => {
 const updateUser = asyncHandler (async (req, res) => {
   const user = await User.findById(req.params.id);
 
-  if(!User) {
+  if(!user) {
       res.status(400)
       throw new Error('User not found');
   }
