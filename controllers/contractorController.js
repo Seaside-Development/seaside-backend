@@ -44,7 +44,7 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
           id: contractor._id,
         }
     })
-    res.status(200).json(contractorResult);
+    // res.status(200).json(contractorResult);
 })
 
 // @desc    Login the contractor
