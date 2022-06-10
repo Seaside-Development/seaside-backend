@@ -49,16 +49,24 @@ const registerUser = asyncHandler (async (req, res) => {
     telephone,
   })  
 
+  res.redirect('/createjobform', 200, 
+    {
+      _id: user.id,
+      username: user.username,
+      email: user.email,
+      token: generateToken(user._id),
+      title: 'User Login Form',
+    })
+
   if (user) {
-    res
-    .status(201).json({
-      _id: user._id, 
+    res.redirect('/createjobform', 201, {
+      _id: user._id,
       username: user.username,
       email: user.email, 
       avatar: user.avatar,
       telephone: user.telephone,
       token: generateToken(user._id),
-    })
+    },  'User created successfully')
   } else {
     res.status(400)
     throw new Error('Invalid user data')
@@ -104,6 +112,7 @@ const deleteUser = asyncHandler (async (req, res) => {
 // @desc    Authenticate a user
 // @route   POST /api/users/login
 // @access  Public
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
@@ -111,28 +120,14 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email })
 
   if (user && (await bcrypt.compare(password, user.password))) {
-
-    console.log('ggs my dude')
-
-    res.redirect(`../../useraccount`, 200)
-
-
-    // res.redirect(200,'../../index',{
-    //   _id: user.id,
-    //   username: user.username,
-    //   email: user.email,
-    //   token: generateToken(user._id)
-    // user: user,
-    // title: 'User Registration Form',
-    // });
-
-
-    // res.json({
-    //   _id: user.id,
-    //   username: user.username,
-    //   email: user.email,
-    //   token: generateToken(user._id),
-    // })
+    res.redirect('/createjobform', 200, 
+    {
+      _id: user.id,
+      username: user.username,
+      email: user.email,
+      token: generateToken(user._id),
+      title: 'User Login Form',
+    })
   } else {
     res.status(400)
     throw new Error('Invalid credentials')
