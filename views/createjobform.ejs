@@ -8,47 +8,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-<<<<<<< HEAD
-    
     <% 
-      function handleSubmit() {
-        var searchForContractor ={ 
-          industry: document.getElementById('industry').value,
-          service: document.getElementById('service').value,
-          operatingLocation: document.getElementById('operatingLocation').value,
-        };
-
-        console.log(searchForContractor);
-        fetch('/api/contractors/search', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `req.headers.authorization.split(' ')[1]`,
-          },
-          body: JSON.stringify(searchForContractor),
-        })
+    function handleSubmit() 
+    { 
+      var searchForContractor = { 
+        industry: document.getElementById('industry').value, 
+        service: document.getElementById('service').value, 
+        //operatingLocation: document.getElementById('operatingLocation').value, 
+      };
+      console.log(searchForContractor); fetch('/api/contractors/findContractor', { method:
+        'GET', headers: { 
+          'Content-Type': 'application/json'
+        },
+          body:
+          JSON.stringify(searchForContractor)
+        }) 
           .then(response => response.json())
-          .then(data => console.log(data))
-          .catch(err => console.log(err));
-      }; 
-    %> 
-=======
-    <% function handleSubmit() { var searchForContractor ={ industry:
-    document.getElementById('industry').value, service:
-    document.getElementById('service').value, operatingLocation:
-    document.getElementById('operatingLocation').value, };
-    console.log(searchForContractor); fetch('/api/contractors/search', { method:
-    'GET', headers: { 'Content-Type': 'application/json', 'Authorization':
-    `req.headers.authorization.split(' ')[1]`, }, body:
-    JSON.stringify(searchForContractor), }) .then(response => response.json())
-    .then(data => console.log(data)) .catch(err => console.log(err)); }; %>
->>>>>>> 76d107ae5880d39effd0358ebae067902a86b379
+          .then(data => console.log(data)) .catch(err => console.log(err)); 
+    }; 
+    %>
 
     <div class="flex justify-center items-center py-24">
       <form
         action="/api/jobrequests/createjob"
         method="POST"
-        onsubmit="{handleSubmit}"
+        onsubmit="handleSubmit"
         class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg bg-slate-100"
       >
         <div class="space-y-8 divide-y divide-gray-200">
@@ -114,17 +98,15 @@
                   Industry
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <select
-                    id="industry"
-                    name="industry"
-                    autocomplete="industry-name"
-                    value="industry"
-                    class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
-                  >
-                    <% industryObj.forEach(function(i) { %>
-                    <option><%= i.name %></option>
-                    <% }) %>
-                  </select>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="industry"
+                      id="industry"
+                      autoComplete="industry"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
                 </div>
               </div>
               <div
@@ -203,13 +185,13 @@
                   for="location"
                   class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Location
+                  Parish
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <select
-                    id="location"
-                    name="location"
-                    autocomplete="location-name"
+                    id="parish"
+                    name="parish"
+                    autocomplete="parish-name"
                     class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>St. Lucy</option>
@@ -236,7 +218,7 @@
                   Date
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <input type="date" value="" />
+                  <input name="startdate" id="startdate" type="date" value="" />
                 </div>
               </div>
               <div

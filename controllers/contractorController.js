@@ -24,7 +24,7 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
       {
         industry: [industry],
         services: [services],
-        operatingLocations: [operatingLocations]
+        //operatingLocations: [operatingLocations]
       }
     );
     // limit the results to 5

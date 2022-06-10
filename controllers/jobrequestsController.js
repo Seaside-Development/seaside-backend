@@ -31,11 +31,11 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 // @route   POST /api/services
 // @access  Private
 const setJobrequest = asyncHandler (async (req, res) => {
-    const {title, complexity, contractorID, user, industry, services, description, length, parish, status, startdate, endDate, reviews, img} = req.body;
+    const {title, complexity, contractorID, user, industry, service, description, length, parish, status, startdate, endDate, reviews, img} = req.body;
 
-    if(!title || !complexity || !industry || !description || !services || !length || !parish || !status || !startdate) {
+    if(!title || !complexity || !industry || !description || !service || !length || !parish || !startdate) {
         res.status(400)
-        throw new Error('Please add required fields');
+        throw new Error(`Please add required fields`);
     }
 
     const jobrequest = await JobRequests.create({
@@ -43,17 +43,21 @@ const setJobrequest = asyncHandler (async (req, res) => {
         complexity, 
         contractorID, 
         industry, 
-        services,
+        service,
         description, 
         length, 
         parish, 
-        status, 
+        status: 'Pending', 
         startdate, 
         endDate, 
         reviews,
-        user: req.user.id
+        //user: req.user.id
     });
-    res.status(200).json(jobrequest);
+    console.log(jobrequest);
+    res.redirect('/api/jobrequests/searchJobs', 200, {
+        jobrequest: jobrequest
+    });
+    // res.status(200).json(jobrequest);
 })
 
 // @desc    Add Service review

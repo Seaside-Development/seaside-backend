@@ -5,30 +5,30 @@ const User=require('./userModel').user
 //Job request Schema
 const jobRequestsSchema = mongoose.Schema({
     title: { type: String, required: [true, "Please provide a title"] },
-    complexity: {type: Boolean, default: false, required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
+    complexity: {type: String, default: "Easy", required: [true, 'Please select a complexity']}, //description: 'true means complex, false means simple. MANDATORY'
     //reference to contractor
     contractorID: {type: mongoose.Schema.Types.ObjectId, ref: 'Contractors'},
     //reference to user
     user: 
       {
         type: mongoose.Schema.Types.ObjectId, 
-        required: true,
+        // required: true,
         ref: 'User',
       },
     
     //Industry that pertains to the job
     industry: {
       type:String,
-      enum: ['Gardening', 'Construction', 'Plumbing','Electrical'],
+      enum: ['Gardening', 'Construction', 'Plumbing','Electrical', 'Cleaning', "Lawn", "Mechanic", 'Other', 'None'],
       required:  [true, 'Please select an industry']
     },
-    services: {
+    service: {
       type: String,
     },
     //job description
     description: {type:String, default: '', required: [true, 'Please enter a job description']},
     //How long the job is expected to be
-    length: {type: Boolean, default: false, required: [true, 'Please select a true or false']}, //description: 'true means long, false means short. MANDATORY'
+    length: {type: String, default: false, required: [true, 'Please select a true or false']}, //description: 'true means long, false means short. MANDATORY'
     //Location of Job
     parish: {
       type: String,

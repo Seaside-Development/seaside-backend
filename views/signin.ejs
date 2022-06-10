@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body class="h-full">
-    <!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-50">
-  <body class="h-full">
-  ```
--->
+<body class="h-full">
     <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -22,9 +8,37 @@
         </h2>
       </div>
 
+      <script>
+        const onSubmit = () => {
+          fetch('/api/users/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: document.getElementById('email').value,
+              password: document.getElementById('password').value,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.success) {
+                res.redirect('/');
+              } else {
+                alert(data.message);
+              }
+            });
+        }
+      </script>
+
       <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-slate-100 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form class="space-y-6" action="/api/users/login" method="POST">
+          <form 
+          action="/api/users/login" 
+          method="POST"
+          class="space-y-6" 
+          onsubmit="onSubmit()"
+          >
             <div>
               <label
                 for="email"
