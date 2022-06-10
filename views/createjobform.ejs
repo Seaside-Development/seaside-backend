@@ -9,30 +9,30 @@
   </head>
   <body>
     <% 
-    function handleSubmit() 
-    { 
+    function searchForTheContractor() 
+{ 
       var searchForContractor = { 
         industry: document.getElementById('industry').value, 
         service: document.getElementById('service').value, 
         //operatingLocation: document.getElementById('operatingLocation').value, 
       };
-      console.log(searchForContractor); fetch('/api/contractors/findContractor', { method:
-        'GET', headers: { 
-          'Content-Type': 'application/json'
-        },
-          body:
-          JSON.stringify(searchForContractor)
-        }) 
-          .then(response => response.json())
+      console.log(searchForContractor); 
+      fetch('/contractors/findContractor', 
+      { 
+        method:'GET', 
+        headers: { 'Content-Type': 'application/json'},
+        body:JSON.stringify(searchForContractor)
+    }) 
+          .then(response => response.redirect("contractorpreview"))
           .then(data => console.log(data)) .catch(err => console.log(err)); 
-    }; 
+}; 
     %>
 
     <div class="flex justify-center items-center py-24">
       <form
-        action="/api/jobrequests/createjob"
+        action="/jobrequests/createjob"
         method="POST"
-        onsubmit="handleSubmit"
+        onsubmit="searchForTheContractor()"
         class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg bg-slate-100"
       >
         <div class="space-y-8 divide-y divide-gray-200">
@@ -107,6 +107,9 @@
                       class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
+                  <!-- <% industryObj.forEach(function(i) { %>
+                    <option><%= i.name %></option>
+                  <% }) %> -->
                 </div>
               </div>
               <div

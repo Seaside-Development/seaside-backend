@@ -7,34 +7,10 @@
           Sign in to your account
         </h2>
       </div>
-
-      <script>
-        const onSubmit = () => {
-          fetch('/api/users/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: document.getElementById('email').value,
-              password: document.getElementById('password').value,
-            }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.success) {
-                res.redirect('/');
-              } else {
-                alert(data.message);
-              }
-            });
-        }
-      </script>
-
       <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-slate-100 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form 
-          action="/api/users/login" 
+          action="/users/login" 
           method="POST"
           class="space-y-6" 
           onsubmit="onSubmit()"
@@ -123,5 +99,27 @@
         </div>
       </div>
     </div>
+    <script>
+      const onSubmit = () => {
+        fetch('/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              res.redirect('/');
+            } else {
+              alert(data.message);
+            }
+          });
+      }
+    </script>
   </body>
 </html>

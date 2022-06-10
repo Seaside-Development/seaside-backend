@@ -17,21 +17,22 @@ const getContractors = asyncHandler (async (req, res) => {
 // @route  GET /api/contractor/search
 // @access Private
 const getContractorsBySearch = asyncHandler (async (req, res) => {
-    let {industry, services, operatingLocations} = req.body;
+    let {industry, services} = req.body;
 
     //search for the contractor by query parameters
     let contractors = await Contractors.find(
       {
         industry: [industry],
         services: [services],
-        //operatingLocations: [operatingLocations]
       }
     );
     // limit the results to 5
     contractors = contractors.slice(0, 5);
     // return the contractors
     //res.send(contractors);
-    res.render('contractor-list', { contractors: contractors, title: 'All contractors' });
+    res.render('contractorpreview', { 
+        contractors: contractors, title: 'All contractors' 
+      });
     contractorResult = Contractors.map(contractor => {
         return {
           title: contractor.title,

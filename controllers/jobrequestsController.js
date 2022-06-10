@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const { result } = require('lodash');
 const JobRequests = require('../models/jobRequestsModel');
 const reviews = require('../models/reviewsModel');
+const {getContractorsBySearch} = require('../controllers/contractorController');
 
 // @desc    Get all Service
 // @route   GET /api/services
@@ -35,7 +36,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
 
     if(!title || !complexity || !industry || !description || !service || !length || !parish || !startdate) {
         res.status(400)
-        throw new Error(`Please add required fields`);
+        return (`Please add required fields`);
     }
 
     const jobrequest = await JobRequests.create({
@@ -54,10 +55,10 @@ const setJobrequest = asyncHandler (async (req, res) => {
         //user: req.user.id
     });
     console.log(jobrequest);
-    res.redirect('/api/jobrequests/searchJobs', 200, {
-        jobrequest: jobrequest
+    res.redirect(getContractorsBySearch, 200, {
+        industry: req.body.industry,
+        service: req.body.service,
     });
-    // res.status(200).json(jobrequest);
 })
 
 // @desc    Add Service review

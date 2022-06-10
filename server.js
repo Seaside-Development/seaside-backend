@@ -81,9 +81,9 @@ app.get("/contractoroverview", (req, res) => {
 
 //API routes
 //@Desc: routes used to get data from the database
-app.use("/api/users", User);
-app.use("/api/jobrequests", JobRequests);
-app.use("/api/contractor", ContractorsRoutes);
+app.use("/users", User);
+app.use("/jobrequests", JobRequests);
+app.use("/contractor", ContractorsRoutes);
 app.use(errorHandler); //pathway to the error handler
 
 // check that app is running on production mode
@@ -97,3 +97,8 @@ if (process.env.NODE_ENV === "production") {
 app.listen(port, () =>
   console.log(`Server started on port ${port}`.blue.underline)
 );
+
+// 404 page
+app.use((req, res) => {
+  res.status(404).render('404', { title: '404' });
+});

@@ -129,8 +129,7 @@ const loginUser = asyncHandler(async (req, res) => {
       title: 'User Login Form',
     })
   } else {
-    res.status(400)
-    throw new Error('Invalid credentials')
+   res.status(400, 'Invalid email or password');
   }
 })
 
