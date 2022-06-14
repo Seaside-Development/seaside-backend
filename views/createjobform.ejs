@@ -8,31 +8,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <% 
-    function searchForTheContractor() 
-    { 
-      var searchForContractor = { 
-        industry: document.getElementById('industry').value, 
-        service: document.getElementById('service').value, 
-        //operatingLocation: document.getElementById('operatingLocation').value, 
-      };
-      console.log(searchForContractor); 
-      fetch('/contractors/findContractor', 
-      { 
-        method:'GET', 
-        headers: { 'Content-Type': 'application/json'},
-        body:JSON.stringify(searchForContractor)
-    }) 
-          .then(response => response.redirect("contractorpreview"))
-          .then(data => console.log(data)) .catch(err => console.log(err)); 
-    }; 
-    %>
+    <% function searchForTheContractor() { var searchForContractor = { industry:
+    document.getElementById('industry').value, service:
+    document.getElementById('service').value, //operatingLocation:
+    document.getElementById('operatingLocation').value, };
+    console.log(searchForContractor); fetch('/contractors/findContractor', {
+    method:'GET', headers: { 'Content-Type': 'application/json'},
+    body:JSON.stringify(searchForContractor) }) .then(response =>
+    response.redirect("contractorpreview")) .then(data => console.log(data))
+    .catch(err => console.log(err)); }; %>
 
     <div class="flex justify-center items-center py-24">
       <form
         action="/jobrequests/createjob"
         method="POST"
-        class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg bg-slate-100"
+        class="space-y-8 divide-y w-3/6 divide-gray-200 shadow-lg p-4 rounded-lg bg-indigo-50"
       >
         <div class="space-y-8 divide-y divide-gray-200">
           <div>
