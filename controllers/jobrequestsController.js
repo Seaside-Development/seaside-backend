@@ -4,8 +4,8 @@ const JobRequests = require('../models/jobRequestsModel');
 const Contractors = require('../models/contractorModel');
 const reviews = require('../models/reviewsModel');
 
-// @desc    Get all Service
-// @route   GET /api/services
+// @desc    Get all Jobs
+// @route   GET /job-list
 // @access  Public
 const searchJobrequests = asyncHandler (async (req, res) => {
     const perPage = 10;
@@ -26,25 +26,6 @@ const searchJobrequests = asyncHandler (async (req, res) => {
         }
     );
 });
-
-
-
-// const jobrequests = await JobRequests.find({})
-//     try {
-//         //const jobrequest = await JobRequests.find().sort({ createdAt: -1 })
-//         //results.results = await JobRequests.slice(startIndex, endIndex).find().sort(sort);
-//         res.render('job-list', { jobrequests: jobrequests, title: 'All job request'});
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-
-    // let {id, userId} = req.body;
-    // const jobrequests = await JobRequests.find( {
-    //     id: _id,
-    //     userId: userId
-    // });
-    // res.status(200).json(jobrequests);
 
 // @desc    Set Service
 // @route   POST /api/services
