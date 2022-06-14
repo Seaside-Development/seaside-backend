@@ -8,39 +8,6 @@ const getContractors = asyncHandler (async (req, res) => {
     const contractor = await Contractors.find();
     res.status(200).json(contractor);
 })
-  
-
-// @desc   Get conntractor by search parameters
-// @route  GET /api/contractor/search
-// @access Private
-const getContractorsBySearch = asyncHandler (async (req, res) => {
-    let {industry, services} = req.body;
-
-    //search for the contractor by query parameters
-    let contractors = await Contractors.find(
-      {
-        industry: [industry],
-        services: [services],
-      })
-    
-    console.log(contractors, 'contractors');
-    // limit the results to 5
-    contractors = contractors.slice(0, 5);
-    // contractorResult = Contractors.map(contractor => {
-    //     return {
-    //       title: contractor.title,
-    //       contractorName: contractor.contractorName,
-    //       email: contractor.email,
-    //       businessDescription: contractor.businessDescription, 
-    //       operatingLocations: contractor.operatingLocations.split(', '),
-    //       services: contractor.services,
-    //       avgRating: contractor.avgRating,
-    //       id: contractor._id,
-    //     }
-    // })
-    res.render('contractorpreview', {contractors});
-    //res.status(200).json(contractors);
-})
 
 // @desc    Login the contractor
 // @route   POST /api/contractor/login
@@ -178,5 +145,5 @@ const getMe = asyncHandler(async (req, res) => {
 })
   
 module.exports = {
-    getContractors, registerContractor, updateContractors, deleteContractors, getMe, getContractorsBySearch, loginContractor, getContractorById
+    getContractors, registerContractor, updateContractors, deleteContractors, getMe, loginContractor, getContractorById
 }

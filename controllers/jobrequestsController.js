@@ -58,6 +58,9 @@ const setJobrequest = asyncHandler (async (req, res) => {
     console.log({industry, service}, 'query information');
 })
 
+// @desc    Get a contractor by search query
+// @route   GET /contractorpreview
+// @access  Public
 const findContractors = asyncHandler (async (req, res) => {
     let {industry, services} = req.query;
 
@@ -177,6 +180,8 @@ const getJobrequestById = asyncHandler (async (req, res) => {
     await JobRequests.findById(id)
         .then(result => {
         res.render('jobDetails', { jobrequest: result, title: 'Job Request Details by ID' });
+
+        // res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service, {industry: req.query.industry, service: req.query.service}, 201);
         //res.status(200).json(result);
     })
     .catch(err => {

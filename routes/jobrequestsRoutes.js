@@ -8,7 +8,7 @@ router.get('/findcontractors?', findContractors);
 router.post('/createjob', setJobrequest);
 router.put('/updatejob/:id',updateJobrequest);
 router.delete('/removejob/:id',deleteJobrequest);
-router.get('/:id', getJobrequestById);
+router.get('/:id/?', getJobrequestById);
 router.get('/contractorJobs/:id', getJobrequestByContractorId);
 
 module.exports = router;
