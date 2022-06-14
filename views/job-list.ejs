@@ -33,6 +33,9 @@
                       Description: <%= jobrequest.description %>
                     </p>  
                     <p class="w-max text-sm font-thin text-gray-900 ">
+                      Status: <%= jobrequest.status %>
+                    </p>
+                    <p class="w-max text-sm font-thin text-gray-900 ">
                       Complexity: <%= jobrequest.complexity %>
                     </p>
                     <p class="w-max text-sm font-thin text-gray-900 ">
@@ -48,6 +51,58 @@
           <% } else { %>
             <p>There are no Jobs to display...</p>
           <% } %>
+      </div>
+      <!-- Pagination -->
+      <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <nav class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <% if (pages > 0) { %>
+          <ul class="inline-flex -space-x-px" >
+              <% if (current == 1) { %>
+                  <li class="disabled"><a
+                    class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    >First</a></li>
+              <% } else { %>
+                  <li><a class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    href="/jobrequests/searchJobs/1">First</a></li>
+              <% } %>
+              <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+              <% if (i !== 1) { %>
+                  <li class="disabled"><a
+                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                    >...</a></li>
+              <% } %>
+              <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                  <% if (i == current) { %>
+                      <li class="active"><a
+                        aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                        ><%= i %></a></li>
+                  <% } else { %>
+                      <li><a 
+                        class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                        href="/jobrequests/searchJobs/<%= i %>"><%= i %></a></li>
+                  <% } %>
+                  <% if (i == Number(current) + 4 && i < pages) { %>
+                      <li class="disabled"><a
+                        class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                        >...</a></li>
+                  <% } %>
+              <% } %>
+              <% if (current == pages) { %>
+                  <li class="disabled"><a
+                    class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                    >Last</a></li>
+              <% } else { %>
+                  <li><a 
+                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                    href="/products/<%= pages %>">
+                    Last
+                  </a></li>
+              <% } %>
+          </ul>
+      <% } %>
+    </nav>
+      </div>
+      <!-- End of Pagination -->
       </div>
     </div>
     </div>

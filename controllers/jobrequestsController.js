@@ -8,18 +8,36 @@ const reviews = require('../models/reviewsModel');
 // @route   GET /api/services
 // @access  Public
 const searchJobrequests = asyncHandler (async (req, res) => {
-    JobRequests.find().sort({ createdAt: -1 })
-        .then(result => {
-            res.render('job-list', { jobrequests: result, title: 'All job request' });
-        })
-        .catch  (err => {
-            console.log(err);
-            // res.status(500).json({
-            //     success: false, 
-            //     error: 'Server Error'
-            // });
-        });
+    const perPage = 10;
+    const page = req.params.page || 1;
+    const jobrequests = await JobRequests
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec( function (err, jobrequests) {
+            JobRequests.countDocuments().exec(function (err, count) {
+                if (err) return next(err)
+                res.render('job-list', {
+                    jobrequests,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                })
+            })
+        }
+    );
 });
+
+
+
+// const jobrequests = await JobRequests.find({})
+//     try {
+//         //const jobrequest = await JobRequests.find().sort({ createdAt: -1 })
+//         //results.results = await JobRequests.slice(startIndex, endIndex).find().sort(sort);
+//         res.render('job-list', { jobrequests: jobrequests, title: 'All job request'});
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
 
     // let {id, userId} = req.body;
     // const jobrequests = await JobRequests.find( {
@@ -55,9 +73,8 @@ const setJobrequest = asyncHandler (async (req, res) => {
         //user: req.user.id
     });
     console.log(jobrequest);
-    res.redirect("/jobrequests/findcontractors?industry=Mechanic&service=tire change", {industry: req.query.industry, service: req.query.service}, 201);
+    res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service, {industry: req.query.industry, service: req.query.service}, 201);
     console.log({industry, service}, 'query information');
-    //res.status(201).json(jobrequest);
 })
 
 const findContractors = asyncHandler (async (req, res) => {
