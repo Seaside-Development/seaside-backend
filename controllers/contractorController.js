@@ -81,8 +81,6 @@ const registerContractor = asyncHandler (async (req, res) => {
   
     console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
 
-
-
     if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !telephone || !password) {
       console.log(typeof operatingLocations)
       console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
