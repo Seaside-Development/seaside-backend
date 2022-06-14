@@ -1,23 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/dist/output.css" rel="stylesheet" />
-    <!-- <link href="/styles/styles.css" rel="stylesheet" /> -->
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
   <body>
-    <% function searchForTheContractor() { var searchForContractor = { industry:
-    document.getElementById('industry').value, service:
-    document.getElementById('service').value, //operatingLocation:
-    document.getElementById('operatingLocation').value, };
-    console.log(searchForContractor); fetch('/contractors/findContractor', {
-    method:'GET', headers: { 'Content-Type': 'application/json'},
-    body:JSON.stringify(searchForContractor) }) .then(response =>
-    response.redirect("contractorpreview")) .then(data => console.log(data))
-    .catch(err => console.log(err)); }; %>
-
     <div class="flex justify-center items-center py-24">
       <form
         action="/jobrequests/createjob"
@@ -124,6 +107,7 @@
                     <option>Carpentry</option>
                     <option>Plumbing</option>
                     <option>HVAC</option>
+                    <option>tire change</option>
                   </select>
                 </div>
               </div>

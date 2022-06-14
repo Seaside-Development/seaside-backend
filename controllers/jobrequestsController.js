@@ -39,31 +39,6 @@ const setJobrequest = asyncHandler (async (req, res) => {
         res.status(400)
         return (`Please add required fields`);
     }
-
-    // const jobrequest = await JobRequests.create({
-    //     title, 
-    //     complexity, 
-    //     contractorID, 
-    //     industry, 
-    //     service,
-    //     description, 
-    //     length, 
-    //     parish, 
-    //     status: 'Pending', 
-    //     startdate, 
-    //     endDate, 
-    //     reviews,
-    //     //user: req.user.id
-    // })
-    //     .then(data => {
-    //     res.render("contractor/search", 201, { jobrequest: data, title: 'Job Request Details by ID' });
-    //     console.log(jobrequest);
-    // })
-    // .catch(err => {
-    //     res.status(400)
-    //     throw new Error('Jobrequest not created');
-    // })
-
     const jobrequest = await JobRequests.create({
         title, 
         complexity, 
@@ -80,7 +55,8 @@ const setJobrequest = asyncHandler (async (req, res) => {
         //user: req.user.id
     });
     console.log(jobrequest);
-    res.redirect("/contractor/search", 201, { jobrequest: jobrequest, title: 'Job Request Details by ID' });
+    res.redirect("/contractor/search", 201, { jobrequest, title: 'Job Request Details by ID' });
+    //res.status(201).json(jobrequest);
 })
 
 // @desc    Add Service review

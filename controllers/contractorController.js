@@ -24,29 +24,25 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
       {
         industry: [industry],
         services: [services],
-      }
-    );
+      })
+    
+    console.log(contractors, 'contractors');
     // limit the results to 5
     contractors = contractors.slice(0, 5);
-    // return the contractors
-    //res.send(contractors);
-    // res.render('contractorpreview', { 
-    //     contractors: contractors, title: 'All contractors' 
-    //   });
-      res.render('contractorpreview');
-    contractorResult = Contractors.map(contractor => {
-        return {
-          title: contractor.title,
-          contractorName: contractor.contractorName,
-          email: contractor.email,
-          businessDescription: contractor.businessDescription, 
-          operatingLocations: contractor.operatingLocations.split(', '),
-          services: contractor.services,
-          avgRating: contractor.avgRating,
-          id: contractor._id,
-        }
-    })
-    // res.status(200).json(contractorResult);
+    // contractorResult = Contractors.map(contractor => {
+    //     return {
+    //       title: contractor.title,
+    //       contractorName: contractor.contractorName,
+    //       email: contractor.email,
+    //       businessDescription: contractor.businessDescription, 
+    //       operatingLocations: contractor.operatingLocations.split(', '),
+    //       services: contractor.services,
+    //       avgRating: contractor.avgRating,
+    //       id: contractor._id,
+    //     }
+    // })
+    res.render('contractorpreview', {contractors});
+    //res.status(200).json(contractors);
 })
 
 // @desc    Login the contractor
