@@ -101,71 +101,77 @@
             <div class="grid grid-cols-4 gap-3 h-full">
               <!-- card  1-->
 
-              <div class="flex flex-col rounded-2xl shadow-2xl bg-white">
-                <% if (contractors.length > 0) { %>
+              <% if (contractors.length > 0) { %>
                 <% contractors.forEach(function(contractor) { %>
+              <div class="flex flex-col rounded-2xl shadow-2xl bg-white">
                 <div class="flex items-center justify-between">
                   <img
                     class="relative -left-1 -top-8 ml-8 mt-0 h-20 w-20 rounded-full"
                     src="https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
                     alt=""
                   />
-                  <p
-                    class="flex h-7 px-5 m-4 items-center text-indigo-100 bg-indigo-700 rounded-lg"
-                  >
-                    Freelance
-                  </p>
-                </div>
-                <div class="flex px-6 flex-col justify-between">
-                  <div class="flex flex-col">
-                    <p class="text-xl font-semibold text-indigo-900">
-                      Company Name <%= contractor.name %>
+                  <a href="#">
+                    <p class="flex h-7 px-5 m-4 items-center text-indigo-100 bg-indigo-700 rounded-lg">
+                      Book Now
                     </p>
-                    <p class="mt-3 text-base text-gray-500">
-                      <%= contractor.businessDescription %>
-                    </p>
-                  </div>
-                  <div
-                    class="mt-6 flex items-center justify-between text-indigo-700"
-                  >
-                    <div class="flex items-center flex-shrink-0 space-x-1">
-                      <a href="#">
-                        <svg
-                          class="w-4 h-4 text-indigo-700"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          ></path>
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          ></path>
-                        </svg>
-                        <p class="text-sm font-medium">
-                          <a href="#" class="hover:underline"> <%= contractor.operatingLocations %> </a>
-                        </p>
-                      </a>
-                    </div>
-                    <div class="flex ml-3 justify-between items-center">
-                      <p class="text-3xl">$25</p>
-                      <p>/hour</p>
-                    </div>
-                  </div>
+                  </a>
                 </div>
-                <% }) %>
+                <!--<a href="/contractor/<%= contractor.id %>" >-->
+                  <a href="/contractor/<%= contractor.id %>">
+
+                
+                        <div class="flex px-6 flex-col justify-between">
+                          <div class="flex flex-col">
+                            <p class="text-xl font-semibold text-indigo-900">
+                              <!--<%= contractor.title %>-->
+                              <%= contractor.title %>
+                            </p>
+                            <p class="mt-3 text-base text-gray-500">
+                              <%= contractor.businessDescription %>
+                            </p>
+                          </div>
+                          <div
+                            class="mt-6 flex items-center justify-between text-indigo-700"
+                          >
+                            <div class="flex items-center flex-shrink-0 space-x-1">
+                              <a href="#">
+                                <svg
+                                  class="w-4 h-4 text-indigo-700"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                  ></path>
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                  ></path>
+                                </svg>
+                                <p class="text-sm font-medium">
+                                  <a href="#" class="hover:underline"> <%= contractor.industry %> </a>
+                                </p>
+                              </a>
+                            </div>
+                            <div class="flex ml-3 justify-between items-center">
+                              <p class="text-3xl">$25</p>
+                              <p>/hour</p>
+                            </div>
+                          </div>
+                        </div>
+              </a>
+              </div>
+              <% }) %>
                   <% } else { %>
                     <p>There are no contractors to display...</p>
                   <% } %>
-              </div>
             </div>
             <!-- card end -->
           </div>

@@ -1,8 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const Contractors = require('../models/contractorModel');
-const User = require('../models/userModel');
-const JobRequest = require('../models/jobRequestsModel');
-
 
 // @desc    Get all Service
 // @route   GET /api/contractor
@@ -81,6 +78,7 @@ const registerContractor = asyncHandler (async (req, res) => {
   
     console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
 
+
     if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !telephone || !password) {
       console.log(typeof operatingLocations)
       console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
@@ -124,9 +122,25 @@ const registerContractor = asyncHandler (async (req, res) => {
       throw new Error('Invalid Contractor data')
     }
 })
+
+// @desc    GET Contractor
+// @route   GET /contractor/:id
+// @access  Public
+const getContractorById = asyncHandler (async (req, res) => {
+  const id = req.params.id;
+    await Contractors.findById(id)
+        .then(result => {
+        res.render('contractoroverview', { contractor: result, title: 'Contractor Details by ID' });
+        //res.status(200).json(result);
+    })
+    .catch(err => {
+        res.status(404)
+        throw new Error('Contractor not found');
+    })
+});
   
 // @desc    Update user
-// @route   PUT /api/contractor/update/:id
+// @route   PUT /contractor/update/:id
 // @access  Public
 const updateContractors = asyncHandler (async (req, res) => {
   const contractor = await Contractors.findById(req.params.id);
@@ -164,5 +178,5 @@ const getMe = asyncHandler(async (req, res) => {
 })
   
 module.exports = {
-    getContractors, registerContractor, updateContractors, deleteContractors, getMe, getContractorsBySearch, loginContractor
+    getContractors, registerContractor, updateContractors, deleteContractors, getMe, getContractorsBySearch, loginContractor, getContractorById
 }

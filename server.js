@@ -69,9 +69,9 @@ app.get("/createjobform", (req, res) => {
 app.get("/signin", (req, res) => {
   res.render("signin");
 }); //end of app.get
-app.get("/contractorpreview", (req, res) => {
-  res.render("contractorpreview");
-}); //end of app.get
+// app.get("/contractorpreview", (req, res) => {
+//   res.render("contractorpreview");
+// }); //end of app.get
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get

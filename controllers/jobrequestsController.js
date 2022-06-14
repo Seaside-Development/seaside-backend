@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const { result } = require('lodash');
 const JobRequests = require('../models/jobRequestsModel');
+const Contractors = require('../models/contractorModel');
 const reviews = require('../models/reviewsModel');
-const {getContractorsBySearch} = require('../controllers/contractorController');
 
 // @desc    Get all Service
 // @route   GET /api/services
@@ -55,8 +55,27 @@ const setJobrequest = asyncHandler (async (req, res) => {
         //user: req.user.id
     });
     console.log(jobrequest);
-    res.redirect("/contractor/search", 201, { jobrequest, title: 'Job Request Details by ID' });
+    res.redirect("/jobrequests/findcontractors?industry=Mechanic&service=tire change", {industry: req.query.industry, service: req.query.service}, 201);
+    console.log({industry, service}, 'query information');
     //res.status(201).json(jobrequest);
+})
+
+const findContractors = asyncHandler (async (req, res) => {
+    let {industry, services} = req.query;
+
+    //search for the contractor by query parameters
+    let contractors = await Contractors.find(
+      {
+        industry: [industry],
+        service: [services],
+      })
+    
+    console.log(contractors, 'contractors');
+    // limit the results to 5
+    contractors = contractors.slice(0, 5);
+
+    res.render('contractorpreview', {contractors});
+    //res.status(200).json(contractors);
 })
 
 // @desc    Add Service review
@@ -178,5 +197,5 @@ const getJobrequestByContractorId = asyncHandler (async (req, res) => {
 })
 
 module.exports = {
-    searchJobrequests, setJobrequest, updateJobrequest, deleteJobrequest, getJobrequestById, addReview, getJobrequestByContractorId
+    searchJobrequests, setJobrequest, updateJobrequest, deleteJobrequest, getJobrequestById, addReview, getJobrequestByContractorId, findContractors
 }
