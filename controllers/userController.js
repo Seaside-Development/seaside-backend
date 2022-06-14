@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
+const Contractors = require('../models/contractorModel');
 const { redirect } = require('express/lib/response');
 
 // @desc    Get all Service
@@ -11,6 +12,14 @@ const getUsers = asyncHandler (async (req, res) => {
   const users = await User.find();
   res.status(200).json(users);
 })
+
+
+const getContractors = asyncHandler (async (req, res) => {
+  const contractor = await Contractors.find();
+  res.status(200).json(contractor);
+})
+
+
 
 // @desc    Set/Register a new User
 // @route   POST /api/users/register
