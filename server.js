@@ -13,7 +13,7 @@ const fs = require("fs");
 
 const JobRequests = require("./routes/jobrequestsRoutes");
 const User = require("./routes/userRoutes");
-const ContractorsRoutes = require("./routes/contractorsRoutes");
+const ContractorsRoutes = require("./routes/ContractorsRoutes");
 
 const ejsLint = require("ejs-lint");
 const port = process.env.PORT || 5000;
