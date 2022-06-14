@@ -30,9 +30,10 @@ const getContractorsBySearch = asyncHandler (async (req, res) => {
     contractors = contractors.slice(0, 5);
     // return the contractors
     //res.send(contractors);
-    res.render('contractorpreview', { 
-        contractors: contractors, title: 'All contractors' 
-      });
+    // res.render('contractorpreview', { 
+    //     contractors: contractors, title: 'All contractors' 
+    //   });
+      res.render('contractorpreview');
     contractorResult = Contractors.map(contractor => {
         return {
           title: contractor.title,

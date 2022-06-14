@@ -32,16 +32,38 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 // @route   POST /api/services
 // @access  Private
 const setJobrequest = asyncHandler (async (req, res) => {
-    const {title, complexity, contractorID, user, industry, service, description, length, parish, status, startdate, endDate, reviews, img} = req.body;
 
-    const contractoer_industry = req.params.industry;
-    const contractoer_service = req.params.service;
+    const {title, complexity, contractorID, user, industry, service, description, length, parish, status, startdate, endDate, reviews, img} = req.body;
 
     if(!title || !complexity || !industry || !description || !service || !length || !parish || !startdate) {
         res.status(400)
         return (`Please add required fields`);
     }
-    
+
+    // const jobrequest = await JobRequests.create({
+    //     title, 
+    //     complexity, 
+    //     contractorID, 
+    //     industry, 
+    //     service,
+    //     description, 
+    //     length, 
+    //     parish, 
+    //     status: 'Pending', 
+    //     startdate, 
+    //     endDate, 
+    //     reviews,
+    //     //user: req.user.id
+    // })
+    //     .then(data => {
+    //     res.render("contractor/search", 201, { jobrequest: data, title: 'Job Request Details by ID' });
+    //     console.log(jobrequest);
+    // })
+    // .catch(err => {
+    //     res.status(400)
+    //     throw new Error('Jobrequest not created');
+    // })
+
     const jobrequest = await JobRequests.create({
         title, 
         complexity, 
@@ -58,10 +80,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
         //user: req.user.id
     });
     console.log(jobrequest);
-    res.render("contractorpreview", 200, {
-        industry: req.body.industry,
-        service: req.body.service,
-    });
+    res.redirect("/contractor/search", 201, { jobrequest: jobrequest, title: 'Job Request Details by ID' });
 })
 
 // @desc    Add Service review
