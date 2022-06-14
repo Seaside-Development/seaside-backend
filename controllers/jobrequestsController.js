@@ -34,11 +34,14 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 const setJobrequest = asyncHandler (async (req, res) => {
     const {title, complexity, contractorID, user, industry, service, description, length, parish, status, startdate, endDate, reviews, img} = req.body;
 
+    const contractoer_industry = req.params.industry;
+    const contractoer_service = req.params.service;
+
     if(!title || !complexity || !industry || !description || !service || !length || !parish || !startdate) {
         res.status(400)
         return (`Please add required fields`);
     }
-
+    
     const jobrequest = await JobRequests.create({
         title, 
         complexity, 
@@ -55,7 +58,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
         //user: req.user.id
     });
     console.log(jobrequest);
-    res.redirect(getContractorsBySearch, 200, {
+    res.render("contractorpreview", 200, {
         industry: req.body.industry,
         service: req.body.service,
     });
