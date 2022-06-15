@@ -67,7 +67,7 @@ app.get("/contact", (req, res) => {
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
   res.render("createjobform", { industryObj: industryObj });
-  res.redirect("/job-list");
+  // res.redirect("/job-list");
 }); //end of app.get
 app.get("/signin", (req, res) => {
   res.render("signin");

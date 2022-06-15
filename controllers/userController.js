@@ -9,14 +9,26 @@ const uuid=require("uuid")
 // @route   GET /api/users
 // @access  Private
 const getUsers = asyncHandler (async (req, res) => {
-  const users = await User.find();
-  res.status(200).json(users);
+  if (req.cookies.auth){
+    const users = await User.find();
+    res.status(200).json(users);
+  }
+  
+  else
+    res.redirect('/')
+  
 })
 
 
 const getContractors = asyncHandler (async (req, res) => {
-  const contractor = await Contractors.find();
-  res.status(200).json(contractor);
+  if (req.cookies.auth){
+    const contractor = await Contractors.find();
+    res.status(200).json(contractor);
+  }
+  else
+    res.redirect('/')
+  
+  
 })
 
 
