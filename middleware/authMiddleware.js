@@ -1,33 +1,46 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const asyncHandler = require('express-async-handler');
+const passport=require("passport")
 const User = require('../models/userModel');
+const CookieStrategy=require("passport-cookie")
 
-const protect = asyncHandler(async (req, res, next) => {
-    let token
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        try {
-            // Get token from header
-            token = req.headers.authorization.split(' ')[1]
+const protect = passport.use(new CookieStrategy({
+        cookieName: 'auth',
+      }, 
+      
+      function(req, token, done) {
+        User.findByToken({ token: token }, function(err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          return done(null, user);
+        });
+      })
 
-            // Verify token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    );
+    // let token
+    // if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    //     try {
+    //         // Get token from header
+    //         token = req.headers.authorization.split(' ')[1]
 
-            // Get user from token
-            req.user = await User.findById(decoded.id).select('-password')
-            next()
-        } catch (err) {
-            console.log(err)
-            res.status(401)
-            throw new Error('Unauthorized Access')
-        }
-    }
+    //         // Verify token
+    //         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-    if(!token) {
-        res.status(401)
-        throw new Error('Unauthorized Access, please login')
-    }
-})
+    //         // Get user from token
+    //         req.user = await User.findById(decoded.id).select('-password')
+    //         next()
+    //     } catch (err) {
+    //         console.log(err)
+    //         res.status(401)
+    //         throw new Error('Unauthorized Access')
+    //     }
+    // }
+
+    // if(!token) {
+    //     res.status(401)
+    //     throw new Error('Unauthorized Access, please login')
+    // }
+// })
 
 module.exports = { protect };
 

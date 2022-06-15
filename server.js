@@ -10,10 +10,12 @@ const morgan = require("morgan");
 const cors = require("cors");
 const ejs = require("ejs");
 const fs = require("fs");
+const cookie_parser=require("cookie-parser")
 
 const JobRequests = require("./routes/jobrequestsRoutes");
 const User = require("./routes/userRoutes");
 const ContractorsRoutes = require("./routes/ContractorsRoutes");
+
 
 const ejsLint = require("ejs-lint");
 const port = process.env.PORT || 5000;
@@ -23,6 +25,7 @@ connectDB(); // connect to database function
 //enable express middleware
 const app = express();
 app.use(express.json());
+app.use(cookie_parser())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));

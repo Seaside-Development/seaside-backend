@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Contractors = require('../models/contractorModel');
-const { redirect } = require('express/lib/response');
+const uuid=require("uuid")
 
 // @desc    Get all Service
 // @route   GET /api/users
@@ -127,8 +127,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // Check for user email
   const user = await User.findOne({ email })
-
+  
   if (user && (await bcrypt.compare(password, user.password))) {
+    res.cookie('auth', uuid.v4() )
     res.redirect('/createjobform', 200, 
     {
       _id: user.id,
@@ -136,11 +137,27 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       token: generateToken(user._id),
       title: 'User Login Form',
-    })
+    })    
   } else {
    res.status(400, 'Invalid email or password');
   }
 })
+
+
+const logout = asyncHandler(async (req, res) => {
+  if (req.cookies.auth){
+    console.log(req.cookies.auth)
+    console.log(res.cookie)
+
+    res.clearCookie('auth')
+    console.log(res.cookie)
+    //res.end()
+  }
+  res.redirect('/')
+  
+  // 
+})
+
 
 // @desc    Get user data
 // @route   GET /api/users/me
@@ -156,5 +173,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser
+    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout
 }
