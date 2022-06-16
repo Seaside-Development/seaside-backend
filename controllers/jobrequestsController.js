@@ -29,8 +29,9 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 
     }
     
-    else
-        res.redirect('/')
+    else{
+        res.redirect(401,'/')
+    }
 });
 
 // @desc    Set Service
@@ -58,7 +59,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
             startdate, 
             endDate, 
             reviews,
-            //user: req.user.id
+            user: req.cookies.auth
         });
         console.log(jobrequest);
         res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service, {industry: req.query.industry, service: req.query.service}, 201);
@@ -66,7 +67,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
     }
 
     else
-        res.redirect('/')
+        res.redirect(401,'/')
 
 })
 

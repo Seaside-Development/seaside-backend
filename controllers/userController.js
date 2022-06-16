@@ -150,7 +150,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email })
   
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.cookie('auth', uuid.v4() )
+    res.cookie('auth', user.id )
     res.redirect('/createjobform', 200, 
     {
       _id: user.id,
@@ -173,8 +173,11 @@ const logout = asyncHandler(async (req, res) => {
     res.clearCookie('auth')
     console.log(res.cookie)
     //res.end()
+    res.redirect('/')
   }
-  res.redirect('/')
+  else{
+    res.redirect(401,'/')
+  }
   
   // 
 })
