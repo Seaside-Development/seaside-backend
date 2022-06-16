@@ -1,17 +1,8 @@
 <html>
   <body>
-    <% 
-      const handleSubmit = (e) => 
-      { 
-        e.preventDefault(); 
-        const formData = new
-        FormData(e.target); 
-        const data = {}; formData.forEach((value, key) => {
-          data[key] = value; }); 
-          console.log(data); 
-          this.props.onSubmit(data); 
-      } 
-    %>
+    <% const handleSubmit = (e) => { e.preventDefault(); const formData = new
+    FormData(e.target); const data = {}; formData.forEach((value, key) => {
+    data[key] = value; }); console.log(data); this.props.onSubmit(data); } %>
     <div class="flex justify-center">
       <div class="card w-3/6 shadow-md rounded-lg p-8 m-8 bg-indigo-50">
         <h1 class="text-center font-semibold text-2xl">Registration Form</h1>
@@ -38,7 +29,7 @@
                       name="username"
                       id="username"
                       autoComplete="username"
-                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md"
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
@@ -58,7 +49,7 @@
                       type="password"
                       autoComplete="current-password"
                       required
-                      class="flex-1 block w-full px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300 drop-shadow-md placeholder-gray-300"
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                       placeholder="*********"
                     />
                   </div>
