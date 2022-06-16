@@ -38,9 +38,6 @@ app.use("/", cors());
 
 //static files
 app.use(express.static("public"));
-// app.use("/css", express.static(__dirname + "frontend/public/css"));
-// app.use("/css", express.static(__dirname + "frontend/public/js"));
-// app.use("/css", express.static(__dirname + "frontend/public/attachments"));
 
 //set views
 app.use(expressLayouts); // allows us to use ejs layouts

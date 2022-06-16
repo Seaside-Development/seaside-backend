@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/dist/output.css" rel="stylesheet" />
-    <!-- <link href="/styles/styles.css" rel="stylesheet" /> -->
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
   <body>
     <div class="flex justify-center py-24">
       <div class="card w-3/6 shadow-md rounded-lg p-8 m-8 bg-indigo-50">
@@ -14,8 +7,8 @@
           Contractor Update Form
         </h1>
         <form
-          action="/api/contractor/regcontractor"
-          method="POST"
+          action="/contractor//update/<% contractor.id %>"
+          method="PUT"
           class="py-5 space-y-8 divide-y divide-gray-200"
         >
           <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">

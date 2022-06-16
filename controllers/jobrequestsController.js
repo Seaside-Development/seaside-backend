@@ -216,8 +216,8 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
 
 const getJobrequestById = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
-        const id = req.params.id;
-        await JobRequests.findById(id)
+        const email = req.params.email;
+        await JobRequests.findById(email)
             .then(result => {
             res.render('jobDetails', { jobrequest: result, title: 'Job Request Details by ID' });
 
