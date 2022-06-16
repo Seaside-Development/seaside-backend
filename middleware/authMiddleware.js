@@ -4,6 +4,27 @@ const passport=require("passport")
 const User = require('../models/userModel');
 const CookieStrategy=require("passport-cookie")
 
+const checkCookie = () => {
+    passport.use(new CookieStrategy(
+        (req, res) => { 
+            if (req.cookies.auth) {
+                const token = req.cookies.auth;
+                jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+                    if (err) {
+                        res.redirect('/')
+                    } else {
+                        res.redirect('/useraccount')
+                    }
+                })
+            } else {
+                res.redirect('/')
+            }
+        }
+    ))
+}
+
+console.log(checkCookie());
+
 const protect = passport.use(new CookieStrategy({
         cookieName: 'auth',
       }, 
@@ -42,6 +63,6 @@ const protect = passport.use(new CookieStrategy({
     // }
 // })
 
-module.exports = { protect };
+module.exports = { protect, checkCookie };
 
 // for more information visit --> https://jwt.io/
