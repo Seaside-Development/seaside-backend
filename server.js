@@ -80,6 +80,9 @@ app.get("/contractorupdateform", (req, res) => {
 app.get("/contractoroverview", (req, res) => {
   res.render("contractoroverview");
 }); //end of app.get
+app.get("/jobupdateform", (req, res) => {
+  res.render("jobupdateform");
+}); //end of app.get
 
 //API routes
 //@Desc: routes used to get data from the database
