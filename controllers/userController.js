@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const Contractors = require('../models/contractorModel');
 const uuid=require("uuid")
+let alert = require('alert');
 
 
 // @desc    Get all Service
@@ -53,15 +54,15 @@ const registerUser = asyncHandler (async (req, res) => {
   } 
   // check if password length is greater than 8.
   if(password.length < 7) {
-    res.status(400);
-    throw new Error('Password must be at least 8 characters long');
+    //res.status(400);
+  alert('Password must be at least 8 characters long');
   }
 
   // check if user exists
   const userExist = await User.findOne({ email });
   if(userExist) {
-      res.status(400)
-      throw new Error('User already exist');
+      // res.status(400)
+      alert('User already exists');
   }
 
   // Hashing password
@@ -79,32 +80,22 @@ const registerUser = asyncHandler (async (req, res) => {
     telephone,
   })  
 
-  res.redirect('/createjobform', 200, 
-    {
-      _id: user.id,
-      username: user.username,
-      email: user.email,
-      token: generateToken(user._id),
-      title: 'User Login Form',
-    })
-
   if (user) {
-    res.redirect('/createjobform', 201, {
+    res.status(201, 
+      {
       _id: user._id,
       username: user.username,
       email: user.email, 
       avatar: user.avatar,
       telephone: user.telephone,
       token: generateToken(user._id),
-    },  'User created successfully')
+    }
+    )
   } else {
-    res.status(400)
-    throw new Error('Invalid user data')
+    //res.status(400)
+    alert('Invalid user data')
   }
-  res.redirect('signup',{
-    user: user,
-    title: 'User Registration Form',
-  });
+  res.redirect('/',{title: 'Welcome'}, 201);
 })
 
 // @desc    Update user
