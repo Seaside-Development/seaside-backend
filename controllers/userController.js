@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 const Contractors = require('../models/contractorModel');
 const uuid=require("uuid")
 
+
 // @desc    Get all Service
 // @route   GET /api/users
 // @access  Private
@@ -19,6 +20,14 @@ const getUsers = asyncHandler (async (req, res) => {
   
 })
 
+const checkCookie = asyncHandler (async (req, res) => {
+  // if (req.cookies.auth){
+  //   return console.log(`Cookie is ${auth}`.blue.underline)
+  // }
+  // else {
+  //   return console.log(`Cookie not found`.red.underline);
+  // }
+});
 
 const getContractors = asyncHandler (async (req, res) => {
   if (req.cookies.auth){
@@ -185,5 +194,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout
+    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout, checkCookie
 }

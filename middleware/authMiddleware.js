@@ -1,29 +1,14 @@
 const jwt = require('jsonwebtoken')
+const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs')
 const passport=require("passport")
 const User = require('../models/userModel');
 const CookieStrategy=require("passport-cookie")
-
-const checkCookie = () => {
-    passport.use(new CookieStrategy(
-        (req, res) => { 
-            if (req.cookies.auth) {
-                const token = req.cookies.auth;
-                jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-                    if (err) {
-                        res.redirect('/')
-                    } else {
-                        res.redirect('/useraccount')
-                    }
-                })
-            } else {
-                res.redirect('/')
-            }
-        }
-    ))
-}
-
-console.log(checkCookie());
+const http = require('http');
+var express = require('express');
+var cookieParser = require('cookie-parser');
+var app = express();
+app.use(cookieParser());
 
 const protect = passport.use(new CookieStrategy({
         cookieName: 'auth',
@@ -63,6 +48,6 @@ const protect = passport.use(new CookieStrategy({
     // }
 // })
 
-module.exports = { protect, checkCookie };
+module.exports = { protect};
 
 // for more information visit --> https://jwt.io/

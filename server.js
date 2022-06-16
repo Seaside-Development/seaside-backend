@@ -3,6 +3,7 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 const expressLayouts = require("express-ejs-layouts");
 const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
+const {checkCookie} = require("./controllers/userController");
 const express = require("express");
 const colors = require("colors");
 const bodyParser = require("body-parser");
@@ -20,6 +21,8 @@ const ejsLint = require("ejs-lint");
 const port = process.env.PORT || 5000;
 
 connectDB(); // connect to database function
+
+checkCookie();
 
 //enable express middleware
 const app = express();
@@ -63,14 +66,10 @@ app.get("/contact", (req, res) => {
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
   res.render("createjobform", { industryObj: industryObj });
-  // res.redirect("/job-list");
 }); //end of app.get
 app.get("/signin", (req, res) => {
   res.render("signin");
 }); //end of app.get
-// app.get("/contractorpreview", (req, res) => {
-//   res.render("contractorpreview");
-// }); //end of app.get
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get
