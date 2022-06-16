@@ -20,34 +20,40 @@ const protect = passport.use(new CookieStrategy({
           if (!user) { return done(null, false); }
           return done(null, user);
         });
-      })
+  })
+);
 
-    );
-    // let token
-    // if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    //     try {
-    //         // Get token from header
-    //         token = req.headers.authorization.split(' ')[1]
+const protected = asyncHandler(async (req, res, next) => {
+  let token
 
-    //         // Verify token
-    //         const decoded = jwt.verify(token, process.env.JWT_SECRET)
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    try {
+      // Get token from header
+      token = req.headers.authorization.split(' ')[1]
 
-    //         // Get user from token
-    //         req.user = await User.findById(decoded.id).select('-password')
-    //         next()
-    //     } catch (err) {
-    //         console.log(err)
-    //         res.status(401)
-    //         throw new Error('Unauthorized Access')
-    //     }
-    // }
+      // Verify token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-    // if(!token) {
-    //     res.status(401)
-    //     throw new Error('Unauthorized Access, please login')
-    // }
-// })
+      // Get user from the token
+      req.user = await User.findById(decoded.id).select('-password')
 
-module.exports = { protect};
+      next()
+    } catch (error) {
+      console.log(error)
+      res.status(401)
+      throw new Error('Not authorized')
+    }
+  }
+
+  if (!token) {
+    res.status(401)
+    throw new Error('Not authorized, no token')
+  }
+})
+
+module.exports = { protect }
 
 // for more information visit --> https://jwt.io/

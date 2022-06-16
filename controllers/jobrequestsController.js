@@ -58,7 +58,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
             startdate, 
             endDate, 
             reviews,
-            //user: req.user.id
+            // user: req.user.id
         });
         console.log(jobrequest);
         res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service, {industry: req.query.industry, service: req.query.service}, 201);
