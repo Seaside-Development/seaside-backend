@@ -34,22 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-function addContractor(id) {
-  fetch("/addContractor/:id", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      contractorID: contractor.id,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
-}
-
 //Enable CORS
 app.use("/", cors());
 
@@ -91,7 +75,7 @@ app.get("/contractorupdateform", (req, res) => {
   res.render("contractorupdateform");
 }); //end of app.get
 app.get("/contractoroverview", (req, res) => {
-  res.render("contractoroverview");
+  res.render("contractoroverview", function1());
 }); //end of app.get
 app.get("/jobupdateform", (req, res) => {
   res.render("jobupdateform");
