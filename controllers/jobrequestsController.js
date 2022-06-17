@@ -62,8 +62,14 @@ const setJobrequest = asyncHandler (async (req, res) => {
             user: req.cookies.auth
         });
         console.log(jobrequest, );
-        res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service+"&_id="+jobrequest._id, {industry: req.query.industry, service: req.query.service}, 201);
-        console.log({industry, service}, 'query information');
+        res.redirect("/jobrequests/findcontractors?industry="+industry+"&id="+jobrequest._id+"&service="+service, 
+        {
+            industry: req.query.industry, 
+            id: req.query._id,
+            service: req.query.service, 
+        }, 
+            201);
+        console.log({industry, service, id}, 'query information');
     }
 
     else
@@ -76,7 +82,8 @@ const setJobrequest = asyncHandler (async (req, res) => {
 // @access  Public
 const findContractors = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
-        let {industry, services} = req.query;
+        let {industry, services, id} = req.query;
+        console.log(industry, services, id, 'query information');
 
         //search for the contractor by query parameters
         let contractors = await Contractors.find(
@@ -84,13 +91,13 @@ const findContractors = asyncHandler (async (req, res) => {
             industry: [industry],
             service: [services],
         })
-        
-        console.log(contractors, 'contractors');
+        const jobrequest = await JobRequests.findById(id);
+
+        console.log(`JOB REQUEST: ${jobrequest}`.red, `CONTRACTORS: ${contractors}`.green);
         // limit the results to 5
         contractors = contractors.slice(0, 5);
-
-        res.render('contractorpreview', {contractors});
-        //res.status(200).json(contractors);
+        // render the page
+        res.render('contractorpreview', {contractors, jobrequest});
     }
 
     else
@@ -101,19 +108,21 @@ const findContractors = asyncHandler (async (req, res) => {
 const addContractor = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
         // get the review and change the status to completed
-        let {id} = req.query;
-        let contractorID = req.body;
+        let {jobid, contractorid} = req.params;
 
-        const jobrequest = await JobRequests.findById(id);
-        console.log(jobrequest, 'jobrequest');
-        
+        //console.log('CONTRACTORID:', contractorid, 'JOBID:', jobid, "JUST A CHECK")
+
+        const jobrequest = await JobRequests.findById(jobid);
+        //console.log(jobrequest, "JOB REQUEST")
+        const contractor = await Contractors.findById(contractorid);
+
         //update the service
-        const updatedJobrequest = await JobRequests.findByIdAndUpdate(id, req.body, {
+        const updatedJobrequest = await JobRequests.findByIdAndUpdate(jobid, {
+            contractorID: contractorid,
             new: true,
         });
-        res.status(200).json(updatedJobrequest);
+        console.log('UPDATED JOB:', updatedJobrequest);
     }
-
     else
         res.redirect('/')
 

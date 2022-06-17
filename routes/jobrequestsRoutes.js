@@ -19,6 +19,6 @@ router.put('/updatejob/:id',updateJobrequest);
 router.delete('/removejob/:id',deleteJobrequest);
 router.get('/:id/?', getJobrequestById);
 router.get('/contractorJobs/:id', getJobrequestByContractorId);
-router.put('/addContractor/:id', addContractor);
+router.put('/addcontractor/:contractorid&:jobid', addContractor);
 
 module.exports = router;
