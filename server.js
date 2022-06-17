@@ -3,7 +3,7 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 const expressLayouts = require("express-ejs-layouts");
 const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
-const {checkCookie} = require("./controllers/userController");
+const { checkCookie } = require("./controllers/userController");
 const express = require("express");
 const colors = require("colors");
 const bodyParser = require("body-parser");
@@ -34,21 +34,20 @@ app.use((req, res, next) => {
   next();
 });
 
-
 function addContractor(id) {
-  fetch('/addContractor/:id', {
-  method: 'PUT',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    contractorID: contractor.id
+  fetch("/addContractor/:id", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      contractorID: contractor.id,
+    }),
   })
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 //Enable CORS
@@ -96,6 +95,9 @@ app.get("/contractoroverview", (req, res) => {
 }); //end of app.get
 app.get("/jobupdateform", (req, res) => {
   res.render("jobupdateform");
+}); //end of app.get
+app.get("/404", (req, res) => {
+  res.render("404");
 }); //end of app.get
 
 //API routes
