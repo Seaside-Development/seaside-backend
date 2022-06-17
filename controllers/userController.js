@@ -17,7 +17,7 @@ const getUsers = asyncHandler (async (req, res) => {
   }
   
   else
-    res.redirect('/')
+    res.redirect('/401')
   
 })
 
@@ -27,7 +27,7 @@ const getContractors = asyncHandler (async (req, res) => {
     res.status(200).json(contractor);
   }
   else
-    res.redirect('/')
+  res.redirect('/401')
   
   
 })
@@ -158,7 +158,7 @@ const logout = asyncHandler(async (req, res) => {
     res.redirect('/')
   }
   else{
-    res.redirect(401,'/')
+    res.redirect('/401')
   }
   
   // 

@@ -67,7 +67,7 @@ const setJobrequest = asyncHandler (async (req, res) => {
     }
 
     else
-        res.redirect(401,'/')
+        res.redirect('/401')
 
 })
 
@@ -94,7 +94,7 @@ const findContractors = asyncHandler (async (req, res) => {
     }
 
     else
-        res.redirect('/')
+        res.redirect('/401')
 
 })
 
@@ -115,7 +115,7 @@ const addContractor = asyncHandler (async (req, res) => {
     }
 
     else
-        res.redirect('/')
+        res.redirect('/401')
 
 })
 
@@ -151,7 +151,7 @@ const updateJobrequest = asyncHandler (async (req, res) => {
 
     }
     else
-        res.redirect('/')
+        res.redirect('/401')
 
 })
 
@@ -200,7 +200,7 @@ const addReview = asyncHandler (async (req, res) => {
     }
 
     else
-        res.redirect('/')
+        res.redirect('/401')
 
 })
 
