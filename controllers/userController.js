@@ -21,15 +21,6 @@ const getUsers = asyncHandler (async (req, res) => {
   
 })
 
-const checkCookie = asyncHandler (async (req, res) => {
-  // if (req.cookies.auth){
-  //   return console.log(`Cookie is ${auth}`.blue.underline)
-  // }
-  // else {
-  //   return console.log(`Cookie not found`.red.underline);
-  // }
-});
-
 const getContractors = asyncHandler (async (req, res) => {
   if (req.cookies.auth){
     const contractor = await Contractors.find();
@@ -188,5 +179,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout, checkCookie
+    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout
 }

@@ -22,8 +22,6 @@ const port = process.env.PORT || 5000;
 
 connectDB(); // connect to database function
 
-checkCookie();
-
 //enable express middleware
 const app = express();
 app.use(express.json());
@@ -35,6 +33,23 @@ app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
 });
+
+
+function addContractor(id) {
+  fetch('/addContractor/:id', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    contractorID: contractor.id
+  })
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  });
+}
 
 //Enable CORS
 app.use("/", cors());

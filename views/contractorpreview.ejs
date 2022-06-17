@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/dist/output.css" rel="stylesheet" />
-    <title>Document</title>
-  </head>
   <body>
+    <%
+    function addContractor(contractorID) {
+      fetch('/addContractor/:id', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contractorID: contractor.id
+      }) })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      });
+    }
+    %>
     <div class="flex flex-col h-full justify-center items-center py-24">
       <div
         class="content bg-indigo-50 flex flex-col w-5/6 h-full shadow-md rounded-lg p-8 my-8"
@@ -110,16 +119,15 @@
                     src="https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
                     alt=""
                   />
-                  <a href="#">
+                  <button 
+                    onclick="addContractor(contractor.id)"
+                  >
                     <p class="flex h-7 px-5 m-4 items-center text-indigo-100 bg-indigo-700 rounded-lg">
                       Book Now
                     </p>
-                  </a>
+                  </button>
                 </div>
-                <!--<a href="/contractor/<%= contractor.id %>" >-->
                   <a href="/contractor/<%= contractor.id %>">
-
-                
                         <div class="flex px-6 flex-col justify-between">
                           <div class="flex flex-col">
                             <p class="text-xl font-semibold text-indigo-900">

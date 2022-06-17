@@ -61,8 +61,8 @@ const setJobrequest = asyncHandler (async (req, res) => {
             reviews,
             user: req.cookies.auth
         });
-        console.log(jobrequest);
-        res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service, {industry: req.query.industry, service: req.query.service}, 201);
+        console.log(jobrequest, );
+        res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service+"&_id="+jobrequest._id, {industry: req.query.industry, service: req.query.service}, 201);
         console.log({industry, service}, 'query information');
     }
 
@@ -97,6 +97,64 @@ const findContractors = asyncHandler (async (req, res) => {
         res.redirect('/')
 
 })
+
+const addContractor = asyncHandler (async (req, res) => {
+    if (req.cookies.auth){
+        // get the review and change the status to completed
+        let {id} = req.query;
+        let contractorID = req.body;
+
+        const jobrequest = await JobRequests.findById(id);
+        console.log(jobrequest, 'jobrequest');
+        
+        //update the service
+        const updatedJobrequest = await JobRequests.findByIdAndUpdate(id, req.body, {
+            new: true,
+        });
+        res.status(200).json(updatedJobrequest);
+    }
+
+    else
+        res.redirect('/')
+
+})
+
+// @desc    Update Service
+// @route   PUT /api/services/update/:id
+// @access  Private
+const updateJobrequest = asyncHandler (async (req, res) => {
+    if (req.cookies.auth){
+        const jobrequest = await JobRequests.findByIdAndUpdate(req.params.id)
+        if(!jobrequest) {
+            res.status(404)
+            throw new Error('Jobrequest not found');
+        }
+
+        // Check for user
+        if (!req.user) {
+            res.status(401)
+            throw new Error('User not found')
+        }
+
+        // Make sure the logged in user matches the goal user
+        if (jobrequest.user.toString() !== req.user.id) {
+            res.status(401)
+            throw new Error('User not authorized to update this request')
+        }
+
+        //update the goal or create a new one
+        const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
+        
+        res.status(200).json(updatedJobrequest);
+
+    }
+    else
+        res.redirect('/')
+
+})
+
 
 // @desc    Add Service review
 // @route   PUT /api/services/review/:id
@@ -146,42 +204,6 @@ const addReview = asyncHandler (async (req, res) => {
 
 })
 
-// @desc    Update Service
-// @route   PUT /api/services/update/:id
-// @access  Private
-const updateJobrequest = asyncHandler (async (req, res) => {
-    if (req.cookies.auth){
-        const jobrequest = await JobRequests.findByIdAndUpdate(req.params.id)
-        if(!jobrequest) {
-            res.status(404)
-            throw new Error('Jobrequest not found');
-        }
-
-        // Check for user
-        if (!req.user) {
-            res.status(401)
-            throw new Error('User not found')
-        }
-
-        // Make sure the logged in user matches the goal user
-        if (jobrequest.user.toString() !== req.user.id) {
-            res.status(401)
-            throw new Error('User not authorized to update this request')
-        }
-
-        //update the goal or create a new one
-        const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        });
-        
-        res.status(200).json(updatedJobrequest);
-
-    }
-    else
-        res.redirect('/')
-
-})
-
 // @desc    Delete Service
 // @route   DELETE /api/services/remove/:id
 // @access  Private
@@ -221,9 +243,6 @@ const getJobrequestById = asyncHandler (async (req, res) => {
         await JobRequests.findById(email)
             .then(result => {
             res.render('jobDetails', { jobrequest: result, title: 'Job Request Details by ID' });
-
-            // res.redirect("/jobrequests/findcontractors?industry="+industry+"&service="+service, {industry: req.query.industry, service: req.query.service}, 201);
-            //res.status(200).json(result);
         })
         .catch(err => {
             res.status(404)
@@ -251,5 +270,5 @@ const getJobrequestByContractorId = asyncHandler (async (req, res) => {
 })
 
 module.exports = {
-    searchJobrequests, setJobrequest, updateJobrequest, deleteJobrequest, getJobrequestById, addReview, getJobrequestByContractorId, findContractors
+    searchJobrequests, setJobrequest, updateJobrequest, deleteJobrequest, getJobrequestById, addReview, getJobrequestByContractorId, findContractors, addContractor
 }
