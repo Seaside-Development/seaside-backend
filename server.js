@@ -34,25 +34,6 @@ app.use((req, res, next) => {
   next();
 });
 
-<<<<<<< HEAD
-=======
-function addContractor(id) {
-  fetch("/addContractor/:id", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      contractorID: contractor.id,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
-}
-
->>>>>>> 52efd6744423e106fb1b5d57b012cf0cfcca0b96
 //Enable CORS
 app.use("/", cors());
 
