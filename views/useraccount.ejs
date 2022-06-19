@@ -5,14 +5,22 @@
     data[key] = value; }); console.log(data); this.props.onSubmit(data); } %>
     <div class="flex justify-center">
       <div class="card w-3/6 shadow-md rounded-lg p-8 m-8 bg-indigo-50">
+        <a href="/contractorform">
+            <h1>Become a Pro</h1>
+        </a>
+
         <h1 class="text-center font-semibold text-2xl">Update User Form</h1>
+
+        
         <form
-          action="/api/users/register"
+          action="/users/register"
           method="POST"
           onSubmit="handleSubmit"
         >
           <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
+              
+              
               <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                 <div
                   class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"

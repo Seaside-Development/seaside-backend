@@ -18,6 +18,7 @@ const getContractors = asyncHandler (async (req, res) => {
 // @access  Public
 const loginContractor = asyncHandler (async (req, res) => {
     const {email, password} = req.body;
+    
     // Check if email and password exist
     if(!email || !password) {
         res.status(400)
@@ -25,16 +26,18 @@ const loginContractor = asyncHandler (async (req, res) => {
     }
     // Check if user exists and password is correct
     const contractor = await Contractors.findOne({email});
-
-      if (contractor && (await bcrypt.compare(password, contractor.password))) {
-    res.cookie('auth', contractor.id )
-    res.redirect('/useraccount', 200, 
-    {
-      _id: contractor.id,
-      email: contractor.email,
-      token: generateToken(user._id),
-      title: 'Contractor Login Form',
-    })    
+    console.log(contractor)
+    if (contractor && (await bcrypt.compare(password, contractor.password))) {
+      console.log(contractor)
+      console.log('Hola')
+      res.cookie('auth', contractor.id )
+      res.redirect('/', 200)     
+    // {
+    //   _id: contractor.id,
+    //   email: contractor.email,
+    //   token: generateToken(user._id),
+    //   title: 'Contractor Login Form',
+    // }
   } else {
    res.status(400, 'Invalid email or password');
   }
@@ -71,7 +74,7 @@ const registerContractor = asyncHandler (async (req, res) => {
 
     // Create contractor object
     const contractor = await Contractors.create({
-        user: req.user.id,
+        user: req.cookies.auth,
         // title,
         contractorName, 
         email, 

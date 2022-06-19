@@ -75,7 +75,7 @@ app.get("/contractorupdateform", (req, res) => {
   res.render("contractorupdateform");
 }); //end of app.get
 app.get("/contractoroverview", (req, res) => {
-  res.render("contractoroverview", function1());
+  res.render("contractoroverview");
 }); //end of app.get
 app.get("/jobupdateform", (req, res) => {
   res.render("jobupdateform");
@@ -88,6 +88,10 @@ app.get("/401", (req, res) => {
   res.render("401");
 });
 
+
+app.get("/contractor_signin", (req, res) => {
+  res.render("contractor_signin");
+});
 
 //API routes
 //@Desc: routes used to get data from the database
