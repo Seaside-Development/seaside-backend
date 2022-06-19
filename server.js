@@ -83,6 +83,11 @@ app.get("/404", (req, res) => {
   res.render("404");
 }); //end of app.get
 
+app.get("/401", (req, res) => {
+  res.render("401");
+});
+
+
 //API routes
 //@Desc: routes used to get data from the database
 app.use("/users", User);
