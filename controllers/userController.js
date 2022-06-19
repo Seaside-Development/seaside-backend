@@ -28,8 +28,6 @@ const getContractors = asyncHandler (async (req, res) => {
   }
   else
   res.redirect('/401')
-  
-  
 })
 
 

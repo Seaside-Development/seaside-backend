@@ -1,5 +1,9 @@
 const asyncHandler = require('express-async-handler');
 const Contractors = require('../models/contractorModel');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const uuid=require("uuid")
+let alert = require('alert');
 
 // @desc    Get all Service
 // @route   GET /api/contractor
@@ -21,18 +25,19 @@ const loginContractor = asyncHandler (async (req, res) => {
     }
     // Check if user exists and password is correct
     const contractor = await Contractors.findOne({email});
-    if(!contractor) {
-        res.status(400)
-        throw new Error('Email not found');
-    }
-    const isMatch = await contractor.comparePassword(password);
-    if(!isMatch) {
-        res.status(400)
-        throw new Error('Incorrect password');
-    }
-    // Return jsonwebtoken
-    const token = contractor.getSignedJwtToken();
-    res.status(200).json({success: true, token});
+
+      if (contractor && (await bcrypt.compare(password, contractor.password))) {
+    res.cookie('auth', contractor.id )
+    res.redirect('/useraccount', 200, 
+    {
+      _id: contractor.id,
+      email: contractor.email,
+      token: generateToken(user._id),
+      title: 'Contractor Login Form',
+    })    
+  } else {
+   res.status(400, 'Invalid email or password');
+  }
 })
 
 
@@ -60,13 +65,17 @@ const registerContractor = asyncHandler (async (req, res) => {
         throw new Error('Contractor already exist');
     }
 
+      // Hashing password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
     // Create contractor object
     const contractor = await Contractors.create({
         user: req.user.id,
         // title,
         contractorName, 
         email, 
-        password,
+        password: hashedPassword,
         businessDescription, 
         operatingLocations, 
         industry,
