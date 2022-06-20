@@ -21,14 +21,14 @@ const getUsers = asyncHandler (async (req, res) => {
   
 })
 
-const getContractors = asyncHandler (async (req, res) => {
-  if (req.cookies.auth){
-    const contractor = await Contractors.find();
-    res.status(200).json(contractor);
-  }
-  else
-  res.redirect('/401')
-})
+// const getContractors = asyncHandler (async (req, res) => {
+//   if (req.cookies.auth){
+//     const contractor = await Contractors.find();
+//     res.status(200).json(contractor);
+//   }
+//   else
+//   res.redirect('/401')
+// })
 
 
 
