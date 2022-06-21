@@ -178,31 +178,39 @@ const addContractor = asyncHandler (async (req, res) => {
 // @route   PUT /api/services/update/:id
 // @access  Private
 const updateJobrequest = asyncHandler (async (req, res) => {
+    console.log("test")
     if (req.cookies.auth){
-        const jobrequest = await JobRequests.findByIdAndUpdate(req.params.id)
+        console.log(req.query.id)
+        
+        const jobrequest = await JobRequests.findById(req.query.id)
+        console.log(jobrequest)
         if(!jobrequest) {
+            console.log("dead wrong")
             res.status(404)
             throw new Error('Jobrequest not found');
         }
 
-        // Check for user
-        if (!req.user) {
-            res.status(401)
-            throw new Error('User not found')
-        }
+        res.status(200).json(jobrequest);
 
-        // Make sure the logged in user matches the goal user
-        if (jobrequest.user.toString() !== req.user.id) {
-            res.status(401)
-            throw new Error('User not authorized to update this request')
-        }
 
-        //update the goal or create a new one
-        const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        });
+        // // Check for user
+        // if (!req.user) {
+        //     res.status(401)
+        //     throw new Error('User not found')
+        // }
+
+        // // Make sure the logged in user matches the goal user
+        // if (jobrequest.user.toString() !== req.cookies.auth) {
+        //     res.status(401)
+        //     throw new Error('User not authorized to update this request')
+        // }
+
+        // //update the goal or create a new one
+        // const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
+        //     new: true,
+        // });
         
-        res.status(200).json(updatedJobrequest);
+        // res.status(200).json(updatedJobrequest);
 
     }
     else
