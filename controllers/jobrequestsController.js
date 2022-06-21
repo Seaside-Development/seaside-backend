@@ -38,37 +38,10 @@ const searchJobrequests = asyncHandler (async (req, res) => {
     }
 });
 
-const getJobrequestByContractorId = asyncHandler (async (req, res) => {
-    if (req.cookies.auth){
-        const contractorID = req.cookies.auth;
-        const perPage = 10;
-        const page = req.params.page || 1;
-        const jobrequests = await JobRequests
-            .find({
-                contractorID: [contractorID]
-            })
-            .skip((perPage * page) - perPage)
-            .limit(perPage)
-            .exec( function (err, jobrequests) {
-                JobRequests.countDocuments().exec(function (err, count) {
-                    if (err) return next(err)
-                    res.render('job-list', {
-                        jobrequests,
-                        current: page,
-                        pages: Math.ceil(count / perPage)
-                    })
-                })
-            }
-        );
 
-    }
-    
-    else{
-        res.redirect(401,'/')
-    }
-})
-
-
+// @desc    Get job by id
+// @route   GET /jobrequest/findJobrequestById/:id
+// @access  Public
 const findJobrequestById = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
         const jobrequest = await JobRequests.findById(req.params.id);
@@ -174,11 +147,39 @@ const addContractor = asyncHandler (async (req, res) => {
 
 })
 
+const UpdateStatus = asyncHandler (async (req, res) => {
+    if (req.cookies.auth){
+        // get the review and change the status to completed
+        let {status, id} = req.params;
+        console.log(id, status, 'STATUS')
+
+        const jobrequest = await JobRequests.findById(id);
+      
+        if (status = 'Pending'){
+            //console.log('COMPLETED')
+            const updatedJobrequest = await JobRequests.findByIdAndUpdate(id, {
+                jobrequest: jobrequest.contractorID = null,
+                status: status,
+                new: true,
+            });
+        }
+        else{
+            //console.log('PENDING')
+            const updatedJobrequest = await JobRequests.findByIdAndUpdate(id, {
+                status: status,
+                new: true,
+            });
+        }
+    }
+    else
+        res.redirect('/401')
+
+})
+
 // @desc    Update Service
 // @route   PUT /api/services/update/:id
 // @access  Private
 const updateJobrequest = asyncHandler (async (req, res) => {
-    console.log("test")
     if (req.cookies.auth){
         console.log(req.query.id)
         
@@ -192,25 +193,18 @@ const updateJobrequest = asyncHandler (async (req, res) => {
 
         res.status(200).json(jobrequest);
 
+        // Make sure the logged in user matches the goal user
+        if (jobrequest.user.toString() !== req.cookies.auth) {
+            res.status(401)
+            throw new Error('User not authorized to update this request')
+        }
 
-        // // Check for user
-        // if (!req.user) {
-        //     res.status(401)
-        //     throw new Error('User not found')
-        // }
-
-        // // Make sure the logged in user matches the goal user
-        // if (jobrequest.user.toString() !== req.cookies.auth) {
-        //     res.status(401)
-        //     throw new Error('User not authorized to update this request')
-        // }
-
-        // //update the goal or create a new one
-        // const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
-        //     new: true,
-        // });
+        //update the goal or create a new one
+        const updatedJobrequest = await JobRequests.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
         
-        // res.status(200).json(updatedJobrequest);
+        res.status(200).json(updatedJobrequest);
 
     }
     else
@@ -307,8 +301,8 @@ module.exports = {
     updateJobrequest, 
     deleteJobrequest, 
     addReview, 
-    getJobrequestByContractorId, 
     findContractors, 
     addContractor,
-    findJobrequestById
+    findJobrequestById,
+    UpdateStatus
 }

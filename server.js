@@ -12,36 +12,15 @@ const ejs = require("ejs");
 const fs = require("fs");
 const cookie_parser = require("cookie-parser");
 
-const Contractors = require('./models/contractorModel');
-const asyncHandler = require('express-async-handler');
 
 //Routes Imports
 const JobRequests = require("./routes/jobrequestsRoutes");
 const User = require("./routes/userRoutes");
 const ContractorsRoutes = require("./routes/ContractorsRoutes");
-
-const ejsLint = require("ejs-lint");
+const amIAContractor = require("./controllers/contractorController");
 const port = process.env.PORT || 5000;
 
 connectDB(); // connect to database function
-
-
-// @desc    check user is a contractor or not
-const amIAContractor = asyncHandler (async (req, res) => {
-    if (req.cookies.auth){
-      const id = req.cookies.auth;
-      const contractor = await Contractors.findById(id);
-      if(contractor) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
-    else
-      res.redirect('/401')
-  }
-)
 
 //enable express middleware
 const app = express();
@@ -72,7 +51,7 @@ var industryObj = JSON.parse(fileData);
 //render pages
 //@Desc: routes to render the pages
 app.get("/useraccount", (req, res) => {
-  res.render("useraccount", {amIAContractor});
+  res.render("useraccount");
 }); //end of app.get
 app.get("/", (req, res) => {
   res.render("index");

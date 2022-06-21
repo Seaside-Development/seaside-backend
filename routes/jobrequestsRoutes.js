@@ -7,17 +7,16 @@ const {
     updateJobrequest, 
     deleteJobrequest, 
     findJobrequestById,
-    getJobrequestById, 
-    getJobrequestByContractorId,
-    addContractor
+    addContractor,
+    UpdateStatus
 } = require('../controllers/jobrequestsController');// Importing the serviceController
 
 router.get('/searchJobs/:page', searchJobrequests);
 router.get('/findcontractors?', findContractors);
 router.post('/createjob', setJobrequest);
 router.put('/updatejob?',updateJobrequest);
+router.put('/changeStatus/:id&:status', UpdateStatus);
 router.delete('/removejob/:id',deleteJobrequest);
-router.get('/contractorJobs/:page', getJobrequestByContractorId);
 router.put('/addcontractor/:contractorid&:jobid', addContractor);
 router.get('/findJobrequestById/:id', findJobrequestById);
 

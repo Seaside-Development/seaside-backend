@@ -5,6 +5,25 @@ const bcrypt = require('bcryptjs')
 const uuid=require("uuid")
 let alert = require('alert');
 
+
+// @desc    check user is a contractor or not
+const amIAContractor = asyncHandler (async (req, res) => {
+  if (req.cookies.auth){
+    const id = req.cookies.auth;
+    const contractor = await Contractors.findById(id);
+    if(contractor) {
+      result = true;
+    }
+    else {
+      result = false;
+    }
+    return result;
+  }
+  else
+    res.redirect('/401')
+}
+)
+
 // @desc    Get all Service
 // @route   GET /api/contractor
 // @access  Private
@@ -157,5 +176,5 @@ const getMe = asyncHandler(async (req, res) => {
 })
   
 module.exports = {
-    getContractors, registerContractor, updateContractors, deleteContractors, getMe, loginContractor, getContractorById
+    getContractors, registerContractor, updateContractors, deleteContractors, getMe, loginContractor, getContractorById, amIAContractor
 }
