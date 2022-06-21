@@ -34,6 +34,17 @@ const searchJobrequests = asyncHandler (async (req, res) => {
     }
 });
 
+const findJobrequestById = asyncHandler (async (req, res) => {
+    if (req.cookies.auth){
+        const jobrequest = await JobRequests.findById(req.params.id);
+        res.render('jobDetails', { jobrequest: jobrequest });
+    }
+    else{
+        res.redirect(401,'/')
+    }
+}
+);
+
 // @desc    Set Service
 // @route   POST /services
 // @access  Private
@@ -249,12 +260,11 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
 const getJobrequestById = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
         const user = req.cookies.auth;
-
-        let jobrequest = await JobRequests.find(
+        const jobrequest = await JobRequests.find(
             {
                 user: [user],
             })
-        //console.log(user, 'ID')
+        console.log(user, 'ID')
         res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by User ID' });
     }
     else
@@ -277,5 +287,15 @@ const getJobrequestByContractorId = asyncHandler (async (req, res) => {
 })
 
 module.exports = {
-    searchJobrequests, setJobrequest, updateJobrequest, deleteJobrequest, getJobrequestById, addReview, getJobrequestByContractorId, findContractors, addContractor
+    
+    searchJobrequests, 
+    setJobrequest, 
+    updateJobrequest, 
+    deleteJobrequest, 
+    getJobrequestById, 
+    addReview, 
+    getJobrequestByContractorId, 
+    findContractors, 
+    addContractor,
+    findJobrequestById
 }

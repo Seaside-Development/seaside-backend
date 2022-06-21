@@ -6,6 +6,7 @@ const {
     setJobrequest, 
     updateJobrequest, 
     deleteJobrequest, 
+    findJobrequestById,
     getJobrequestById, 
     getJobrequestByContractorId,
     addContractor
@@ -19,5 +20,6 @@ router.delete('/removejob/:id',deleteJobrequest);
 router.get('/findMyJobs', getJobrequestById);
 router.get('/contractorJobs/:id', getJobrequestByContractorId);
 router.put('/addcontractor/:contractorid&:jobid', addContractor);
+router.get('/findJobrequestById/:id', findJobrequestById);
 
 module.exports = router;
