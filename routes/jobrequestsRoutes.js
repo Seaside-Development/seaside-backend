@@ -15,7 +15,7 @@ const {
 router.get('/searchJobs/:page', searchJobrequests);
 router.get('/findcontractors?', findContractors);
 router.post('/createjob', setJobrequest);
-router.put('/updatejob/:id',updateJobrequest);
+router.put('/updatejob?',updateJobrequest);
 router.delete('/removejob/:id',deleteJobrequest);
 router.get('/findMyJobs', getJobrequestById);
 router.get('/contractorJobs/:id', getJobrequestByContractorId);
