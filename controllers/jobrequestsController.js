@@ -93,7 +93,7 @@ const findContractors = asyncHandler (async (req, res) => {
         })
         const jobrequest = await JobRequests.findById(id);
 
-        console.log(`JOB REQUEST: ${jobrequest}`.red, `CONTRACTORS: ${contractors}`.green);
+        //console.log(`JOB REQUEST: ${jobrequest}`.red, `CONTRACTORS: ${contractors}`.green);
         // limit the results to 5
         contractors = contractors.slice(0, 5);
         // render the page
@@ -254,8 +254,8 @@ const getJobrequestById = asyncHandler (async (req, res) => {
             {
                 user: [user],
             })
-        console.log(user, 'ID')
-        res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
+        //console.log(user, 'ID')
+        res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by User ID' });
     }
     else
         res.redirect('/')
