@@ -274,13 +274,13 @@ const getJobrequestById = asyncHandler (async (req, res) => {
 
 const getJobrequestByContractorId = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
-        const jobrequest = await JobRequests.find({contractorID: req.params.id});
-        if(!jobrequest) {
-            res.status(404)
-            throw new Error('Jobrequest not found');
-        }
-        res.status(200).json(jobrequest);
-
+        const contractorID = req.cookies.auth;
+        const jobrequest = await JobRequests.find(
+            {
+                contractorID: [contractorID],
+            })
+        console.log(contractorID, 'ID')
+        res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by User ID' });
     }
     else
         res.redirect('/')
