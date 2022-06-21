@@ -11,13 +11,13 @@ const {
     UpdateStatus
 } = require('../controllers/jobrequestsController');// Importing the serviceController
 
-router.get('/searchJobs/:page', searchJobrequests);
-router.get('/findcontractors?', findContractors);
-router.post('/createjob', setJobrequest);
-router.put('/updatejob?',updateJobrequest);
-router.put('/changeStatus/:id&:status', UpdateStatus);
-router.delete('/removejob/:id',deleteJobrequest);
-router.put('/addcontractor/:contractorid&:jobid', addContractor);
-router.get('/findJobrequestById/:id', findJobrequestById);
+router.get('/searchJobs/:page', searchJobrequests); //Secure
+router.get('/findcontractors?', findContractors); //Secure
+router.post('/createjob', setJobrequest); //Secure
+router.put('/updatejob?',updateJobrequest); //Secure
+router.delete('/removejob/:id',deleteJobrequest); //remove job secure
+router.get('/contractorJobs/:page', getJobrequestByContractorId); // secure
+router.put('/addcontractor/:contractorid&:jobid', addContractor); //Secure
+router.get('/findJobrequestById/:id', findJobrequestById); //secure
 
 module.exports = router;

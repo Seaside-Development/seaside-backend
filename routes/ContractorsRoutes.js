@@ -7,12 +7,12 @@ const
     loginContractor, getContractorById
 } = require('../controllers/contractorController');// Importing the serviceController
 
-router.get('/findContractor', getContractors);
-router.post('/regcontractor', registerContractor);
-router.get('/:id', getContractorById);
-router.put('/update/:id', updateContractors);
-router.delete('/remove/:id', deleteContractors);
+router.get('/findContractor', getContractors); //secure
+router.post('/regcontractor', registerContractor); //Secure
+router.get('/:id', getContractorById); //Secure
+router.put('/update/:id', updateContractors); //Secure
+router.delete('/remove/:id', deleteContractors); //Secure
 router.get('/me', getMe);
-router.post('/loginPro', loginContractor);
+router.post('/loginPro', loginContractor); //Secure
 
 module.exports = router;
