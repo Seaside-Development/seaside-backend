@@ -129,10 +129,10 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   // Check for user email
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email }) || await Contractors.findOne({ email });
   
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.cookie('auth', user.id )
+    res.cookie('auth', user.id)
     res.redirect('/createjobform', 200, 
     {
       _id: user.id,

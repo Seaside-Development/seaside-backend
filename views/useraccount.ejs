@@ -6,19 +6,31 @@
                 type="submit"
                 class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-              <a href="/jobrequests/findMyJobs">
+              <a href="/jobrequests/searchJobs/1">
                 <h1>MY JOBS</h1>
               </a>
               </button>
 
-              <button
+              <% if (amIAContractor) { %>
+                <button
+                  type="submit"
+                  class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <a href="/contractorform">
+                    <h1>Become a Pro</h1>
+                  </a>
+                </button>
+              <% } %>
+
+
+              <!-- <button
                 type="submit"
                 class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
               <a href="/contractorform">
                 <h1>Become a Pro</h1>
             </a>
-              </button>
+              </button> -->
         <a href="/contractorform">
         </a>
     

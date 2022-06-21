@@ -9,10 +9,14 @@ const reviews = require('../models/reviewsModel');
 // @access  Public
 const searchJobrequests = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
+        const user = req.cookies.auth;
+        const contractorID = req.cookies.auth;
         const perPage = 10;
         const page = req.params.page || 1;
         const jobrequests = await JobRequests
-            .find({})
+            .find({
+                $or: [{user: [user]}, {contractorID: [contractorID]}]
+            })
             .skip((perPage * page) - perPage)
             .limit(perPage)
             .exec( function (err, jobrequests) {
@@ -33,6 +37,37 @@ const searchJobrequests = asyncHandler (async (req, res) => {
         res.redirect(401,'/')
     }
 });
+
+const getJobrequestByContractorId = asyncHandler (async (req, res) => {
+    if (req.cookies.auth){
+        const contractorID = req.cookies.auth;
+        const perPage = 10;
+        const page = req.params.page || 1;
+        const jobrequests = await JobRequests
+            .find({
+                contractorID: [contractorID]
+            })
+            .skip((perPage * page) - perPage)
+            .limit(perPage)
+            .exec( function (err, jobrequests) {
+                JobRequests.countDocuments().exec(function (err, count) {
+                    if (err) return next(err)
+                    res.render('job-list', {
+                        jobrequests,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    })
+                })
+            }
+        );
+
+    }
+    
+    else{
+        res.redirect(401,'/')
+    }
+})
+
 
 const findJobrequestById = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
@@ -257,42 +292,12 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
     
 })
 
-const getJobrequestById = asyncHandler (async (req, res) => {
-    if (req.cookies.auth){
-        const user = req.cookies.auth;
-        const jobrequest = await JobRequests.find(
-            {
-                user: [user],
-            })
-        console.log(user, 'ID')
-        res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by User ID' });
-    }
-    else
-        res.redirect('/')
-
-});
-
-const getJobrequestByContractorId = asyncHandler (async (req, res) => {
-    if (req.cookies.auth){
-        const contractorID = req.cookies.auth;
-        const jobrequest = await JobRequests.find(
-            {
-                contractorID: [contractorID],
-            })
-        console.log(contractorID, 'ID')
-        res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by User ID' });
-    }
-    else
-        res.redirect('/')
-})
-
 module.exports = {
     
     searchJobrequests, 
     setJobrequest, 
     updateJobrequest, 
     deleteJobrequest, 
-    getJobrequestById, 
     addReview, 
     getJobrequestByContractorId, 
     findContractors, 
