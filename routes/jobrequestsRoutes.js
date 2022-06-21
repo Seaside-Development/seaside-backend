@@ -14,9 +14,9 @@ const {
 router.get('/searchJobs/:page', searchJobrequests); //Secure
 router.get('/findcontractors?', findContractors); //Secure
 router.post('/createjob', setJobrequest); //Secure
-router.put('/updatejob?',updateJobrequest); //Secure
+router.put('/updatejob?', updateJobrequest); //Secure
 router.delete('/removejob/:id',deleteJobrequest); //remove job secure
-router.get('/contractorJobs/:page', getJobrequestByContractorId); // secure
+// router.get('/contractorJobs/:page', protectContractor.authenticate("cookie",{session:false}),getJobrequestByContractorId); // secure
 router.put('/addcontractor/:contractorid&:jobid', addContractor); //Secure
 router.get('/findJobrequestById/:id', findJobrequestById); //secure
 

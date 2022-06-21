@@ -172,7 +172,7 @@ const deleteContractors = asyncHandler (async (req, res) => {
 // @route   GET /api/contractor/me
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
-    res.status(200).json(req.contractor)
+    res.status(200).json("Well Done")
 })
   
 module.exports = {
