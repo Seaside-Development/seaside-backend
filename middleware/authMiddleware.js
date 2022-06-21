@@ -3,25 +3,50 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs')
 const passport=require("passport")
 const User = require('../models/userModel');
+const Contractor = require('../models/contractorModel');
 const CookieStrategy=require("passport-cookie")
-const http = require('http');
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var app = express();
-app.use(cookieParser());
 
-const protect = passport.use(new CookieStrategy({
+
+console.log(User)
+
+
+const protect= passport.use(new CookieStrategy({
         cookieName: 'auth',
-      }, 
+        passReqToCallback: true
+      },
       
-      function(req, token, done) {
-        User.findByToken({ token: token }, function(err, user) {
-          if (err) { return done(err); }
+      
+
+      function(req, token ,done) {
+        
+        console.log(token)
+        
+        User.findById(token , function(err, user) {
+          console.log("nice")
+          if (err) {
+            return done(err); }
           if (!user) { return done(null, false); }
           return done(null, user);
         });
   })
 );
+
+
+
+// const protectCookie = passport.use(new CookieStrategy({
+//   cookieName: 'auth',
+//       }, 
+      
+//       function(req, token, done) {
+//         Contractor.findById({ token: token }, function(err, user) {
+//           if (err) { return done(err); }
+//           if (!user) { return done(null, false); }
+//           return done(null, user);
+//         });
+//   })
+// );
+
+
 
 const protected = asyncHandler(async (req, res, next) => {
   let token
@@ -53,6 +78,11 @@ const protected = asyncHandler(async (req, res, next) => {
     throw new Error('Not authorized, no token')
   }
 })
+
+
+
+
+
 
 module.exports = { protect }
 
