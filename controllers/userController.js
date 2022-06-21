@@ -91,14 +91,15 @@ const registerUser = asyncHandler (async (req, res) => {
 // @route   PUT /api/users/update/:id
 // @access  Public
 const updateUser = asyncHandler (async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const id = req.cookies.auth;
+  const user = await User.findById(id);
 
   if(!user) {
       res.status(400)
       throw new Error('User not found');
   }
 
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+  const updatedUser = await User.findByIdAndUpdate(id, req.body, {
     new: true,
   });
 
@@ -109,6 +110,7 @@ const updateUser = asyncHandler (async (req, res) => {
 // @route   DELETE /api/users/delete:id
 // @access  Public
 const deleteUser = asyncHandler (async (req, res) => {
+  const id = req.cookies.auth;
   const user = await User.findById(req.params.id);
   if(!User) {
     res.status(400)

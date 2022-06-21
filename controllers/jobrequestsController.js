@@ -35,7 +35,7 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 });
 
 // @desc    Set Service
-// @route   POST /api/services
+// @route   POST /services
 // @access  Private
 const setJobrequest = asyncHandler (async (req, res) => {
 
@@ -248,17 +248,14 @@ const deleteJobrequest = asyncHandler (async (req, res) => {
 
 const getJobrequestById = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
-        const ID = req.cookies.auth;
-        const email = req.params.email;
-        await JobRequests.findById(ID)
-            .then(result => {
-            res.render('jobDetails', { jobrequest: result, title: 'Job Request Details by ID' });
-        })
-        .catch(err => {
-            res.status(404)
-            throw new Error('Jobrequest not found');
-        })
+        const user = req.cookies.auth;
 
+        let jobrequest = await JobRequests.find(
+            {
+                user: [user],
+            })
+        console.log(user, 'ID')
+        res.render('components/userJobCards', { jobrequest: jobrequest, title: 'Job Request Details by ID' });
     }
     else
         res.redirect('/')

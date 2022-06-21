@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {getContractors, registerContractor, 
+const 
+{
+    getContractors, registerContractor, 
     updateContractors, deleteContractors, getMe, 
     loginContractor, getContractorById
-} 
-    = require('../controllers/contractorController');// Importing the serviceController
-const {protect} = require('../middleware/authMiddleware');// Importing the authMiddleware
+} = require('../controllers/contractorController');// Importing the serviceController
 
 router.get('/findContractor', getContractors);
 router.post('/regcontractor', registerContractor);

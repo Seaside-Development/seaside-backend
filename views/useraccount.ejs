@@ -1,20 +1,37 @@
 <html>
   <body>
-    <% const handleSubmit = (e) => { e.preventDefault(); const formData = new
-    FormData(e.target); const data = {}; formData.forEach((value, key) => {
-    data[key] = value; }); console.log(data); this.props.onSubmit(data); } %>
     <div class="flex justify-center">
       <div class="card w-3/6 shadow-md rounded-lg p-8 m-8 bg-indigo-50">
+        <button
+                type="submit"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+              <a href="/jobrequests/findMyJobs">
+                <h1>MY JOBS</h1>
+              </a>
+              </button>
+
+              <button
+                type="submit"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+              <a href="/contractorform">
+                <h1>Become a Pro</h1>
+            </a>
+              </button>
         <a href="/contractorform">
-            <h1>Become a Pro</h1>
         </a>
+    
+
+    
+
 
         <h1 class="text-center font-semibold text-2xl">Update User Form</h1>
 
         
         <form
-          action="/users/register"
-          method="POST"
+          action="/users/update"
+          method="post"
           onSubmit="handleSubmit"
         >
           <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
