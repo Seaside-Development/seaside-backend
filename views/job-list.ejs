@@ -56,7 +56,7 @@
                       <p class="w-max text-indigo-800 text-sm">
                         Date posted:
                         <span class="text-gray-700"
-                          ><%= jobrequest.startDate %></span
+                          ><%= moment().format('Do MMMM, YYYY'), jobrequest.startDate %></span
                         >
                       </p>
                     </a>
