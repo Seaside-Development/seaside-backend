@@ -8,8 +8,10 @@ const {
     deleteJobrequest, 
     findJobrequestById,
     addContractor,
-    UpdateStatus
+    UpdateStatus,
+    UpdatePage
 } = require('../controllers/jobrequestsController');// Importing the serviceController
+
 
 router.get('/searchJobs/:page', searchJobrequests); //Secure
 router.get('/findcontractors?', findContractors); //Secure
@@ -18,6 +20,8 @@ router.put('/updatejob?', updateJobrequest); //Secure
 router.delete('/removejob/:id',deleteJobrequest); //remove job secure
 // router.get('/contractorJobs/:page', protectContractor.authenticate("cookie",{session:false}),getJobrequestByContractorId); // secure
 router.put('/addcontractor/:contractorid&:jobid', addContractor); //Secure
+router.get('/UpdatePage/:id', UpdatePage)
 router.get('/findJobrequestById/:id', findJobrequestById); //secure
+
 
 module.exports = router;

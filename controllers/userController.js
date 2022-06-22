@@ -15,21 +15,25 @@ const getUsers = asyncHandler (async (req, res) => {
     const users = await User.find();
     res.status(200).json(users);
   }
-  
   else
     res.redirect('/401')
   
 })
 
-// const getContractors = asyncHandler (async (req, res) => {
-//   if (req.cookies.auth){
-//     const contractor = await Contractors.find();
-//     res.status(200).json(contractor);
-//   }
-//   else
-//   res.redirect('/401')
-// })
 
+const checkUser = asyncHandler (async (req, res) => {
+    const id = req.cookies.auth
+    let collection = null
+    const user = await User.findById(id);
+
+    if(!user) {
+      collection = "contractor"
+    } else {
+      collection = "user"
+    }
+    res.render("useraccount", {collection})
+  return collection
+})
 
 
 // @desc    Set/Register a new User
@@ -180,5 +184,5 @@ const generateToken = (id) => {
 }
 
 module.exports = {
-    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout
+    getUsers, registerUser, updateUser, deleteUser, getMe, loginUser, logout, checkUser
 }

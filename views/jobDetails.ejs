@@ -25,7 +25,6 @@
                 <h1 class="text-center font-semibold text-2xl border-b-2 align-text-bottom mb-6 pb-2">
                 Job Details
                 </h1>
-                <p>EDIT</p> <p>DELETE</p>
 
                 <div class="space-y-8 divide-y divide-gray-200">
                     <div>
@@ -155,12 +154,26 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <a>
-
+                    <button
+                        id="updateBtn"
+                        type="button"
+                        class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                    <a href="/jobrequests/UpdatePage/<%= jobrequest._id %>">
+                        EDIT
                     </a>
+                    </button>
                     <button
                         type="button"
-                        class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                    <a class="delete" data-doc="<%= jobrequest._id %>">
+                        delete
+                    </a>
+                    </button>
+                    <button
+                        type="button"
+                        class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                     <a href="/jobrequests/findcontractors?industry=<%= jobrequest.industry %>&id=<%= jobrequest._id %>&service=<%= jobrequest.service %>">
                         Find Contractor
@@ -168,7 +181,7 @@
                     </button>
                     <button
                         type="button"
-                        class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         id="RejectBtn"
                         value="<%= jobrequest._id %>,Pending"
                         onclick="blabber(document.getElementById('RejectBtn').value)"
@@ -188,5 +201,18 @@
             </div>
 
         </div>
+        <script>
+            const trashcan = document.querySelector('a.delete')
+
+            trashcan.addEventListener('click', (e) =>{
+                const endpoint = `/jobrequests/removejob/${trashcan.dataset.doc}`
+                fetch(endpoint, {
+                    method: "DELETE"
+                })
+                .then(response => response.json())
+                .then(data => window.location.href = data.redirect)
+                .catch(err => console.log(err))
+            })
+        </script>
     </body>
 </html>

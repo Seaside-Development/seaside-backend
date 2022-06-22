@@ -1,0 +1,190 @@
+<h1 class="text-center font-semibold text-2xl">Update User Form</h1>
+        <form
+          action="/users/update"
+          method="post"
+          onSubmit="handleSubmit"
+        >
+          <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+            <div>
+              
+              
+              <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="username"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Username
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      autoComplete="username"
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+                <!-- password -->
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                      placeholder="*********"
+                    />
+                  </div>
+                </div>
+                <!-- password -->
+                <!-- password -->
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="password"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                      placeholder="*********"
+                    />
+                  </div>
+                </div>
+                <!-- password -->
+              </div>
+            </div>
+
+            <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+              <div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Personal Information
+                </h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                  Use a permanent address where you can receive mail.
+                </p>
+              </div>
+              <div class="space-y-6 sm:space-y-5">
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="first-name"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    First name
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="firstName"
+                      id="first-name"
+                      autoComplete="given-name"
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="last-name"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Last name
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="lastName"
+                      id="last-name"
+                      autoComplete="family-name"
+                      class="max-w-lg block w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="email"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Email address
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md pl-5"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+                >
+                  <label
+                    htmlFor="street-address"
+                    class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                  >
+                    Telephone
+                  </label>
+                  <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <input
+                      type="text"
+                      name="telephone"
+                      id="phone-number"
+                      class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
+                      placeholder="+1 (246) 822-6543"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-5">
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>

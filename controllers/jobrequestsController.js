@@ -53,6 +53,17 @@ const findJobrequestById = asyncHandler (async (req, res) => {
 }
 );
 
+const UpdatePage = asyncHandler (async (req, res) => {
+    if (req.cookies.auth){
+        const jobrequest = await JobRequests.findById(req.params.id);
+        res.render('jobupdateform', { jobrequest: jobrequest });
+    }
+    else{
+        res.redirect(401,'/')
+    }
+}
+);
+
 // @desc    Set Service
 // @route   POST /services
 // @access  Private
@@ -181,9 +192,10 @@ const UpdateStatus = asyncHandler (async (req, res) => {
 // @access  Private
 const updateJobrequest = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
-        console.log(req.query.id)
+        let id = req.query.id
+        console.log(req.params)
         
-        const jobrequest = await JobRequests.findById(req.query.id)
+        const jobrequest = await JobRequests.findById(id)
         console.log(jobrequest)
         if(!jobrequest) {
             console.log("dead wrong")
@@ -266,36 +278,37 @@ const addReview = asyncHandler (async (req, res) => {
 // @access  Private
 const deleteJobrequest = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
+        const user = req.cookies.auth
+        const id = req.params.id
+
         //check if the jobrequest exists
-        const jobrequest = await JobRequests.findById(req.params.id);
+        const jobrequest = await JobRequests.findById(id);
         if(!jobrequest) {
             res.status(404)
             throw new Error('Jobrequest not found');
         }
-        // Check for user
-        if (!req.user) {
-            res.status(401)
-            throw new Error('User not found')
-        }
+        // // Check for user
+        // if (!req.user) {
+        //     res.status(401)
+        //     throw new Error('User not found')
+        // }
 
         // Make sure the logged in user matches the jobrequest user
-        if (jobrequest.user.toString() !== req.user.id) {
+        if (jobrequest.user.toString() !== req.cookies.auth) {
             res.status(401)
             throw new Error('User not authorized to delete this request')
         }
-        await jobrequest.remove();
-
-        res.status(200).json({message: `Delete Job Requests ${req.params.id}`});
-
+        await jobrequest.remove()
+        .then(result => {
+            res.json({ redirect: '/jobrequests/searchJobs/1' });
+        })
+        // res.status(200).json({message: `Delete Job Requests ${req.params.id}`});
     }
-
     else
         res.redirect('/')
-    
 })
 
 module.exports = {
-    
     searchJobrequests, 
     setJobrequest, 
     updateJobrequest, 
@@ -304,5 +317,6 @@ module.exports = {
     findContractors, 
     addContractor,
     findJobrequestById,
-    UpdateStatus
+    UpdateStatus,
+    UpdatePage
 }

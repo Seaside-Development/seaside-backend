@@ -41,6 +41,7 @@
                     name="contractor-assigned"
                     id="contractor-assigned"
                     autoComplete="contractor-assigned"
+                    value="<%= jobrequest.contractorID %>"
                     class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -59,8 +60,10 @@
                     id="complexity"
                     name="complexity"
                     autocomplete="complexity-name"
+                    value="<%= jobrequest.complexity %>"
                     class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
+                    <option><%= jobrequest.complexity %></option>
                     <option>Hard</option>
                     <option>Easy</option>
                   </select>
@@ -82,6 +85,7 @@
                       name="industry"
                       id="industry"
                       autoComplete="industry"
+                      value="<%= jobrequest.industry %>"
                       class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
@@ -102,8 +106,10 @@
                     name="service"
                     value="service"
                     autocomplete="service-name"
+                    value="<%= jobrequest.service %>"
                     class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
+                    <option><%= jobrequest.service %></option>
                     <option>Maintenance</option>
                     <option>Repair</option>
                     <option>Electrical</option>
@@ -128,8 +134,9 @@
                     id="description"
                     name="description"
                     rows="3"
+                    value="<%= jobrequest.description %>"
                     class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
-                  ></textarea>
+                  ><%= jobrequest.description %></textarea>
                   <p class="mt-2 text-sm text-gray-500">
                     Write a few sentences describing the project.
                   </p>
@@ -149,6 +156,7 @@
                     id="length"
                     name="length"
                     autocomplete="length-name"
+                    value="<%= jobrequest.length %>"
                     class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Long (8+ days)</option>
@@ -171,8 +179,10 @@
                     id="parish"
                     name="parish"
                     autocomplete="parish-name"
+                    value="<%= jobrequest.parish %>"
                     class="block max-w-lg w-full px-3 py-2 shadow-md focus:ring-indigo-500 focus:border-indigo-500 pl-5 sm:text-sm border-gray-300 rounded-md"
                   >
+                    <optio><%= jobrequest.parish %></optio>
                     <option>St. Lucy</option>
                     <option>St. Peter</option>
                     <option>St. Andrew</option>
@@ -197,7 +207,7 @@
                   Date
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <input name="startdate" id="startdate" type="date" value="" />
+                  <input name="startdate" id="startdate" type="date" value="<%= jobrequest.startDate %>" />
                 </div>
               </div>
               <div
@@ -262,17 +272,21 @@
 
         <div class="flex space justify-between pt-5">
           <button
-            type="submit"
-            class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            type="button"
+             class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Find New Contractor
+            <a href="/jobrequests/findcontractors?industry=<%= jobrequest.industry %>&id=<%= jobrequest._id %>&service=<%= jobrequest.service %>">
+               Find Contractor
+            </a>
           </button>
           <div class="flex justify-end">
             <button
               type="button"
               class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
+            <a href="/">
               Cancel
+            </a>
             </button>
             <button
               type="submit"
@@ -284,5 +298,18 @@
         </div>
       </form>
     </div>
+    <script>
+      const query = document.querySelectorAll('<%= jobrequest.title %>')
+      console.log(query)
+      query.addEventListener('click', (e) =>{
+                const endpoint = `/jobrequests/updatejob${query}`
+                fetch(endpoint, {
+                    method: "PUT"
+                })
+                .then(response => response.json())
+                .then(data => window.location.href = data.redirect)
+                .catch(err => console.log(err))
+            })
+      </script>
   </body>
 </html>

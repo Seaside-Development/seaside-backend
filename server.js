@@ -12,7 +12,6 @@ const ejs = require("ejs");
 const fs = require("fs");
 const cookie_parser = require("cookie-parser");
 
-
 //Routes Imports
 const JobRequests = require("./routes/jobrequestsRoutes");
 const User = require("./routes/userRoutes");
@@ -71,7 +70,7 @@ app.get("/signin", (req, res) => {
 app.get("/contractorform", (req, res) => {
   res.render("contractorform");
 }); //end of app.get
-app.get("/contractorupdateform", (req, res) => {
+app.get("/components/contractorupdateform", (req, res) => {
   res.render("contractorupdateform");
 }); //end of app.get
 app.get("/contractoroverview", (req, res) => {
