@@ -3,24 +3,6 @@ const { result } = require('lodash');
 const JobRequests = require('../models/jobRequestsModel');
 const Contractors = require('../models/contractorModel');
 const reviews = require('../models/reviewsModel');
-
-
-const checkUser = asyncHandler (async (req, res) => {
-    const id = req.cookies.auth
-    const findUser = await Contractors.findById(id);
-    const user = await User.findById(id);
-  
-    if(findUser) {
-      isAContractor = true;
-    }
-    else {
-      isAContractor = false;
-    }
-    res.render("/jobrequests/findJobrequestById?", {isAContractor})
-    console.log("are they a contractor:", isAContractor)
-  return isAContractor
-  })
-
   
 // @desc    Get all Jobs
 // @route   GET /job-list
@@ -57,19 +39,32 @@ const searchJobrequests = asyncHandler (async (req, res) => {
 });
 
 
-// @desc    Get job by id
+// @desc    Get a job by id
 // @route   GET /jobrequest/findJobrequestById/:id
 // @access  Public
 const findJobrequestById = asyncHandler (async (req, res) => {
+
     if (req.cookies.auth){
+        const id = req.cookies.auth
+        const findUser = await Contractors.findById(id);
+  
+        if(findUser) {
+        AContractor = true;
+        }
+        else {
+            AContractor = false;
+        }
+        console.log("are they a contractor:", AContractor)
         const jobrequest = await JobRequests.findById(req.params.id);
-        res.render('jobDetails', { jobrequest: jobrequest });
+        res.render('jobDetails', { AContractor, jobrequest: jobrequest });
+        return AContractor
     }
     else{
         res.redirect(401,'/')
     }
 }
 );
+
 
 const UpdatePage = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
@@ -176,6 +171,9 @@ const addContractor = asyncHandler (async (req, res) => {
 
 })
 
+// @desc    Allow a contractor to change the status of a job
+// @route   GET /contractorpreview
+// @access  Public
 const UpdateStatus = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
         // get the review and change the status to completed
@@ -336,5 +334,5 @@ module.exports = {
     addContractor,
     findJobrequestById,
     UpdateStatus,
-    UpdatePage
+    UpdatePage,
 }

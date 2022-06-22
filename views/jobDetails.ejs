@@ -154,7 +154,9 @@
 
             <div class="pt-5">
                 <div class="flex justify-end">
-                    <button
+                    <%= console.log(AContractor) %>
+                    <% if (AContractor == false) { %>
+                        <button
                         id="updateBtn"
                         type="button"
                         class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -176,11 +178,9 @@
                         class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                     <a href="/jobrequests/findcontractors?industry=<%= jobrequest.industry %>&id=<%= jobrequest._id %>&service=<%= jobrequest.service %>">
-                        Find Contractor
+                        Find A Contractor
                     </a>
                     </button>
-                    <% if (isAContractor == false) { %>
-                        <div></div>
                         <%} else { %>
                             <button
                             type="button"
