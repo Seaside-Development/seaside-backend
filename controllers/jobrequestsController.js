@@ -3,6 +3,7 @@ const { result } = require('lodash');
 const JobRequests = require('../models/jobRequestsModel');
 const Contractors = require('../models/contractorModel');
 const reviews = require('../models/reviewsModel');
+const moment = require('moment');
   
 // @desc    Get all Jobs
 // @route   GET /job-list
@@ -13,7 +14,7 @@ const searchJobrequests = asyncHandler (async (req, res) => {
         const contractorID = req.cookies.auth;
         const perPage = 10;
         const page = req.params.page || 1;
-        const jobrequests = await JobRequests
+        JobRequests
             .find({
                 $or: [{user: [user]}, {contractorID: [contractorID]}]
             })
@@ -23,6 +24,7 @@ const searchJobrequests = asyncHandler (async (req, res) => {
                 JobRequests.countDocuments().exec(function (err, count) {
                     if (err) return next(err)
                     res.render('job-list', {
+                        moment: moment,
                         jobrequests,
                         current: page,
                         pages: Math.ceil(count / perPage)
