@@ -1,0 +1,39 @@
+<html>
+    <body>
+        <div>
+            <h1>Job Request For Contractor</h1>
+            <p>
+                <a href="/">Home</a>
+            </p>
+            <p>
+                <a href="/jobrequestForContractor/create">Create</a>
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Job Request Id</th>
+                        <th>Contractor Id</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{jobrequestForContractor.id}}</td>
+                        <td>{{jobrequestForContractor.jobrequestId}}</td>
+                        <td>{{jobrequestForContractor.contractorId}}</td>
+                        <td>
+                            <a href="/jobrequestForContractor/{{jobrequestForContractor.id}}">Show</a>
+                            <a href="/jobrequestForContractor/{{jobrequestForContractor.id}}/edit">Edit</a>
+                            <form action="/jobrequestForContractor/{{jobrequestForContractor.id}}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
