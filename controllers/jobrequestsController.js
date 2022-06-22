@@ -4,6 +4,24 @@ const JobRequests = require('../models/jobRequestsModel');
 const Contractors = require('../models/contractorModel');
 const reviews = require('../models/reviewsModel');
 
+
+const checkUser = asyncHandler (async (req, res) => {
+    const id = req.cookies.auth
+    const findUser = await Contractors.findById(id);
+    const user = await User.findById(id);
+  
+    if(findUser) {
+      isAContractor = true;
+    }
+    else {
+      isAContractor = false;
+    }
+    res.render("/jobrequests/findJobrequestById?", {isAContractor})
+    console.log("are they a contractor:", isAContractor)
+  return isAContractor
+  })
+
+  
 // @desc    Get all Jobs
 // @route   GET /job-list
 // @access  Public

@@ -4,6 +4,7 @@ const contractorSchema = mongoose.Schema({
     // must have a user reference, is an array because contractors can have multiple users
     user: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     contractorName: {type: String, required: [true, 'Please provide a name']},
+    isContractor: {type: String, default: "Yes"},
     //i.e. company name
     title: {type: String},
     email: {

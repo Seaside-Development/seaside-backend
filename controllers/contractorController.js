@@ -5,24 +5,8 @@ const bcrypt = require('bcryptjs')
 const uuid=require("uuid")
 let alert = require('alert');
 
-
-// @desc    check user is a contractor or not
-const amIAContractor = asyncHandler (async (req, res) => {
-  if (req.cookies.auth){
-    const id = req.cookies.auth;
-    const contractor = await Contractors.findById(id);
-    if(contractor) {
-      result = true;
-    }
-    else {
-      result = false;
-    }
-    return result;
-  }
-  else
-    res.redirect('/401')
-}
-)
+//TODO: api to update contractor
+//TODO: api to delete contractor
 
 // @desc    Get all Service
 // @route   GET /api/contractor
@@ -68,13 +52,9 @@ const loginContractor = asyncHandler (async (req, res) => {
 // @access  Public
 const registerContractor = asyncHandler (async (req, res) => {
     // Body request
-    const {user, contractorName, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating, password} = req.body;
-  
-    console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
-
+    const {user, contractorName, isContractor, email, telephone, businessDescription, operatingLocations, industry, services, title, rating, completedJobs, totalRatings, avgRating, password} = req.body;
 
     if(!contractorName || !email || !businessDescription || !operatingLocations || !industry || !services || !telephone || !password) {
-      console.log(typeof operatingLocations)
       console.log(`${contractorName}, ${email}, ${telephone}, ${businessDescription}, ${operatingLocations}, ${industry}, ${services}`)
         res.status(400)
         throw new Error('Please add all fields');
@@ -97,6 +77,7 @@ const registerContractor = asyncHandler (async (req, res) => {
         // title,
         contractorName, 
         email, 
+        isContractor: true,
         password: hashedPassword,
         businessDescription, 
         operatingLocations, 
@@ -104,7 +85,7 @@ const registerContractor = asyncHandler (async (req, res) => {
         services, 
         telephone,
     })
-    res.status(200).json(contractor);
+    res.redirect("/");
     if (Contractors) {
       res.status(201).json({
         _id: Contractors._id, 
@@ -176,5 +157,5 @@ const getMe = asyncHandler(async (req, res) => {
 })
   
 module.exports = {
-    getContractors, registerContractor, updateContractors, deleteContractors, getMe, loginContractor, getContractorById, amIAContractor
+    getContractors, registerContractor, updateContractors, deleteContractors, getMe, loginContractor, getContractorById
 }

@@ -11,6 +11,6 @@ router.post('/register', registerUser); //
 router.put('/update', protectUser.authenticate("cookie",{session:false}),updateUser) //Secured
 router.delete('/remove/:id', protectUser.authenticate("cookie",{session:false}),deleteUser);  //Secured
 router.get('/me', protectUser.authenticate("cookie",{session:false}),getMe);
-router.get("checkuser", checkUser)
+router.get("/checkuser", checkUser)
 
 module.exports = router;

@@ -1,5 +1,6 @@
 //imports
 const { errorHandler } = require("./middleware/errorMiddleware");
+const asyncHandler = require('express-async-handler');
 const expressLayouts = require("express-ejs-layouts");
 const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
@@ -49,34 +50,38 @@ var industryObj = JSON.parse(fileData);
 
 //render pages
 //@Desc: routes to render the pages
-app.get("/useraccount", (req, res) => {
-  res.render("useraccount");
-}); //end of app.get
 app.get("/", (req, res) => {
+  session = req.headers.cookie;
   res.render("index");
 }); //display the index page
 app.get("/signup", (req, res) => {
   res.render("signup");
 }); //end of app.get
 app.get("/contact", (req, res) => {
+  session = req.headers.cookie,
   res.render("contact");
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
+  session = req.headers.cookie,
   res.render("createjobform", { industryObj: industryObj });
 }); //end of app.get
 app.get("/signin", (req, res) => {
   res.render("signin");
 }); //end of app.get
 app.get("/contractorform", (req, res) => {
+  session = req.headers.cookie,
   res.render("contractorform");
 }); //end of app.get
 app.get("/components/contractorupdateform", (req, res) => {
+  session = req.headers.cookie,
   res.render("contractorupdateform");
 }); //end of app.get
 app.get("/contractoroverview", (req, res) => {
+  session = req.headers.cookie,
   res.render("contractoroverview");
 }); //end of app.get
 app.get("/jobupdateform", (req, res) => {
+  session = req.headers.cookie,
   res.render("jobupdateform");
 }); //end of app.get
 app.get("/404", (req, res) => {
@@ -87,8 +92,8 @@ app.get("/401", (req, res) => {
   res.render("401");
 });
 
-
 app.get("/contractor_signin", (req, res) => {
+  session = req.headers.cookie,
   res.render("contractor_signin");
 });
 

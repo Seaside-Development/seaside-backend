@@ -8,8 +8,8 @@ const
 } = require('../controllers/contractorController');// Importing the serviceController
 const {protectContractor}=require("../middleware/authMiddleware")
 
-router.get('/findContractor', protectContractor.authenticate("cookie",{session:false}),getContractors); //secure
-router.post('/regcontractor', protectContractor.authenticate("cookie",{session:false}),registerContractor); //Secure
+router.get('/findContractor', getContractors); //secure
+router.post('/regcontractor', registerContractor); //Secure
 router.get('/:id', protectContractor.authenticate("cookie",{session:false}),getContractorById); //Secure
 router.put('/update/:id', protectContractor.authenticate("cookie",{session:false}),updateContractors); //Secure
 router.delete('/remove/:id', protectContractor.authenticate("cookie",{session:false}),deleteContractors); //Secure

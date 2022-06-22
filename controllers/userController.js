@@ -20,19 +20,21 @@ const getUsers = asyncHandler (async (req, res) => {
   
 })
 
-
+//Checking if user is contractor or not
 const checkUser = asyncHandler (async (req, res) => {
     const id = req.cookies.auth
-    let collection = null
+    const findUser = await Contractors.findById(id);
     const user = await User.findById(id);
 
-    if(!user) {
-      collection = "contractor"
-    } else {
-      collection = "user"
+    if(findUser) {
+      isAContractor = true;
     }
-    res.render("useraccount", {collection})
-  return collection
+    else {
+      isAContractor = false;
+    }
+    res.render("useraccount", {isAContractor})
+    console.log("are they a contractor:", isAContractor)
+  return isAContractor
 })
 
 
