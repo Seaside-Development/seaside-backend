@@ -56,33 +56,33 @@ app.get("/about", (req, res) => {
 }); //display the index page
 app.get("/", (req, res) => {
   session = req.headers.cookie;
-  res.render("index");
+  res.render("index", {title: "Home"});
 }); //display the index page
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", {title: "signup"});
 }); //end of app.get
 app.get("/contact", (req, res) => {
   session = req.headers.cookie,
-  res.render("contact");
+  res.render("contact", {title: "contact"});
 }); //end of app.get
 app.get("/createjobform", (req, res) => {
   session = req.headers.cookie,
   res.render("createjobform", { industryObj: industryObj });
 }); //end of app.get
 app.get("/signin", (req, res) => {
-  res.render("signin");
+  res.render("signin", {title: "signin"});
 }); //end of app.get
 app.get("/contractorform", (req, res) => {
   session = req.headers.cookie,
-  res.render("contractorform");
+  res.render("contractorform" , {title: "contractor form"});
 }); //end of app.get
 app.get("/components/contractorupdateform", (req, res) => {
   session = req.headers.cookie,
-  res.render("contractorupdateform");
+  res.render("contractorupdateform", {title: "contractor update form"});
 }); //end of app.get
 app.get("/contractoroverview", (req, res) => {
   session = req.headers.cookie,
-  res.render("contractoroverview");
+  res.render("contractoroverview", {title: "contractor update form"});
 }); //end of app.get
 app.get("/jobupdateform", (req, res) => {
   session = req.headers.cookie,
