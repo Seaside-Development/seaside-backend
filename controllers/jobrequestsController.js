@@ -67,7 +67,7 @@ const findJobrequestById = asyncHandler (async (req, res) => {
 }
 );
 
-
+// @desc    Get a job by id
 const UpdatePage = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
         const jobrequest = await JobRequests.findById(req.params.id);
@@ -78,8 +78,7 @@ const UpdatePage = asyncHandler (async (req, res) => {
     }
     else{
         res.redirect(401,'/')
-    }
-}
+    }}
 );
 
 // @desc    Set Service

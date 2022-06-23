@@ -39,7 +39,7 @@ const checkUser = asyncHandler (async (req, res) => {
 
 
 // @desc    Set/Register a new User
-// @route   POST /api/users/register
+// @route   POST /users/register
 // @access  Public
 const registerUser = asyncHandler (async (req, res) => {
   const {firstName, lastName, username, email, avatar, password, telephone} = req.body;
@@ -56,8 +56,8 @@ const registerUser = asyncHandler (async (req, res) => {
   // check if user exists
   const userExist = await User.findOne({ email });
   if(userExist) {
-      // res.status(400)
-      alert('User already exists');
+    // res.status(400)
+    alert('User already exists');
   }
 
   // Hashing password
@@ -101,8 +101,8 @@ const updateUser = asyncHandler (async (req, res) => {
   const user = await User.findById(id);
 
   if(!user) {
-      res.status(400)
-      throw new Error('User not found');
+    res.status(400)
+    throw new Error('User not found');
   }
 
   const updatedUser = await User.findByIdAndUpdate(id, req.body, {
@@ -128,9 +128,8 @@ const deleteUser = asyncHandler (async (req, res) => {
 })
 
 // @desc    Authenticate a user
-// @route   POST /api/users/login
+// @route   POST /users/login
 // @access  Public
-
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
@@ -153,7 +152,9 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 })
 
-
+// @desc    Logout user
+// @route   GET /users/logout
+// @access  Public
 const logout = asyncHandler(async (req, res) => {
   if (req.cookies.auth){
     console.log(req.cookies.auth)
@@ -164,16 +165,14 @@ const logout = asyncHandler(async (req, res) => {
     //res.end()
     res.redirect('/')
   }
-  else{
+  else {
     res.redirect('/401')
   }
-  
-  // 
 })
 
 
 // @desc    Get user data
-// @route   GET /api/users/me
+// @route   GET /users/me
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
   res.status(200).json("Well done")
