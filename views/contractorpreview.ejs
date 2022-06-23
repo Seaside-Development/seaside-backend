@@ -127,7 +127,7 @@
                     alt="Some random image"
                   />
                     <button 
-                      onclick="blabber(document.getElementById('jodid').value)"
+                      onclick="blabber(document.getElementById('jodid').value); clicked();"
                       type="button"
                       value='<%= contractor.id %>,<%= jobrequest._id %>'
                       id="jodid"
@@ -199,6 +199,14 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src=""></script>
+    <script type="text/javascript"> 
+        function clicked() {
+          if (confirm('Do you want to submit?')) {
+              yourformelement.submit();
+          } else {
+              return false;
+          }
+        }
+    </script>
   </body>
 </html>
