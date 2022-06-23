@@ -50,6 +50,10 @@ var industryObj = JSON.parse(fileData);
 
 //render pages
 //@Desc: routes to render the pages
+app.get("/about", (req, res) => {
+  session = req.headers.cookie;
+  res.render("about");
+}); //display the index page
 app.get("/", (req, res) => {
   session = req.headers.cookie;
   res.render("index");
