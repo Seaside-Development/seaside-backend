@@ -73,6 +73,7 @@ const UpdatePage = asyncHandler (async (req, res) => {
         const jobrequest = await JobRequests.findById(req.params.id);
         let contractorId = jobrequest.contractorID;
         const contractor = await Contractors.findById(contractorId);
+        console.log("contractor:", contractor.contractorName)
         res.render('jobupdateform', { jobrequest: jobrequest, contractor: contractor });
     }
     else{
