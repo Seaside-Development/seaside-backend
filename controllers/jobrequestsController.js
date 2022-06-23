@@ -71,7 +71,9 @@ const findJobrequestById = asyncHandler (async (req, res) => {
 const UpdatePage = asyncHandler (async (req, res) => {
     if (req.cookies.auth){
         const jobrequest = await JobRequests.findById(req.params.id);
-        res.render('jobupdateform', { jobrequest: jobrequest });
+        let contractorId = jobrequest.contractorID;
+        const contractor = await Contractors.findById(contractorId);
+        res.render('jobupdateform', { jobrequest: jobrequest, contractor: contractor });
     }
     else{
         res.redirect(401,'/')
