@@ -144,6 +144,7 @@ const findContractors = asyncHandler (async (req, res) => {
         // limit the results to 5
         contractors = contractors.slice(0, 5);
         // render the page
+        res.status(200, { contractors, jobrequest });
         res.render('contractorpreview', {contractors, jobrequest});
     }
 
